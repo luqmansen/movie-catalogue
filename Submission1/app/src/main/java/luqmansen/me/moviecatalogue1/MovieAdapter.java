@@ -1,6 +1,7 @@
 package luqmansen.me.moviecatalogue1;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,7 @@ public class MovieAdapter extends BaseAdapter {
         private TextView  desc;
         private ImageView movieBg;
 
+
         ViewHolder(View view){
             title = view.findViewById( R.id.homeTitle );
             release = view.findViewById( R.id.homeRelease );
@@ -65,7 +67,9 @@ public class MovieAdapter extends BaseAdapter {
 
         void bind(Movie movie){
             title.setText( movie.getTitle() );
+            title.setTextColor( Color.WHITE );
             release.setText( movie.getRelease() );
+            release.setTextColor( Color.WHITE );
             movieBg.setImageResource( movie.getMovieBg() );
         }
     }

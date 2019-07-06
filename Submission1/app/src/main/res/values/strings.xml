@@ -1,16 +1,16 @@
 <resources>
-    <string name="app_name">Movie Catalogue 1</string>
+    <string name="app_name">Movie Catalogue</string>
 
     <string-array name="movie_title">
-        <item>Venom (2018)</item>
-        <item>Robin Hood (2018)</item>
-        <item>The Mule (2018) </item>
-        <item>Bird Box (2018)</item>
-        <item>Bohemian Rhapsody(2018)</item>
-        <item>Bumblebee(2018)</item>
-        <item>Creed II (2018)</item>
-        <item>Mortal Engines(2018)</item>
-        <item>Glass (2019)</item>
+        <item>Venom</item>
+        <item>Robin Hood</item>
+        <item>The Mule</item>
+        <item>Bird Box </item>
+        <item>Bohemian Rhapsody</item>
+        <item>Bumblebee</item>
+        <item>Creed II</item>
+        <item>Mortal Engines</item>
+        <item>Glass</item>
         <item>Hunter Killer</item>
     </string-array>
 

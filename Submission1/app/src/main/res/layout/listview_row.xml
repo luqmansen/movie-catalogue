@@ -74,7 +74,7 @@
             android:foregroundTint="#FFC107"
             android:foregroundTintMode="add"
             android:gravity="bottom|center"
-            android:text="Detail"
+            android:text="Details >"
             android:textColorHighlight="#FFC107"
             android:textColorHint="#00B16F6F"
             android:textColorLink="#FFC107"

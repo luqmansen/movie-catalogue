@@ -1,5 +1,6 @@
 package luqmansen.me.moviecatalogue1;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.res.TypedArray;
@@ -21,13 +22,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
 
-
-
         adapter = new MovieAdapter( this );
-
         ListView listView = findViewById( R.id.listviewID );
         listView.setAdapter( adapter );
 

@@ -4,10 +4,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Movie implements Parcelable {
+
     private String title;
-    private int movieBg;
     private String release;
-    private String detail;
+    private String desc;
+    private Integer movieBg;
 
     public String getTitle() {
         return title;
@@ -15,14 +16,6 @@ public class Movie implements Parcelable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public int getMovieBg() {
-        return movieBg;
-    }
-
-    public void setMovieBg(int movieBg) {
-        this.movieBg = movieBg;
     }
 
     public String getRelease() {
@@ -33,12 +26,20 @@ public class Movie implements Parcelable {
         this.release = release;
     }
 
-    public String getDetail() {
-        return detail;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public Integer getMovieBg() {
+        return movieBg;
+    }
+
+    public void setMovieBg(Integer movieBg) {
+        this.movieBg = movieBg;
     }
 
     @Override
@@ -48,10 +49,10 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.title);
-        dest.writeInt(this.movieBg);
-        dest.writeString(this.release);
-        dest.writeString(this.detail);
+        dest.writeString( this.title );
+        dest.writeString( this.release );
+        dest.writeString( this.desc );
+        dest.writeValue( this.movieBg );
     }
 
     public Movie() {
@@ -59,15 +60,15 @@ public class Movie implements Parcelable {
 
     protected Movie(Parcel in) {
         this.title = in.readString();
-        this.movieBg = in.readInt();
         this.release = in.readString();
-        this.detail = in.readString();
+        this.desc = in.readString();
+        this.movieBg = (Integer) in.readValue( Integer.class.getClassLoader() );
     }
 
     public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
         @Override
         public Movie createFromParcel(Parcel source) {
-            return new Movie(source);
+            return new Movie( source );
         }
 
         @Override

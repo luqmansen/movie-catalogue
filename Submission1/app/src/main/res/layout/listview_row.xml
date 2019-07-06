@@ -30,7 +30,7 @@
             android:layout_marginEnd="43dp"
             android:layout_marginBottom="37dp"
             android:alpha="0.7"
-            app:srcCompat="@drawable/textBg" />
+            app:srcCompat="@drawable/text_background" />
 
         <TextView
             android:id="@+id/homeTitle"

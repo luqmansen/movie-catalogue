@@ -13,7 +13,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     TextView titleObject;
     TextView descObject;
     TextView releaseObject;
-    ImageView imageObject;
+    ImageView movieBgObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         titleObject = findViewById(R.id.titleDetail);
         descObject = findViewById(R.id.descDetail);
         releaseObject = findViewById(R.id.releaseDetail);
-        imageObject = findViewById( R.id.movieImageDetail );
+        movieBgObject = findViewById( R.id.movieImageDetail );
 
         //Collect the intent
         Intent intent = getIntent();
@@ -39,7 +39,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         titleObject.setText(title);
         releaseObject.setText(release);
         descObject.setText(desc);
-        imageObject.setImageResource( image );
+        movieBgObject.setImageResource( image );
 
 
     }

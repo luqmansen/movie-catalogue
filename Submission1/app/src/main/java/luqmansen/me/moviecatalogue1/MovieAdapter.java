@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -41,14 +43,23 @@ public class MovieAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int position, View view, ViewGroup viewGroup) {
+        
         if (view == null){
             view = (View) LayoutInflater.from( context ).inflate( R.layout.listview_row,viewGroup,false );
         }
 
-        ViewHolder viewHolder = new ViewHolder(view);
-        Movie movie = (Movie) getItem( i );
-        viewHolder.bind( movie );
+        ViewHolder holder = new ViewHolder(view);
+        holder.homeDetailButton = view.findViewById(R.id.homeDetailButton);
+        holder.homeDetailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Row " + position + " was clicked!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Movie movie = (Movie) getItem( position );
+        holder.bind( movie );
         return view;
     }
 
@@ -57,12 +68,16 @@ public class MovieAdapter extends BaseAdapter {
         private TextView release;
         private TextView  desc;
         private ImageView movieBg;
+        public Button homeDetailButton;
+        public final Integer position;
 
 
         ViewHolder(View view){
             title = view.findViewById( R.id.homeTitle );
             release = view.findViewById( R.id.homeRelease );
             movieBg = view.findViewById( R.id.homeBg );
+
+            position = 0;
         }
 
         void bind(Movie movie){

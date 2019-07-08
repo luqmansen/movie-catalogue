@@ -75,6 +75,7 @@
             android:foregroundTintMode="add"
             android:gravity="bottom|center"
             android:text="Details >"
+            android:focusable="false"
             android:textColorHighlight="#FFC107"
             android:textColorHint="#00B16F6F"
             android:textColorLink="#FFC107"
@@ -82,6 +83,7 @@
             android:textIsSelectable="true"
             android:textSize="18sp"
             android:textStyle="bold" />
+
 
     </RelativeLayout>
 

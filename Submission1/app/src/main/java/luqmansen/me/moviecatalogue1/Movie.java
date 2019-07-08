@@ -48,6 +48,7 @@ public class Movie implements Parcelable {
     }
 
     @Override
+    //write object value to parcel for storage
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString( this.title );
         dest.writeString( this.release );
@@ -57,14 +58,14 @@ public class Movie implements Parcelable {
 
     public Movie() {
     }
-
+    // constructor for parcel
     protected Movie(Parcel in) {
         this.title = in.readString();
         this.release = in.readString();
         this.desc = in.readString();
         this.movieBg = (Integer) in.readValue( Integer.class.getClassLoader() );
     }
-
+    // creator - used when un-parceling the parcel
     public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
         @Override
         public Movie createFromParcel(Parcel source) {

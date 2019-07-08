@@ -44,24 +44,35 @@ public class MovieAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
-        
+
+        ViewHolder holder;
+
         if (view == null){
             view = (View) LayoutInflater.from( context ).inflate( R.layout.listview_row,viewGroup,false );
+            holder  = new ViewHolder(view);
+            holder.homeDetailButton = (Button) view.findViewById(R.id.homeDetailButton);
+            holder.homeDetailButton.setOnClickListener(buttonClickListener);
+            view.setTag(holder);
+        }
+        else {
+            holder = (ViewHolder) view.getTag();
         }
 
-        ViewHolder holder = new ViewHolder(view);
-        holder.homeDetailButton = view.findViewById(R.id.homeDetailButton);
-        holder.homeDetailButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "Row " + position + " was clicked!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        holder.homeDetailButton.setTag(position);
 
         Movie movie = (Movie) getItem( position );
         holder.bind( movie );
         return view;
     }
+
+    private View.OnClickListener buttonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            int position = (Integer) view.getTag();
+            Toast.makeText(context, "Row " + position + " was clicked!", Toast.LENGTH_SHORT).show();
+        }
+    };
+
 
     private class ViewHolder {
         private TextView title;
@@ -76,7 +87,6 @@ public class MovieAdapter extends BaseAdapter {
             title = view.findViewById( R.id.homeTitle );
             release = view.findViewById( R.id.homeRelease );
             movieBg = view.findViewById( R.id.homeBg );
-
             position = 0;
         }
 

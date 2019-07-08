@@ -19,29 +19,20 @@ import java.util.List;
 
 import static luqmansen.me.moviecatalogue1.MovieDetailActivity.EXTRA_MOVIE;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
-    private String[] dataTitle;
-    private String[] dataRelease;
-    private String[] dataDescription;
-    private TypedArray dataBg;
+    public String[] dataTitle;
+    public String[] dataRelease;
+    public String[] dataDescription;
+    public TypedArray dataBg;
     private MovieAdapter adapter;
     private ArrayList<Movie> movies;
-
-    Context context;
-    ListView listView;
-    Button buttonHomeDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-
-        setContentView( R.layout.listview_row );
-        buttonHomeDetail = findViewById( R.id.homeDetailButton );
-        buttonHomeDetail.setClickable(true);
-        buttonHomeDetail.setOnClickListener(this);
 
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
@@ -52,14 +43,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         prepare();
         addItem();
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(context, "An item clocked", Toast.LENGTH_SHORT).show();
-            }
-        });
-
     }
 
 
@@ -78,27 +61,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adapter.setMovies( movies );
     }
 
-    private void prepare(){
+    public void prepare(){
         dataTitle = getResources().getStringArray( R.array.movie_title );
         dataRelease = getResources().getStringArray( R.array.movie_release );
         dataDescription = getResources().getStringArray( R.array.movie_desc );
         dataBg = getResources().obtainTypedArray( R.array.movie_bg );
     }
 
-    public void onClick(View view) {
-                Movie movie = new Movie();
-
-//                movie.setTitle( dataTitle[position] );
-//                movie.setRelease( dataRelease[position] );
-//                movie.setDesc( dataDescription[position] );
-//                //noinspection ResourceType
-//                movie.setMovieBg( dataBg.getResourceId( position, -1 ) );
-//
-//                Intent movieDetail = new Intent( MainActivity.this, MovieDetailActivity.class );
-//                movieDetail.putExtra( EXTRA_MOVIE, movie );
-//                startActivity( movieDetail );
-//
-    }
 
 
 }

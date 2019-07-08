@@ -1,6 +1,7 @@
 package luqmansen.me.moviecatalogue1;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,17 +11,24 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MovieAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<Movie> movies;
+    private String[] title;
+    private String[] release;
+    private String[] description;
+    private TypedArray moviePoster;
 
     public MovieAdapter(Context context) {
         this.context = context;
         movies = new ArrayList<>(  );
+        getDataFromArray();
     }
 
     public void setMovies(ArrayList<Movie> movies) {
@@ -46,7 +54,6 @@ public class MovieAdapter extends BaseAdapter {
     public View getView(final int position, View view, ViewGroup viewGroup) {
 
         ViewHolder holder;
-
         if (view == null){
             view = (View) LayoutInflater.from( context ).inflate( R.layout.listview_row,viewGroup,false );
             holder  = new ViewHolder(view);
@@ -69,9 +76,26 @@ public class MovieAdapter extends BaseAdapter {
         @Override
         public void onClick(View view) {
             int position = (Integer) view.getTag();
-            Toast.makeText(context, "Row " + position + " was clicked!", Toast.LENGTH_SHORT).show();
+            Movie movie = new Movie();
+
+            movie.setTitle(title[position]);
+            movie.setRelease(release[position]);
+            movie.setDesc( description[position] );
+            //noinspection ResourceType
+            movie.setMovieBg( moviePoster.getResourceId( position, -1 ) );
+
+            Intent movieDetail = new Intent( context, MovieDetailActivity.class );
+            movieDetail.putExtra( MovieDetailActivity.EXTRA_MOVIE, movie );
+            context.startActivity(movieDetail);
         }
     };
+
+    private void getDataFromArray(){
+        title = context.getResources().getStringArray( R.array.movie_title );
+        release = context.getResources().getStringArray( R.array.movie_release );
+        description = context.getResources().getStringArray( R.array.movie_desc );
+        moviePoster = context.getResources().obtainTypedArray( R.array.movie_bg );
+    }
 
 
     private class ViewHolder {

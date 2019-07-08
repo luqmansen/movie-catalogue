@@ -1,5 +1,6 @@
 package luqmansen.me.moviecatalogue1;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -35,6 +36,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         String desc = movie.getDesc();
         Integer image = movie.getMovieBg();
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         titleObject.setText(title);
         releaseObject.setText(release);

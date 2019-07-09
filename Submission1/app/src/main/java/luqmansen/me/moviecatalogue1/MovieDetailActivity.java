@@ -21,6 +21,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
         titleObject = findViewById(R.id.titleDetail);
         descObject = findViewById(R.id.descDetail);
         releaseObject = findViewById(R.id.releaseDetail);
@@ -35,9 +38,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         String release = movie.getRelease();
         String desc = movie.getDesc();
         Integer image = movie.getMovieBg();
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
 
         titleObject.setText(title);
         releaseObject.setText(release);

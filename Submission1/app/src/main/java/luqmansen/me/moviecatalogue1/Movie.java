@@ -10,6 +10,16 @@ public class Movie implements Parcelable {
     private String desc;
     private Integer movieBg;
 
+    public String getMovieTrailerId() {
+        return movieTrailerId;
+    }
+
+    public void setMovieTrailerId(String movieTrailerId) {
+        this.movieTrailerId = movieTrailerId;
+    }
+
+    private String movieTrailerId;
+
     public String getTitle() {
         return title;
     }
@@ -54,6 +64,7 @@ public class Movie implements Parcelable {
         dest.writeString( this.release );
         dest.writeString( this.desc );
         dest.writeValue( this.movieBg );
+        dest.writeString( this.movieTrailerId );
     }
 
     public Movie() {
@@ -64,6 +75,7 @@ public class Movie implements Parcelable {
         this.release = in.readString();
         this.desc = in.readString();
         this.movieBg = (Integer) in.readValue( Integer.class.getClassLoader() );
+        this.movieTrailerId = in.readString();
     }
     // creator - used when un-parceling the parcel
     public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {

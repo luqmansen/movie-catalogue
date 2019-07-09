@@ -23,7 +23,8 @@ public class MovieDetailActivity extends AppCompatActivity implements View.OnCli
     ImageView playButton;
     TextView watchTrailer;
     ImageView trailerBg;
-    String id = "tUJAxxm1y1I";
+    String movieTrailerId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class MovieDetailActivity extends AppCompatActivity implements View.OnCli
         String release = movie.getRelease();
         String desc = movie.getDesc();
         Integer image = movie.getMovieBg();
+        movieTrailerId = movie.getMovieTrailerId();
 
         titleObject.setText(title);
         releaseObject.setText(release);
@@ -66,7 +68,7 @@ public class MovieDetailActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://" + id));
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://" + movieTrailerId ));
         startActivity(intent);
     }
 }

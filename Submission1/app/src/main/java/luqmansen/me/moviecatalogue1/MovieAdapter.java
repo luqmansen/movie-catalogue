@@ -23,6 +23,7 @@ public class MovieAdapter extends BaseAdapter {
     private String[] title;
     private String[] release;
     private String[] description;
+    private String[] movieTrailerId;
     private TypedArray moviePoster;
 
     public MovieAdapter(Context context) {
@@ -83,6 +84,7 @@ public class MovieAdapter extends BaseAdapter {
             movie.setDesc( description[position] );
             //noinspection ResourceType
             movie.setMovieBg( moviePoster.getResourceId( position, -1 ) );
+            movie.setMovieTrailerId( movieTrailerId[position] );
 
             Intent movieDetail = new Intent( context, MovieDetailActivity.class );
             movieDetail.putExtra( MovieDetailActivity.EXTRA_MOVIE, movie );
@@ -95,6 +97,7 @@ public class MovieAdapter extends BaseAdapter {
         release = context.getResources().getStringArray( R.array.movie_release );
         description = context.getResources().getStringArray( R.array.movie_desc );
         moviePoster = context.getResources().obtainTypedArray( R.array.movie_bg );
+        movieTrailerId = context.getResources().getStringArray(R.array.youtube_id);
     }
 
 

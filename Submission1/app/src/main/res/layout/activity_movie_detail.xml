@@ -20,9 +20,9 @@
             android:id="@+id/titleDetail"
             android:layout_width="254dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/videoView"
-            android:layout_marginStart="9dp"
-            android:layout_marginTop="10dp"
+            android:layout_below="@+id/trailerView"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="82dp"
             android:layout_toEndOf="@+id/movieImageDetail"
             android:gravity="center|center_horizontal|left"
@@ -30,6 +30,28 @@
             android:textColor="#FFFFFF"
             android:textSize="30sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/trailerView"
+            android:layout_width="match_parent"
+            android:layout_height="245dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="0dp"
+            android:alpha="10"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/poster_aquaman" />
+
+        <ImageView
+            android:id="@+id/blackTransparent"
+            android:layout_width="match_parent"
+            android:layout_height="246dp"
+            android:layout_alignEnd="@+id/trailerView"
+            android:layout_alignBottom="@+id/trailerView"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="-1dp"
+            android:alpha="0.7"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/text_background" />
 
         <TextView
             android:id="@+id/releaseDetail"
@@ -45,28 +67,41 @@
             android:textColor="#F0F0F0"
             android:textSize="20sp" />
 
-        <VideoView
-            android:id="@+id/videoView"
-            android:layout_width="match_parent"
-            android:layout_height="241dp" />
-
         <ImageView
             android:id="@+id/movieImageDetail"
             android:layout_width="152dp"
             android:layout_height="212dp"
+            android:layout_alignStart="@+id/trailerView"
             android:layout_alignTop="@+id/videoView"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="191dp"
             android:baselineAligned="false"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/poster_aquaman" />
 
         <TextView
+            android:id="@+id/watchTrailer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/blackTransparent"
+            android:layout_alignBottom="@+id/blackTransparent"
+            android:layout_marginEnd="73dp"
+            android:layout_marginBottom="92dp"
+            android:shadowColor="#00EEE7E7"
+            android:text="Watch trailer"
+            android:textColor="#FDFDFD"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/descDetail"
             android:layout_width="291dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/movieImageDetail"
+            android:layout_alignStart="@+id/movieImageDetail"
             android:layout_alignEnd="@+id/videoView"
-            android:layout_marginTop="23dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="22dp"
             android:layout_marginEnd="62dp"
             android:background="#00FFFFFF"
             android:text="TextView"
@@ -76,6 +111,16 @@
             tools:layout_conversion_wrapWidth="822"
             tools:layout_editor_absoluteX="28dp"
             tools:layout_editor_absoluteY="16dp" />
+
+        <ImageView
+            android:id="@+id/playButton"
+            android:layout_width="50dp"
+            android:layout_height="46dp"
+            android:layout_above="@+id/watchTrailer"
+            android:layout_marginEnd="-4dp"
+            android:layout_marginBottom="-49dp"
+            android:layout_toStartOf="@+id/watchTrailer"
+            app:srcCompat="@android:drawable/ic_media_play" />
 
     </RelativeLayout>
 

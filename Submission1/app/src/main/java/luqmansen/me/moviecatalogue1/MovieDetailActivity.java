@@ -3,18 +3,27 @@ package luqmansen.me.moviecatalogue1;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MovieDetailActivity extends AppCompatActivity {
+public class MovieDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String EXTRA_MOVIE = "extra_movie";
     TextView titleObject;
     TextView descObject;
     TextView releaseObject;
     ImageView movieBgObject;
+    ImageView playButton;
+    TextView watchTrailer;
+    Context context;
+    String id = "tUJAxxm1y1I";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +37,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         descObject = findViewById(R.id.descDetail);
         releaseObject = findViewById(R.id.releaseDetail);
         movieBgObject = findViewById( R.id.movieImageDetail );
+        playButton = findViewById(R.id.playButton);
+        watchTrailer = findViewById(R.id.watchTrailer);
 
         //Collect the intent
         Intent intent = getIntent();
@@ -44,6 +55,16 @@ public class MovieDetailActivity extends AppCompatActivity {
         descObject.setText(desc);
         movieBgObject.setImageResource( image );
 
+        //For play trailer icon or text click listener
+        playButton.setOnClickListener(this);
+        watchTrailer.setOnClickListener(this);
 
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://" + id));
+        startActivity(intent);
     }
 }

@@ -7,9 +7,8 @@ There are 5 stage of this application representing 5 submission for the program
 
 1.  **Submission 1: Simple Movie Catalogue**
     </br> Concept needed in application:
-    - Fragment
     - Listview
-    - Parcelabel for 
+    - Parcelabel 
   
 2. **Coming Soon**
 3. **Coming Soon**

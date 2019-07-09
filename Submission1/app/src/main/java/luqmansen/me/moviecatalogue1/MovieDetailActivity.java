@@ -22,7 +22,7 @@ public class MovieDetailActivity extends AppCompatActivity implements View.OnCli
     ImageView movieBgObject;
     ImageView playButton;
     TextView watchTrailer;
-    Context context;
+    ImageView trailerBg;
     String id = "tUJAxxm1y1I";
 
     @Override
@@ -37,6 +37,7 @@ public class MovieDetailActivity extends AppCompatActivity implements View.OnCli
         descObject = findViewById(R.id.descDetail);
         releaseObject = findViewById(R.id.releaseDetail);
         movieBgObject = findViewById( R.id.movieImageDetail );
+        trailerBg = findViewById(R.id.trailerView);
         playButton = findViewById(R.id.playButton);
         watchTrailer = findViewById(R.id.watchTrailer);
 
@@ -54,6 +55,7 @@ public class MovieDetailActivity extends AppCompatActivity implements View.OnCli
         releaseObject.setText(release);
         descObject.setText(desc);
         movieBgObject.setImageResource( image );
+        trailerBg.setImageResource(image);
 
         //For play trailer icon or text click listener
         playButton.setOnClickListener(this);

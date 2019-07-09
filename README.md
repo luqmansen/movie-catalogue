@@ -6,11 +6,11 @@ This is a native android app for submission requirement in "Menjadi Android Deve
 There are 5 stage of this application representing 5 submission for the program 
 
 1.  **Submission 1: Simple Movie Catalogue**
+</br>Check `Submission_1` Branch for the Code
     </br> Concept needed in application:
     - Listview
     - Parcelable
-    </br>
-   </br>Check `Submission_1` Branch for the Code
+    
   
 2. **Coming Soon**
 3. **Coming Soon**

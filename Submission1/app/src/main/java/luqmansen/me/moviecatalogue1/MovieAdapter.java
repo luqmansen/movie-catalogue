@@ -10,14 +10,11 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.content.Intent;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class MovieAdapter extends BaseAdapter {
-
+public class MovieAdapter extends BaseAdapter
+{
     private Context context;
     private ArrayList<Movie> movies;
     private String[] title;
@@ -26,34 +23,39 @@ public class MovieAdapter extends BaseAdapter {
     private String[] movieTrailerId;
     private TypedArray moviePoster;
 
-    public MovieAdapter(Context context) {
+    public MovieAdapter(Context context)
+    {
         this.context = context;
         movies = new ArrayList<>(  );
         getDataFromArray();
     }
 
-    public void setMovies(ArrayList<Movie> movies) {
+    public void setMovies(ArrayList<Movie> movies)
+    {
         this.movies = movies;
     }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return movies.size();
     }
 
     @Override
-    public Object getItem(int i) {
+    public Object getItem(int i)
+    {
         return movies.get( i );
     }
 
     @Override
-    public long getItemId(int i) {
+    public long getItemId(int i)
+    {
         return i;
     }
 
     @Override
-    public View getView(final int position, View view, ViewGroup viewGroup) {
-
+    public View getView(final int position, View view, ViewGroup viewGroup)
+    {
         ViewHolder holder;
         if (view == null){
             view = (View) LayoutInflater.from( context ).inflate( R.layout.listview_row,viewGroup,false );
@@ -62,7 +64,8 @@ public class MovieAdapter extends BaseAdapter {
             holder.homeDetailButton.setOnClickListener(buttonClickListener);
             view.setTag(holder);
         }
-        else {
+        else
+        {
             holder = (ViewHolder) view.getTag();
         }
 
@@ -73,12 +76,14 @@ public class MovieAdapter extends BaseAdapter {
         return view;
     }
 
-    private View.OnClickListener buttonClickListener = new View.OnClickListener() {
+    private View.OnClickListener buttonClickListener = new View.OnClickListener()
+    {
         @Override
-        public void onClick(View view) {
+        public void onClick(View view)
+        {
             int position = (Integer) view.getTag();
-            Movie movie = new Movie();
 
+            Movie movie = new Movie();
             movie.setTitle(title[position]);
             movie.setRelease(release[position]);
             movie.setDesc( description[position] );
@@ -92,7 +97,8 @@ public class MovieAdapter extends BaseAdapter {
         }
     };
 
-    private void getDataFromArray(){
+    private void getDataFromArray()
+    {
         title = context.getResources().getStringArray( R.array.movie_title );
         release = context.getResources().getStringArray( R.array.movie_release );
         description = context.getResources().getStringArray( R.array.movie_desc );
@@ -101,7 +107,8 @@ public class MovieAdapter extends BaseAdapter {
     }
 
 
-    private class ViewHolder {
+    private class ViewHolder
+    {
         private TextView title;
         private TextView release;
         private TextView  desc;
@@ -110,14 +117,16 @@ public class MovieAdapter extends BaseAdapter {
         public final Integer position;
 
 
-        ViewHolder(View view){
+        ViewHolder(View view)
+        {
             title = view.findViewById( R.id.homeTitle );
             release = view.findViewById( R.id.homeRelease );
             movieBg = view.findViewById( R.id.homeBg );
             position = 0;
         }
 
-        void bind(Movie movie){
+        void bind(Movie movie)
+        {
             title.setText( movie.getTitle() );
             title.setTextColor( Color.WHITE );
             release.setText( movie.getRelease() );

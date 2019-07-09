@@ -2,19 +2,15 @@ package luqmansen.me.moviecatalogue1;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MovieDetailActivity extends AppCompatActivity implements View.OnClickListener {
-
+public class MovieDetailActivity extends AppCompatActivity implements View.OnClickListener
+{
     public static final String EXTRA_MOVIE = "extra_movie";
     TextView titleObject;
     TextView descObject;
@@ -27,7 +23,8 @@ public class MovieDetailActivity extends AppCompatActivity implements View.OnCli
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
@@ -62,12 +59,11 @@ public class MovieDetailActivity extends AppCompatActivity implements View.OnCli
         //For play trailer icon or text click listener
         playButton.setOnClickListener(this);
         watchTrailer.setOnClickListener(this);
-
-
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view)
+    {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://" + movieTrailerId ));
         startActivity(intent);
     }

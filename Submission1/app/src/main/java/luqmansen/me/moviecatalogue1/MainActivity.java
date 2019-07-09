@@ -2,15 +2,13 @@ package luqmansen.me.moviecatalogue1;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.widget.ListView;
-
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity
+{
     public String[] dataTitle;
     public String[] dataRelease;
     public String[] dataDescription;
@@ -20,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Movie> movies;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
+    protected void onCreate(Bundle savedInstanceState)
+    {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
@@ -38,10 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void addItem(){
+    private void addItem()
+    {
         movies = new ArrayList<>(  );
 
-        for (int i = 0; i < dataTitle.length; i++){
+        for (int i = 0; i < dataTitle.length; i++)
+        {
             Movie movie = new Movie(  );
             movie.setTitle( dataTitle[i] );
             movie.setRelease( dataRelease[i] );
@@ -53,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
         adapter.setMovies( movies );
     }
 
-    public void prepare(){
+    public void prepare()
+    {
         dataTitle = getResources().getStringArray( R.array.movie_title );
         dataRelease = getResources().getStringArray( R.array.movie_release );
         dataDescription = getResources().getStringArray( R.array.movie_desc );

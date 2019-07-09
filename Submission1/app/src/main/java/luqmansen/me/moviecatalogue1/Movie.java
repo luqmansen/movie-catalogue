@@ -3,21 +3,12 @@ package luqmansen.me.moviecatalogue1;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Movie implements Parcelable {
-
+public class Movie implements Parcelable
+{
     private String title;
     private String release;
     private String desc;
     private Integer movieBg;
-
-    public String getMovieTrailerId() {
-        return movieTrailerId;
-    }
-
-    public void setMovieTrailerId(String movieTrailerId) {
-        this.movieTrailerId = movieTrailerId;
-    }
-
     private String movieTrailerId;
 
     public String getTitle() {
@@ -52,14 +43,25 @@ public class Movie implements Parcelable {
         this.movieBg = movieBg;
     }
 
+    public String getMovieTrailerId() {
+        return movieTrailerId;
+    }
+
+    public void setMovieTrailerId(String movieTrailerId) {
+        this.movieTrailerId = movieTrailerId;
+    }
+
+
     @Override
-    public int describeContents() {
+    public int describeContents()
+    {
         return 0;
     }
 
     @Override
     //write object value to parcel for storage
-    public void writeToParcel(Parcel dest, int flags) {
+    public void writeToParcel(Parcel dest, int flags)
+    {
         dest.writeString( this.title );
         dest.writeString( this.release );
         dest.writeString( this.desc );
@@ -70,7 +72,8 @@ public class Movie implements Parcelable {
     public Movie() {
     }
     // constructor for parcel
-    protected Movie(Parcel in) {
+    protected Movie(Parcel in)
+    {
         this.title = in.readString();
         this.release = in.readString();
         this.desc = in.readString();
@@ -78,14 +81,17 @@ public class Movie implements Parcelable {
         this.movieTrailerId = in.readString();
     }
     // creator - used when un-parceling the parcel
-    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
+    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>()
+    {
         @Override
-        public Movie createFromParcel(Parcel source) {
+        public Movie createFromParcel(Parcel source)
+        {
             return new Movie( source );
         }
 
         @Override
-        public Movie[] newArray(int size) {
+        public Movie[] newArray(int size)
+        {
             return new Movie[size];
         }
     };

@@ -65,6 +65,8 @@
         <item>@drawable/poster_glass</item>
         <item>@drawable/poster_hunterkiller</item>
     </array>
-
+    <string name="title_activity_main">Movie and TV Shows</string>
+    <string name="title_movie">Movie</string>
+    <string name="title_tvshows">TV Shows</string>
 
 </resources>

@@ -69,7 +69,6 @@
             android:backgroundTint="#FFC107"
             android:backgroundTintMode="src_in"
             android:ellipsize="end"
-            android:forceDarkAllowed="false"
             android:foregroundGravity="bottom"
             android:foregroundTint="#FFC107"
             android:foregroundTintMode="add"

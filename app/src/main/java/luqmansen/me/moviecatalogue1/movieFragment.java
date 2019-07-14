@@ -1,6 +1,7 @@
 package luqmansen.me.moviecatalogue1;
 
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 
@@ -73,7 +74,7 @@ public class movieFragment extends Fragment
             @Override
             public void onItemClicked(Movie data)
             {
-                showSelectedItem(data);
+                selectItem(data);
             }
         });
     }
@@ -103,9 +104,17 @@ public class movieFragment extends Fragment
         dataMovieTrailerId = getResources().getStringArray(R.array.youtube_id);
     }
 
-    public void showSelectedItem(Movie movie)
+    public void selectItem(Movie movie)
     {
-        Toast.makeText(getContext(), "Kamu memilih " + movie.getTitle(), Toast.LENGTH_SHORT).show();
+        movie.setTitle(movie.getTitle());
+        movie.setRelease(movie.getRelease());
+        movie.setDesc(movie.getDesc());
+        movie.setMovieBg(movie.getMovieBg());
+        movie.setMovieTrailerId(movie.getMovieTrailerId());
+
+        Intent movieDetail = new Intent(getContext(), MovieDetailActivity.class);
+        movieDetail.putExtra(MovieDetailActivity.EXTRA_MOVIE, movie);
+        getContext().startActivity(movieDetail);
     }
 
 }

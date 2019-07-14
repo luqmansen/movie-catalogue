@@ -1,10 +1,13 @@
 package luqmansen.me.moviecatalogue1;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +25,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     String movieTrailerId;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -53,6 +57,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         titleObject.setText(title);
         releaseObject.setText(release);
         descObject.setText(desc);
+        descObject.setJustificationMode(Layout.JUSTIFICATION_MODE_INTER_WORD);
         movieBgObject.setImageResource( image );
         trailerBg.setImageResource(image);
 

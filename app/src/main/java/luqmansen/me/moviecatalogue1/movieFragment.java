@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -66,6 +67,15 @@ public class movieFragment extends Fragment
         rv_movie.setLayoutManager(new GridLayoutManager(getContext(),3));
         GridMovieAdapter gridMovieAdapter = new GridMovieAdapter(list);
         rv_movie.setAdapter(gridMovieAdapter);
+
+        gridMovieAdapter.setOnItemClickCallback(new GridMovieAdapter.OnItemClickCallback()
+        {
+            @Override
+            public void onItemClicked(Movie data)
+            {
+                showSelectedItem(data);
+            }
+        });
     }
 
     private void addItem()
@@ -82,7 +92,6 @@ public class movieFragment extends Fragment
             movie.setMovieTrailerId( dataMovieTrailerId[i] );
             movies.add( movie );
         }
-//        adapter.setMovies( movies );
     }
 
     public void prepare()
@@ -92,6 +101,11 @@ public class movieFragment extends Fragment
         dataDescription = getResources().getStringArray( R.array.movie_desc );
         dataBg = getResources().obtainTypedArray( R.array.movie_bg );
         dataMovieTrailerId = getResources().getStringArray(R.array.youtube_id);
+    }
+
+    public void showSelectedItem(Movie movie)
+    {
+        Toast.makeText(getContext(), "Kamu memilih " + movie.getTitle(), Toast.LENGTH_SHORT).show();
     }
 
 }

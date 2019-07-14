@@ -16,6 +16,14 @@ import java.util.ArrayList;
 public class GridMovieAdapter extends RecyclerView.Adapter<GridMovieAdapter.GridViewHolder>
 {
     private ArrayList<Movie> listMovie;
+    private OnItemClickCallback onItemClickCallback;
+
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback)
+    {
+        this.onItemClickCallback = onItemClickCallback;
+    }
+
+
     public GridMovieAdapter(ArrayList<Movie> list)
     {
         this.listMovie = list;
@@ -30,14 +38,19 @@ public class GridMovieAdapter extends RecyclerView.Adapter<GridMovieAdapter.Grid
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GridMovieAdapter.GridViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull final GridMovieAdapter.GridViewHolder holder, int position)
     {
         Glide.with(holder.itemView.getContext())
                 .load(listMovie.get(position).getMovieBg())
                 .apply(new RequestOptions().override(350,550))
                 .into(holder.imgPhoto);
 
-//        holder.itemView.setOnClickListener();
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemClickCallback.onItemClicked(listMovie.get(holder.getAdapterPosition()));
+            }
+        });
     }
 
     @Override
@@ -52,5 +65,10 @@ public class GridMovieAdapter extends RecyclerView.Adapter<GridMovieAdapter.Grid
             super(itemView);
             imgPhoto = itemView.findViewById(R.id.img_item_photo);
         }
+    }
+
+    public interface OnItemClickCallback
+    {
+        void onItemClicked(Movie data);
     }
 }

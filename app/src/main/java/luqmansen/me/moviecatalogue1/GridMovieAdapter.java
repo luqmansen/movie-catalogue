@@ -36,6 +36,8 @@ public class GridMovieAdapter extends RecyclerView.Adapter<GridMovieAdapter.Grid
                 .load(listMovie.get(position).getMovieBg())
                 .apply(new RequestOptions().override(350,550))
                 .into(holder.imgPhoto);
+
+//        holder.itemView.setOnClickListener();
     }
 
     @Override

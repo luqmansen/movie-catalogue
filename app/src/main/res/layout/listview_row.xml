@@ -11,6 +11,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="1">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_item_photo"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            tools:src="@android:color/darker_gray" />
+
         <ImageView
             android:id="@+id/homeBg"
             android:layout_width="match_parent"

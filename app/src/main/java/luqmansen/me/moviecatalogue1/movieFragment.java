@@ -63,7 +63,7 @@ public class movieFragment extends Fragment
 
     private void showRecyclerGrid()
     {
-        rv_movie.setLayoutManager(new GridLayoutManager(getContext(),2));
+        rv_movie.setLayoutManager(new GridLayoutManager(getContext(),3));
         GridMovieAdapter gridMovieAdapter = new GridMovieAdapter(list);
         rv_movie.setAdapter(gridMovieAdapter);
     }

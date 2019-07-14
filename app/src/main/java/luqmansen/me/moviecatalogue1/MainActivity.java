@@ -32,12 +32,14 @@ public class MainActivity extends AppCompatActivity
             switch (item.getItemId())
             {
                 case R.id.navigation_movie:
-                    fm.beginTransaction().hide(active).show(fragmentMovie).commit();
-                    active = fragmentTVshows;
+                    fm.beginTransaction()
+                            .replace(R.id.container_layout,fragmentMovie,fragmentMovie.getClass().getSimpleName())
+                            .commit();
                     return true;
                 case R.id.navigation_tvshows:
-                    fm.beginTransaction().hide(active).show(fragmentTVshows).commit();
-                    active = fragmentTVshows;
+                    fm.beginTransaction()
+                            .replace(R.id.container_layout,fragmentTVshows,fragmentTVshows.getClass().getSimpleName())
+                            .commit();
                     return true;
             }
             return false;
@@ -53,8 +55,9 @@ public class MainActivity extends AppCompatActivity
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        fm.beginTransaction().add(R.id.container_layout, fragmentTVshows,"TVShows").hide(fragmentTVshows).commit();
-        fm.beginTransaction().add(R.id.container_layout, fragmentMovie, "Movie").commit();
+        if (savedInstanceState == null){
+            navView.setSelectedItemId(R.id.navigation_movie);
+        }
     }
 
 

@@ -13,7 +13,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
-public class GridMovieAdapter extends RecyclerView.Adapter<GridMovieAdapter.GridViewHolder>
+public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder>
 {
     private ArrayList<Movie> listMovie;
     private OnItemClickCallback onItemClickCallback;
@@ -24,21 +24,21 @@ public class GridMovieAdapter extends RecyclerView.Adapter<GridMovieAdapter.Grid
     }
 
 
-    public GridMovieAdapter(ArrayList<Movie> list)
+    public GridAdapter(ArrayList<Movie> list)
     {
         this.listMovie = list;
     }
 
     @NonNull
     @Override
-    public GridMovieAdapter.GridViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    public GridAdapter.GridViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_grid, parent, false);
         return new GridViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final GridMovieAdapter.GridViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull final GridAdapter.GridViewHolder holder, int position)
     {
         Glide.with(holder.itemView.getContext())
                 .load(listMovie.get(position).getMovieBg())

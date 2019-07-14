@@ -24,6 +24,22 @@ public class MainActivity extends AppCompatActivity
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragmentMovie;
 
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        fm.beginTransaction().add(R.id.container_layout,fragmentTVshows).hide(fragmentTVshows).commit();
+        fm.beginTransaction().add(R.id.container_layout, fragmentMovie).commit();
+    }
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener()
     {
@@ -34,33 +50,22 @@ public class MainActivity extends AppCompatActivity
             {
                 case R.id.navigation_movie:
                     fm.beginTransaction()
-                            .replace(R.id.container_layout,fragmentMovie,fragmentMovie.getClass().getSimpleName())
+                            .hide(active)
+                            .show(fragmentMovie)
                             .commit();
+                    active = fragmentMovie;
                     return true;
                 case R.id.navigation_tvshows:
                     fm.beginTransaction()
-                            .replace(R.id.container_layout,fragmentTVshows,fragmentTVshows.getClass().getSimpleName())
+                            .hide(active)
+                            .show(fragmentTVshows)
                             .commit();
+                    active = fragmentTVshows;
                     return true;
             }
             return false;
         }
     };
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        if (savedInstanceState == null){
-            navView.setSelectedItemId(R.id.navigation_movie);
-        }
-    }
 
 
 }

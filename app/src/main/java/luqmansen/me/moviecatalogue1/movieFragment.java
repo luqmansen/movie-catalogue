@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,7 +49,7 @@ public class movieFragment extends Fragment
         addItem();
         list.addAll(this.movies);
 
-        showRecyclerList();
+        showRecyclerGrid();
         // Inflate the layout for this fragment
         return view;
     }
@@ -58,6 +59,13 @@ public class movieFragment extends Fragment
         rv_movie.setLayoutManager(new LinearLayoutManager(getContext()));
         ListMovieAdapter listMovieAdapter = new ListMovieAdapter(list);
         rv_movie.setAdapter(listMovieAdapter);
+    }
+
+    private void showRecyclerGrid()
+    {
+        rv_movie.setLayoutManager(new GridLayoutManager(getContext(),2));
+        GridMovieAdapter gridMovieAdapter = new GridMovieAdapter(list);
+        rv_movie.setAdapter(gridMovieAdapter);
     }
 
     private void addItem()

@@ -13,8 +13,45 @@
         android:background="#222222"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ScrollView
+            android:layout_width="370dp"
+            android:layout_height="287dp"
+            android:layout_below="@+id/movieImageDetail"
+            android:layout_alignStart="@+id/movieImageDetail"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="19dp"
+            android:foregroundGravity="bottom|center_vertical|fill">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_gravity="top|left"
+                android:gravity="top"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/descDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:background="#00FFFFFF"
+                    android:baselineAligned="true"
+                    android:gravity="top"
+                    android:text="TextView"
+                    android:textAlignment="viewStart"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    tools:layout_conversion_wrapHeight="935"
+                    tools:layout_conversion_wrapWidth="822" />
+
+            </LinearLayout>
+        </ScrollView>
 
         <TextView
             android:id="@+id/titleDetail"
@@ -92,25 +129,6 @@
             android:textColor="#FDFDFD"
             android:textSize="36sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/descDetail"
-            android:layout_width="367dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/movieImageDetail"
-            android:layout_alignStart="@+id/movieImageDetail"
-            android:layout_alignEnd="@+id/blackTransparent"
-            android:layout_marginStart="7dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="29dp"
-            android:background="#00FFFFFF"
-            android:text="TextView"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            tools:layout_conversion_wrapHeight="935"
-            tools:layout_conversion_wrapWidth="822"
-            tools:layout_editor_absoluteX="28dp"
-            tools:layout_editor_absoluteY="16dp" />
 
         <ImageView
             android:id="@+id/playButton"

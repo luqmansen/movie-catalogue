@@ -111,8 +111,8 @@ public class tvshowsFragment extends Fragment
         movie.setMovieBg(movie.getMovieBg());
         movie.setMovieTrailerId(movie.getMovieTrailerId());
 
-        Intent movieDetail = new Intent(getContext(), MovieDetailActivity.class);
-        movieDetail.putExtra(MovieDetailActivity.EXTRA_MOVIE, movie);
+        Intent movieDetail = new Intent(getContext(), DetailActivity.class);
+        movieDetail.putExtra(DetailActivity.EXTRA_MOVIE, movie);
         getContext().startActivity(movieDetail);
     }
 

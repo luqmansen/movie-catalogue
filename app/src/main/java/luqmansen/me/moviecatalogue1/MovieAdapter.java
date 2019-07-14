@@ -91,8 +91,8 @@ public class MovieAdapter extends BaseAdapter
             movie.setMovieBg( moviePoster.getResourceId( position, -1 ) );
             movie.setMovieTrailerId( movieTrailerId[position] );
 
-            Intent movieDetail = new Intent( context, MovieDetailActivity.class );
-            movieDetail.putExtra( MovieDetailActivity.EXTRA_MOVIE, movie );
+            Intent movieDetail = new Intent( context, DetailActivity.class );
+            movieDetail.putExtra( DetailActivity.EXTRA_MOVIE, movie );
             context.startActivity(movieDetail);
         }
     };

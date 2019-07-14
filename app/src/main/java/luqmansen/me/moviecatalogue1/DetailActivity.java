@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MovieDetailActivity extends AppCompatActivity implements View.OnClickListener
+public class DetailActivity extends AppCompatActivity implements View.OnClickListener
 {
     public static final String EXTRA_MOVIE = "extra_movie";
     TextView titleObject;

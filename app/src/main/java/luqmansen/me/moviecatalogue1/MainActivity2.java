@@ -59,6 +59,6 @@ public class MainActivity2 extends AppCompatActivity
         dataRelease = getResources().getStringArray( R.array.movie_release );
         dataDescription = getResources().getStringArray( R.array.movie_desc );
         dataBg = getResources().obtainTypedArray( R.array.movie_bg );
-        dataMovieTrailerId = getResources().getStringArray(R.array.youtube_id);
+        dataMovieTrailerId = getResources().getStringArray(R.array.movie_youtube_id);
     }
 }

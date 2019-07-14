@@ -103,7 +103,7 @@ public class MovieAdapter extends BaseAdapter
         release = context.getResources().getStringArray( R.array.movie_release );
         description = context.getResources().getStringArray( R.array.movie_desc );
         moviePoster = context.getResources().obtainTypedArray( R.array.movie_bg );
-        movieTrailerId = context.getResources().getStringArray(R.array.youtube_id);
+        movieTrailerId = context.getResources().getStringArray(R.array.movie_youtube_id);
     }
 
 

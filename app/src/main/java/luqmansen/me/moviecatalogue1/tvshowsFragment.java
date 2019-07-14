@@ -21,7 +21,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class movieFragment extends Fragment
+public class tvshowsFragment extends Fragment
 {
     public String[] dataTitle;
     public String[] dataRelease;
@@ -34,7 +34,7 @@ public class movieFragment extends Fragment
     private RecyclerView rv_movie;
     private ArrayList<Movie> list = new ArrayList<>();
 
-    public movieFragment() {
+    public tvshowsFragment() {
         // Required empty public constructor
     }
 
@@ -97,11 +97,11 @@ public class movieFragment extends Fragment
 
     public void prepare()
     {
-        dataTitle = getResources().getStringArray( R.array.movie_title );
-        dataRelease = getResources().getStringArray( R.array.movie_release );
-        dataDescription = getResources().getStringArray( R.array.movie_desc );
-        dataBg = getResources().obtainTypedArray( R.array.movie_bg );
-        dataMovieTrailerId = getResources().getStringArray(R.array.tvshow_bg);
+        dataTitle = getResources().getStringArray( R.array.tvshow_title );
+        dataRelease = getResources().getStringArray( R.array.tvshow_release );
+        dataDescription = getResources().getStringArray( R.array.tvshow_desc );
+        dataBg = getResources().obtainTypedArray( R.array.tvshow_bg );
+        dataMovieTrailerId = getResources().getStringArray(R.array.tvshow_youtube_id);
     }
 
     public void selectItem(Movie movie)

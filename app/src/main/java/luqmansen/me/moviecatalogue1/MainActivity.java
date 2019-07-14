@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
 {
     final Fragment fragmentMovie = new movieFragment();
-    final Fragment fragmentTVshows = new tvshowsFrament();
+    final Fragment fragmentTVshows = new tvshowsFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragmentMovie;
 

@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginTop="16dp"
-                android:text="Overview"
+                android:text="@string/overview_detail"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -85,13 +85,15 @@
                 android:id="@+id/watchTrailer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="132dp"
+                android:layout_marginEnd="8dp"
                 android:shadowColor="#00EEE7E7"
-                android:text="Watch trailer"
+                android:text="@string/watch_trailer"
                 android:textColor="#FDFDFD"
                 android:textSize="36sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/blackTransparent"
+                app:layout_constraintBottom_toBottomOf="@+id/playButton"
+                app:layout_constraintEnd_toEndOf="@+id/blackTransparent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/playButton" />
 
             <TextView
@@ -136,10 +138,12 @@
                 android:id="@+id/playButton"
                 android:layout_width="52dp"
                 android:layout_height="48dp"
-                android:layout_marginEnd="272dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginBottom="132dp"
                 app:layout_constraintBottom_toBottomOf="@+id/blackTransparent"
                 app:layout_constraintEnd_toEndOf="@+id/blackTransparent"
+                app:layout_constraintHorizontal_bias="0.193"
+                app:layout_constraintStart_toStartOf="@+id/blackTransparent"
                 app:srcCompat="@android:drawable/ic_media_play" />
 
             <RelativeLayout

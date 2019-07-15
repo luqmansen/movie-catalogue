@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:menuCategory="container">
         <item android:id="@+id/menu1"
-            android:title="Menu1"
+            android:title="Language"
             android:icon = "@drawable/baseline_language_black_18dp"
             app:showAsAction="never" />
 

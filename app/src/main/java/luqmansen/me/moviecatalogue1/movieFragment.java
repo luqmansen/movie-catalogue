@@ -28,8 +28,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class movieFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener
-{
+public class movieFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, View.OnFocusChangeListener {
     public String[] dataTitle;
     public String[] dataRelease;
     public String[] dataDescription;
@@ -132,9 +131,10 @@ public class movieFragment extends Fragment implements SearchView.OnQueryTextLis
     {
         inflater.inflate(R.menu.search, menu);
         final MenuItem searchItem = menu.findItem(R.id.search);
-        MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW  );
+        MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(this);
+        searchView.setOnQueryTextFocusChangeListener(this);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -175,5 +175,10 @@ public class movieFragment extends Fragment implements SearchView.OnQueryTextLis
     public boolean onMenuItemActionCollapse(MenuItem menuItem) {
         gridAdapter.setFilter(list);
         return true;
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        gridAdapter.setFilter(list);
     }
 }

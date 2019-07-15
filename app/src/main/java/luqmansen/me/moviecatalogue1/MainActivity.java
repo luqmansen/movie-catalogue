@@ -1,5 +1,6 @@
 package luqmansen.me.moviecatalogue1;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,6 +31,9 @@ public class MainActivity extends AppCompatActivity
     final Fragment fragmentTVshows = new tvshowsFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragmentMovie;
+
+    private  ArrayList<Movie> arrayList;
+    private GridAdapter adapter;
 
 
     public boolean onCreateOptionsMenu(Menu menu)
@@ -41,10 +46,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        if (item.getItemId() == R.id.menu1)
+        switch (item.getItemId())
         {
-            Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
-            startActivity(mIntent);
+            case R.id.menu1:
+                Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+                startActivity(mIntent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

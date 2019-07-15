@@ -1,5 +1,6 @@
 package luqmansen.me.moviecatalogue1;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder>
 {
     private ArrayList<Movie> listMovie;
+    private Context context;
     private OnItemClickCallback onItemClickCallback;
 
     public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback)
@@ -24,9 +26,10 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder
     }
 
 
-    public GridAdapter(ArrayList<Movie> list)
+    public GridAdapter(ArrayList<Movie> list, Context context)
     {
         this.listMovie = list;
+        this.context = context;
     }
 
     @NonNull
@@ -56,6 +59,13 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder
     @Override
     public int getItemCount() {
         return listMovie.size();
+    }
+
+    public void setFilter(ArrayList<Movie> dataFilter)
+    {
+        listMovie.clear();
+        listMovie.addAll(dataFilter);
+        notifyDataSetChanged();
     }
 
     public class GridViewHolder extends RecyclerView.ViewHolder {

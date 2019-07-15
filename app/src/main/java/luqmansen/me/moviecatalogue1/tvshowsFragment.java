@@ -65,7 +65,7 @@ public class tvshowsFragment extends Fragment
     private void showRecyclerGrid()
     {
         rv_movie.setLayoutManager(new GridLayoutManager(getContext(),3));
-        GridAdapter gridAdapter = new GridAdapter(list);
+        GridAdapter gridAdapter = new GridAdapter(list, getContext());
         rv_movie.setAdapter(gridAdapter);
 
         gridAdapter.setOnItemClickCallback(new GridAdapter.OnItemClickCallback()

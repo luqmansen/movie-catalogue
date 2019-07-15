@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,9 +36,11 @@ public class movieFragment extends Fragment implements SearchView.OnQueryTextLis
     public TypedArray dataBg;
     public String[] dataMovieTrailerId;
     private ArrayList<Movie> movies;
+    private ArrayList<Movie> filteredList;
 
     private RecyclerView rv_movie;
     private ArrayList<Movie> list = new ArrayList<>();
+
     GridAdapter gridAdapter = new GridAdapter(list, getContext());
     public movieFragment() {
         // Required empty public constructor
@@ -52,23 +55,24 @@ public class movieFragment extends Fragment implements SearchView.OnQueryTextLis
         rv_movie = view.findViewById(R.id.rv_movie);
         rv_movie.setHasFixedSize(true);
 
-        setHasOptionsMenu(true);
-
         prepare();
         addItem();
         list.addAll(this.movies);
 
+        filteredList = list;
         showRecyclerGrid();
+
+        setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         return view;
     }
 
-    private void showRecyclerList()
-    {
-        rv_movie.setLayoutManager(new LinearLayoutManager(getContext()));
-        ListMovieAdapter listMovieAdapter = new ListMovieAdapter(list);
-        rv_movie.setAdapter(listMovieAdapter);
-    }
+//    private void showRecyclerList()
+//    {
+//        rv_movie.setLayoutManager(new LinearLayoutManager(getContext()));
+//        ListMovieAdapter listMovieAdapter = new ListMovieAdapter(list);
+//        rv_movie.setAdapter(listMovieAdapter);
+//    }
 
     private void showRecyclerGrid()
     {
@@ -128,10 +132,9 @@ public class movieFragment extends Fragment implements SearchView.OnQueryTextLis
     {
         inflater.inflate(R.menu.search, menu);
         final MenuItem searchItem = menu.findItem(R.id.search);
-        MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS  | MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+        MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW  );
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(this);
-
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -147,7 +150,6 @@ public class movieFragment extends Fragment implements SearchView.OnQueryTextLis
         if (s == null || s.trim().isEmpty())
         {
             gridAdapter.setFilter(list);
-            Toast.makeText(getContext(),"NULL HAHAHAH",Toast.LENGTH_SHORT);
             return false;
         }
         s = s.toLowerCase();

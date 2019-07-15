@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder>
 {
     private ArrayList<Movie> listMovie;
+    private ArrayList<Movie> filteredList;
     private Context context;
     private OnItemClickCallback onItemClickCallback;
 
@@ -57,13 +58,14 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return listMovie.size();
     }
 
     public void setFilter(ArrayList<Movie> dataFilter)
     {
-        listMovie.clear();
+        listMovie = new ArrayList<>();
         listMovie.addAll(dataFilter);
         notifyDataSetChanged();
     }

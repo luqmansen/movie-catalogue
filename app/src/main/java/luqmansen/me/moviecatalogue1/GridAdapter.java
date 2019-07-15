@@ -42,7 +42,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder
     {
         Glide.with(holder.itemView.getContext())
                 .load(listMovie.get(position).getMovieBg())
-                .apply(new RequestOptions().override(350,550))
+                .apply(new RequestOptions().override(300,500))
                 .into(holder.imgPhoto);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

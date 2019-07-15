@@ -35,12 +35,12 @@ public class movieFragment extends Fragment implements SearchView.OnQueryTextLis
     public TypedArray dataBg;
     public String[] dataMovieTrailerId;
     private ArrayList<Movie> movies;
-    private ArrayList<Movie> filteredList;
 
     private RecyclerView rv_movie;
     private ArrayList<Movie> list = new ArrayList<>();
 
     GridAdapter gridAdapter = new GridAdapter(list, getContext());
+
     public movieFragment() {
         // Required empty public constructor
     }
@@ -58,7 +58,6 @@ public class movieFragment extends Fragment implements SearchView.OnQueryTextLis
         addItem();
         list.addAll(this.movies);
 
-        filteredList = list;
         showRecyclerGrid();
 
         setHasOptionsMenu(true);

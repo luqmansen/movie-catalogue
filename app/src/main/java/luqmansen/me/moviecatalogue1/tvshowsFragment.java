@@ -5,14 +5,19 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import java.util.ArrayList;
 
@@ -20,18 +25,18 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class tvshowsFragment extends Fragment
+public class tvshowsFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItemCompat.OnActionExpandListener,View.OnFocusChangeListener
 {
     public String[] dataTitle;
     public String[] dataRelease;
     public String[] dataDescription;
     public TypedArray dataBg;
     public String[] dataMovieTrailerId;
-    private MovieAdapter adapter;
     private ArrayList<Movie> movies;
 
     private RecyclerView rv_movie;
     private ArrayList<Movie> list = new ArrayList<>();
+    GridAdapter gridAdapter = new GridAdapter(list, getContext());
 
     public tvshowsFragment() {
         // Required empty public constructor
@@ -51,21 +56,21 @@ public class tvshowsFragment extends Fragment
         list.addAll(this.movies);
 
         showRecyclerGrid();
+        setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         return view;
     }
 
-    private void showRecyclerList()
-    {
-        rv_movie.setLayoutManager(new LinearLayoutManager(getContext()));
-        ListMovieAdapter listMovieAdapter = new ListMovieAdapter(list);
-        rv_movie.setAdapter(listMovieAdapter);
-    }
+//    private void showRecyclerList()
+//    {
+//        rv_movie.setLayoutManager(new LinearLayoutManager(getContext()));
+//        ListMovieAdapter listMovieAdapter = new ListMovieAdapter(list);
+//        rv_movie.setAdapter(listMovieAdapter);
+//    }
 
     private void showRecyclerGrid()
     {
         rv_movie.setLayoutManager(new GridLayoutManager(getContext(),3));
-        GridAdapter gridAdapter = new GridAdapter(list, getContext());
         rv_movie.setAdapter(gridAdapter);
 
         gridAdapter.setOnItemClickCallback(new GridAdapter.OnItemClickCallback()
@@ -116,4 +121,62 @@ public class tvshowsFragment extends Fragment
         getContext().startActivity(movieDetail);
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+    {
+        inflater.inflate(R.menu.search, menu);
+        final MenuItem searchItem = menu.findItem(R.id.search);
+        MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(this);
+        searchView.setOnQueryTextFocusChangeListener(this);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean b)
+    {
+        gridAdapter.setFilter(list);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s)
+    {
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s)
+    {
+        if (s == null || s.trim().isEmpty())
+        {
+            gridAdapter.setFilter(list);
+            return false;
+        }
+        s = s.toLowerCase();
+        final ArrayList<Movie> filteredTitle = new ArrayList<>();
+        for (Movie model : list)
+        {
+            final String title = model.getTitle().toLowerCase();
+            if (title.contains(s))
+            {
+                filteredTitle.add(model);
+            }
+        }
+        gridAdapter.setFilter(filteredTitle);
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemActionExpand(MenuItem item)
+    {
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemActionCollapse(MenuItem item)
+    {
+        gridAdapter.setFilter(list);
+        return true;
+    }
 }

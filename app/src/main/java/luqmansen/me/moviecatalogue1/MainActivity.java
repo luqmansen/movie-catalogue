@@ -3,6 +3,9 @@ package luqmansen.me.moviecatalogue1;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.graphics.BitmapFactory;
+import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -22,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.util.ArrayList;
 
@@ -34,6 +38,8 @@ public class MainActivity extends AppCompatActivity
 
     private  ArrayList<Movie> arrayList;
     private GridAdapter adapter;
+
+    public  String title;
 
 
     public boolean onCreateOptionsMenu(Menu menu)
@@ -67,13 +73,18 @@ public class MainActivity extends AppCompatActivity
 
         fm.beginTransaction().add(R.id.container_layout,fragmentTVshows).hide(fragmentTVshows).commit();
         fm.beginTransaction().add(R.id.container_layout, fragmentMovie).commit();
+
+        if(title == null){
+            title = "Movies";
+        }
+        setActionBarTitle(title);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        hideSystemUI();
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        hideSystemUI();
+//    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener()
@@ -88,6 +99,8 @@ public class MainActivity extends AppCompatActivity
                             .hide(active)
                             .show(fragmentMovie)
                             .commit();
+                    title = "Movies";
+                    setActionBarTitle(title);
                     active = fragmentMovie;
                     return true;
                 case R.id.navigation_tvshows:
@@ -95,6 +108,8 @@ public class MainActivity extends AppCompatActivity
                             .hide(active)
                             .show(fragmentTVshows)
                             .commit();
+                    title = "TV Shows";
+                    setActionBarTitle(title);
                     active = fragmentTVshows;
                     return true;
             }
@@ -106,7 +121,7 @@ public class MainActivity extends AppCompatActivity
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
-            hideSystemUI();
+//            hideSystemUI();
         }
     }
 
@@ -117,13 +132,23 @@ public class MainActivity extends AppCompatActivity
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
-                        // Set the content to appear under the system bars so that the
-                        // content doesn't resize when the system bars hide and show.
-                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        // Hide the nav bar and status bar
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
+                // Set the content to appear under the system bars so that the
+                // content doesn't resize when the system bars hide and show.
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                // Hide the nav bar and status bar
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
+
+
+    public void setActionBarTitle(String title)
+    {
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayUseLogoEnabled(true);
+        actionbar.setTitle(title);
+
     }
 }
+

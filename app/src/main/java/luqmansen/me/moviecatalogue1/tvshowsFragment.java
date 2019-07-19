@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -55,13 +57,14 @@ public class tvshowsFragment extends Fragment implements SearchView.OnQueryTextL
         addItem();
         list.addAll(this.movies);
 
-        showRecyclerGrid();
         setHasOptionsMenu(true);
-        // Inflate the layout for this fragment
+
+        showRecyclerGrid();
+
         return view;
     }
 
-//    private void showRecyclerList()
+    //    private void showRecyclerList()
 //    {
 //        rv_movie.setLayoutManager(new LinearLayoutManager(getContext()));
 //        ListMovieAdapter listMovieAdapter = new ListMovieAdapter(list);

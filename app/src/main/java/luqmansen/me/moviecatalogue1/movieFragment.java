@@ -1,6 +1,7 @@
 package luqmansen.me.moviecatalogue1;
 
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,12 +37,10 @@ public class movieFragment extends Fragment implements SearchView.OnQueryTextLis
     public TypedArray dataBg;
     public String[] dataMovieTrailerId;
     private ArrayList<Movie> movies;
-
     private RecyclerView rv_movie;
     private ArrayList<Movie> list = new ArrayList<>();
 
     GridAdapter gridAdapter = new GridAdapter(list, getContext());
-
     public movieFragment() {
         // Required empty public constructor
     }
@@ -59,13 +59,13 @@ public class movieFragment extends Fragment implements SearchView.OnQueryTextLis
         list.addAll(this.movies);
 
         showRecyclerGrid();
-
         setHasOptionsMenu(true);
-        // Inflate the layout for this fragment
+
         return view;
     }
 
-//    private void showRecyclerList()
+
+    //    private void showRecyclerList()
 //    {
 //        rv_movie.setLayoutManager(new LinearLayoutManager(getContext()));
 //        ListMovieAdapter listMovieAdapter = new ListMovieAdapter(list);
@@ -180,4 +180,5 @@ public class movieFragment extends Fragment implements SearchView.OnQueryTextLis
     public void onFocusChange(View view, boolean b) {
         gridAdapter.setFilter(list);
     }
+
 }

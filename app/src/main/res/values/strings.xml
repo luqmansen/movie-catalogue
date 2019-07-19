@@ -5,6 +5,7 @@
     <string name="title_tv_shows" >TV Shows</string>
     <string name="watch_trailer">"Watch Trailer"</string>
     <string name="overview_detail">"Overview"</string>
+    <string name="searchview_hint">Find something....</string>
 
     <string-array name="movie_title">
         <item>Venom</item>

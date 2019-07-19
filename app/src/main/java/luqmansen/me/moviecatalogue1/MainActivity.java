@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity
         fm.beginTransaction().add(R.id.container_layout, fragmentMovie).commit();
 
         if(title == null){
-            title = "Movies";
+            title = getString(R.string.title_movie);
         }
         setActionBarTitle(title);
     }
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity
                             .hide(active)
                             .show(fragmentMovie)
                             .commit();
-                    title = "Movies";
+                    title = getString(R.string.title_movie);
                     setActionBarTitle(title);
                     active = fragmentMovie;
                     return true;
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity
                             .hide(active)
                             .show(fragmentTVshows)
                             .commit();
-                    title = "TV Shows";
+                    title = getString(R.string.title_tv_shows);
                     setActionBarTitle(title);
                     active = fragmentTVshows;
                     return true;

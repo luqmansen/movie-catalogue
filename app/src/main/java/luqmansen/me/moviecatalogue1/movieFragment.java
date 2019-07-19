@@ -118,6 +118,7 @@ public class movieFragment extends Fragment implements SearchView.OnQueryTextLis
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(this);
         searchView.setOnQueryTextFocusChangeListener(this);
+        searchView.setQueryHint(getString(R.string.searchview_hint));
         super.onCreateOptionsMenu(menu, inflater);
     }
 

@@ -1,29 +1,20 @@
 package luqmansen.me.moviecatalogue1;
 
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.SearchView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 
 
@@ -64,13 +55,6 @@ public class movieFragment extends Fragment implements SearchView.OnQueryTextLis
         return view;
     }
 
-
-    //    private void showRecyclerList()
-//    {
-//        rv_movie.setLayoutManager(new LinearLayoutManager(getContext()));
-//        ListMovieAdapter listMovieAdapter = new ListMovieAdapter(list);
-//        rv_movie.setAdapter(listMovieAdapter);
-//    }
 
     private void showRecyclerGrid()
     {

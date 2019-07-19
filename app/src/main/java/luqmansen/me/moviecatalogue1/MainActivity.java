@@ -15,19 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.SearchView;
-import android.widget.Toast;
-import android.widget.Toolbar;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -35,9 +27,6 @@ public class MainActivity extends AppCompatActivity
     final Fragment fragmentTVshows = new tvshowsFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragmentMovie;
-
-    private  ArrayList<Movie> arrayList;
-    private GridAdapter adapter;
 
     public  String title;
 
@@ -79,12 +68,6 @@ public class MainActivity extends AppCompatActivity
         }
         setActionBarTitle(title);
     }
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        hideSystemUI();
-//    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener()

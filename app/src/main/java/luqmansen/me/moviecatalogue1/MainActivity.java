@@ -1,15 +1,9 @@
 package luqmansen.me.moviecatalogue1;
 
-import android.content.Context;
+
 import android.content.Intent;
-import android.content.res.TypedArray;
-import android.graphics.BitmapFactory;
-import android.graphics.Shader;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;

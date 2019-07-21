@@ -58,9 +58,9 @@ public class MovieAdapter extends BaseAdapter
     {
         ViewHolder holder;
         if (view == null){
-            view = (View) LayoutInflater.from( context ).inflate( R.layout.listview_row,viewGroup,false );
+            view = LayoutInflater.from( context ).inflate( R.layout.listview_row,viewGroup,false );
             holder  = new ViewHolder(view);
-            holder.homeDetailButton = (Button) view.findViewById(R.id.homeDetailButton);
+            holder.homeDetailButton = view.findViewById(R.id.homeDetailButton);
             holder.homeDetailButton.setOnClickListener(buttonClickListener);
             view.setTag(holder);
         }

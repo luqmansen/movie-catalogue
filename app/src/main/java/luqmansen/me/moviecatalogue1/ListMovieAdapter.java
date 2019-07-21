@@ -5,19 +5,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
-public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.ListViewHolder>
-{
+public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.ListViewHolder> {
     private ArrayList<Movie> listMovie;
 
-    public ListMovieAdapter(ArrayList<Movie> list)
-    {
+    public ListMovieAdapter(ArrayList<Movie> list) {
         this.listMovie = list;
     }
 
@@ -29,13 +29,12 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.List
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListMovieAdapter.ListViewHolder holder, int position)
-    {
+    public void onBindViewHolder(@NonNull ListMovieAdapter.ListViewHolder holder, int position) {
         Movie movie = listMovie.get(position);
 
         Glide.with(holder.itemView.getContext())
                 .load(movie.getMovieBg())
-                .apply(new RequestOptions().override(55,55))
+                .apply(new RequestOptions().override(55, 55))
                 .into(holder.imgPhoto);
 
         holder.tvName.setText(movie.getTitle());
@@ -47,8 +46,7 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.List
         return listMovie.size();
     }
 
-    public class ListViewHolder extends RecyclerView.ViewHolder
-    {
+    public class ListViewHolder extends RecyclerView.ViewHolder {
         public ImageView imgPhoto;
         public TextView tvName;
         public TextView tvRelease;

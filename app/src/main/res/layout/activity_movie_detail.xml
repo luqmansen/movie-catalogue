@@ -5,7 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MovieDetailActivity">
+    tools:context=".DetailActivity">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -29,45 +29,47 @@
 
             <ImageView
                 android:id="@+id/trailerView"
-                android:layout_width="409dp"
-                android:layout_height="268dp"
+                android:layout_width="408dp"
+                android:layout_height="269dp"
                 android:alpha="10"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/poster_aquaman"
-                tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="0dp" />
+                app:layout_constraintBottom_toTopOf="@+id/movieImageDetail"
+                app:layout_constraintEnd_toEndOf="@+id/blackTransparent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.02"
+                app:srcCompat="@drawable/poster_aquaman" />
 
             <TextView
                 android:id="@+id/Overview"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/overview_detail"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-                app:layout_constraintStart_toStartOf="@+id/movieImageDetail"
-                app:layout_constraintTop_toBottomOf="@+id/movieImageDetail"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/movieImageDetail" />
 
             <TextView
                 android:id="@+id/descDetail"
                 android:layout_width="368dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="21dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="18dp"
                 android:background="#00FFFFFF"
                 android:baselineAligned="true"
                 android:gravity="top"
-                android:text="TextView"
+                android:text="@string/desc_movie1"
                 android:textAlignment="viewStart"
                 android:textColor="#FFFFFF"
                 android:textSize="17sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/blackTransparent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/movieImageDetail"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Overview"
                 app:layout_constraintVertical_bias="0.0" />
 
@@ -75,11 +77,14 @@
                 android:id="@+id/blackTransparent"
                 android:layout_width="411dp"
                 android:layout_height="268dp"
+                android:layout_marginStart="1dp"
                 android:alpha="0.7"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/text_background"
-                tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="0dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/text_background" />
 
             <TextView
                 android:id="@+id/watchTrailer"
@@ -102,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="TextView"
+                android:text="@string/overview_release"
                 android:textColor="#C9C1C1"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/movieImageDetail"
@@ -112,14 +117,15 @@
                 android:id="@+id/titleDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="158dp"
                 android:layout_marginTop="8dp"
                 android:gravity="center|center_horizontal|left"
-                android:text="Movie Title"
+                android:text="@string/title_movie"
                 android:textColor="#FFFFFF"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/movieImageDetail"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/blackTransparent" />
 
             <ImageView
@@ -140,19 +146,12 @@
                 android:layout_height="48dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="132dp"
+                android:contentDescription="@android:string/ok"
                 app:layout_constraintBottom_toBottomOf="@+id/blackTransparent"
                 app:layout_constraintEnd_toEndOf="@+id/blackTransparent"
                 app:layout_constraintHorizontal_bias="0.193"
                 app:layout_constraintStart_toStartOf="@+id/blackTransparent"
                 app:srcCompat="@android:drawable/ic_media_play" />
-
-            <RelativeLayout
-                android:id="@+id/relativeLayout2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#222222">
-
-            </RelativeLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

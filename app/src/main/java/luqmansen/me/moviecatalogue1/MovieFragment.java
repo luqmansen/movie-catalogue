@@ -4,10 +4,12 @@ package luqmansen.me.moviecatalogue1;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,13 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+
 import java.util.ArrayList;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class movieFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, View.OnFocusChangeListener {
+public class MovieFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, View.OnFocusChangeListener {
     public String[] dataTitle;
     public String[] dataRelease;
     public String[] dataDescription;
@@ -32,15 +35,15 @@ public class movieFragment extends Fragment implements SearchView.OnQueryTextLis
     private ArrayList<Movie> list = new ArrayList<>();
 
     GridAdapter gridAdapter = new GridAdapter(list, getContext());
-    public movieFragment() {
+
+    public MovieFragment() {
         // Required empty public constructor
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movie, container, false);
         rv_movie = view.findViewById(R.id.rv_movie);
         rv_movie.setHasFixedSize(true);
@@ -56,48 +59,41 @@ public class movieFragment extends Fragment implements SearchView.OnQueryTextLis
     }
 
 
-    private void showRecyclerGrid()
-    {
-        rv_movie.setLayoutManager(new GridLayoutManager(getContext(),3));
+    private void showRecyclerGrid() {
+        rv_movie.setLayoutManager(new GridLayoutManager(getContext(), 3));
         rv_movie.setAdapter(gridAdapter);
 
-        gridAdapter.setOnItemClickCallback(new GridAdapter.OnItemClickCallback()
-        {
+        gridAdapter.setOnItemClickCallback(new GridAdapter.OnItemClickCallback() {
             @Override
-            public void onItemClicked(Movie data)
-            {
+            public void onItemClicked(Movie data) {
                 selectItem(data);
             }
         });
     }
 
-    private void addItem()
-    {
+    private void addItem() {
         movies = new ArrayList<>();
 
-        for (int i = 0; i < dataTitle.length; i++)
-        {
-            Movie movie = new Movie(  );
-            movie.setTitle( dataTitle[i] );
-            movie.setRelease( dataRelease[i] );
-            movie.setDesc( dataDescription[i] );
-            movie.setMovieBg( dataBg.getResourceId( i, -1 ) );
-            movie.setMovieTrailerId( dataMovieTrailerId[i] );
-            movies.add( movie );
+        for (int i = 0; i < dataTitle.length; i++) {
+            Movie movie = new Movie();
+            movie.setTitle(dataTitle[i]);
+            movie.setRelease(dataRelease[i]);
+            movie.setDesc(dataDescription[i]);
+            movie.setMovieBg(dataBg.getResourceId(i, -1));
+            movie.setMovieTrailerId(dataMovieTrailerId[i]);
+            movies.add(movie);
         }
     }
 
-    public void prepare()
-    {
-        dataTitle = getResources().getStringArray( R.array.movie_title );
-        dataRelease = getResources().getStringArray( R.array.movie_release );
-        dataDescription = getResources().getStringArray( R.array.movie_desc );
-        dataBg = getResources().obtainTypedArray( R.array.movie_bg );
+    public void prepare() {
+        dataTitle = getResources().getStringArray(R.array.movie_title);
+        dataRelease = getResources().getStringArray(R.array.movie_release);
+        dataDescription = getResources().getStringArray(R.array.movie_desc);
+        dataBg = getResources().obtainTypedArray(R.array.movie_bg);
         dataMovieTrailerId = getResources().getStringArray(R.array.tvshow_bg);
     }
 
-    public void selectItem(Movie movie)
-    {
+    public void selectItem(Movie movie) {
         movie.setTitle(movie.getTitle());
         movie.setRelease(movie.getRelease());
         movie.setDesc(movie.getDesc());
@@ -110,9 +106,8 @@ public class movieFragment extends Fragment implements SearchView.OnQueryTextLis
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
-    {
-        if(inflater == null) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        if (inflater == null) {
             inflater.inflate(R.menu.search, menu);
             final MenuItem searchItem = menu.findItem(R.id.search);
             MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
@@ -125,26 +120,21 @@ public class movieFragment extends Fragment implements SearchView.OnQueryTextLis
     }
 
     @Override
-    public boolean onQueryTextSubmit(String s)
-    {
+    public boolean onQueryTextSubmit(String s) {
         return true;
     }
 
     @Override
-    public boolean onQueryTextChange(String s)
-    {
-        if (s == null || s.trim().isEmpty())
-        {
+    public boolean onQueryTextChange(String s) {
+        if (s == null || s.trim().isEmpty()) {
             gridAdapter.setFilter(list);
             return false;
         }
         s = s.toLowerCase();
         final ArrayList<Movie> filteredTitle = new ArrayList<>();
-        for (Movie model : list)
-        {
+        for (Movie model : list) {
             final String title = model.getTitle().toLowerCase();
-            if (title.contains(s))
-            {
+            if (title.contains(s)) {
                 filteredTitle.add(model);
             }
         }

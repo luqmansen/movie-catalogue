@@ -27,8 +27,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class tvshowsFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItemCompat.OnActionExpandListener,View.OnFocusChangeListener
-{
+public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItemCompat.OnActionExpandListener, View.OnFocusChangeListener {
     public String[] dataTitle;
     public String[] dataRelease;
     public String[] dataDescription;
@@ -40,15 +39,14 @@ public class tvshowsFragment extends Fragment implements SearchView.OnQueryTextL
     private ArrayList<Movie> list = new ArrayList<>();
     GridAdapter gridAdapter = new GridAdapter(list, getContext());
 
-    public tvshowsFragment() {
+    public TvShowsFragment() {
         // Required empty public constructor
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movie, container, false);
         rv_movie = view.findViewById(R.id.rv_movie);
         rv_movie.setHasFixedSize(true);
@@ -71,48 +69,41 @@ public class tvshowsFragment extends Fragment implements SearchView.OnQueryTextL
 //        rv_movie.setAdapter(listMovieAdapter);
 //    }
 
-    private void showRecyclerGrid()
-    {
-        rv_movie.setLayoutManager(new GridLayoutManager(getContext(),3));
+    private void showRecyclerGrid() {
+        rv_movie.setLayoutManager(new GridLayoutManager(getContext(), 3));
         rv_movie.setAdapter(gridAdapter);
 
-        gridAdapter.setOnItemClickCallback(new GridAdapter.OnItemClickCallback()
-        {
+        gridAdapter.setOnItemClickCallback(new GridAdapter.OnItemClickCallback() {
             @Override
-            public void onItemClicked(Movie data)
-            {
+            public void onItemClicked(Movie data) {
                 selectItem(data);
             }
         });
     }
 
-    private void addItem()
-    {
+    private void addItem() {
         movies = new ArrayList<>();
 
-        for (int i = 0; i < dataTitle.length; i++)
-        {
-            Movie movie = new Movie(  );
-            movie.setTitle( dataTitle[i] );
-            movie.setRelease( dataRelease[i] );
-            movie.setDesc( dataDescription[i] );
-            movie.setMovieBg( dataBg.getResourceId( i, -1 ) );
-            movie.setMovieTrailerId( dataMovieTrailerId[i] );
-            movies.add( movie );
+        for (int i = 0; i < dataTitle.length; i++) {
+            Movie movie = new Movie();
+            movie.setTitle(dataTitle[i]);
+            movie.setRelease(dataRelease[i]);
+            movie.setDesc(dataDescription[i]);
+            movie.setMovieBg(dataBg.getResourceId(i, -1));
+            movie.setMovieTrailerId(dataMovieTrailerId[i]);
+            movies.add(movie);
         }
     }
 
-    public void prepare()
-    {
-        dataTitle = getResources().getStringArray( R.array.tvshow_title );
-        dataRelease = getResources().getStringArray( R.array.tvshow_release );
-        dataDescription = getResources().getStringArray( R.array.tvshow_desc );
-        dataBg = getResources().obtainTypedArray( R.array.tvshow_bg );
+    public void prepare() {
+        dataTitle = getResources().getStringArray(R.array.tvshow_title);
+        dataRelease = getResources().getStringArray(R.array.tvshow_release);
+        dataDescription = getResources().getStringArray(R.array.tvshow_desc);
+        dataBg = getResources().obtainTypedArray(R.array.tvshow_bg);
         dataMovieTrailerId = getResources().getStringArray(R.array.tvshow_youtube_id);
     }
 
-    public void selectItem(Movie movie)
-    {
+    public void selectItem(Movie movie) {
         movie.setTitle(movie.getTitle());
         movie.setRelease(movie.getRelease());
         movie.setDesc(movie.getDesc());
@@ -125,11 +116,10 @@ public class tvshowsFragment extends Fragment implements SearchView.OnQueryTextL
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
-    {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.search, menu);
         final MenuItem searchItem = menu.findItem(R.id.search);
-        MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
+        MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(this);
         searchView.setOnQueryTextFocusChangeListener(this);
@@ -137,32 +127,26 @@ public class tvshowsFragment extends Fragment implements SearchView.OnQueryTextL
     }
 
     @Override
-    public void onFocusChange(View view, boolean b)
-    {
+    public void onFocusChange(View view, boolean b) {
         gridAdapter.setFilter(list);
     }
 
     @Override
-    public boolean onQueryTextSubmit(String s)
-    {
+    public boolean onQueryTextSubmit(String s) {
         return true;
     }
 
     @Override
-    public boolean onQueryTextChange(String s)
-    {
-        if (s == null || s.trim().isEmpty())
-        {
+    public boolean onQueryTextChange(String s) {
+        if (s == null || s.trim().isEmpty()) {
             gridAdapter.setFilter(list);
             return false;
         }
         s = s.toLowerCase();
         final ArrayList<Movie> filteredTitle = new ArrayList<>();
-        for (Movie model : list)
-        {
+        for (Movie model : list) {
             final String title = model.getTitle().toLowerCase();
-            if (title.contains(s))
-            {
+            if (title.contains(s)) {
                 filteredTitle.add(model);
             }
         }
@@ -171,14 +155,12 @@ public class tvshowsFragment extends Fragment implements SearchView.OnQueryTextL
     }
 
     @Override
-    public boolean onMenuItemActionExpand(MenuItem item)
-    {
+    public boolean onMenuItemActionExpand(MenuItem item) {
         return true;
     }
 
     @Override
-    public boolean onMenuItemActionCollapse(MenuItem item)
-    {
+    public boolean onMenuItemActionCollapse(MenuItem item) {
         gridAdapter.setFilter(list);
         return true;
     }

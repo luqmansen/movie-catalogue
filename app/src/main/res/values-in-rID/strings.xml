@@ -4,8 +4,8 @@
 	<string name="title_activity_main">""</string>
 	<string name="title_movie">Film</string>
 	<string name="title_tv_shows">Acara TV</string>
-	<string name="watch_trailer">"Nonton cuplikan"</string>
-	<string name="overview_detail">"Tinjauan Umum"</string>
+	<string name="watch_trailer">"Tonton Trailer"</string>
+	<string name="overview_detail">"Sinopsis"</string>
 	<string name="searchview_hint">Cari sesuatu....</string>
 	<string name="desc_movie1">"Wartawan investigasi Eddie Brock berusaha untuk kembali setelah skandal, tetapi secara tidak sengaja menjadi tuan rumah Venom, seorang simbiot alien yang sangat kuat, segera. Dia harus mengandalkan kekuatan yang baru ditemukannya untuk melindungi dunia dari sebuah organisasi bayangan yang mencari simposium dari </string>
 	<string name="desc_movie2">Seorang pejuang perang yang keras dan komandan Moornya melakukan pemberontakan yang berani melawan mahkota Inggris yang korup.</string>

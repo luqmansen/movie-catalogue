@@ -7,7 +7,7 @@
     <string name="overview_detail">"Overview"</string>
     <string name="searchview_hint">Find something....</string>
     <string name="overview_release" translatable="false">"21 December 2019"</string>
-
+    <string name="description" translatable="false">normal description</string>
     <string-array name="movie_title">
         <item>Venom</item>
         <item>Robin Hood</item>

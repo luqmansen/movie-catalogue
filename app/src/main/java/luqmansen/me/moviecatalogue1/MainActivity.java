@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu1:
                 Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+                fm.beginTransaction().remove(active).commit();
                 startActivity(mIntent);
                 break;
         }

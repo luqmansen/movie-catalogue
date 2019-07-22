@@ -4,10 +4,12 @@
     <string name="title_movie" >Movie</string>
     <string name="title_tv_shows" >TV Shows</string>
     <string name="watch_trailer">"Watch Trailer"</string>
+    <string name="Language">Language</string>
     <string name="overview_detail">"Overview"</string>
     <string name="searchview_hint">Find something....</string>
     <string name="overview_release" translatable="false">"21 December 2019"</string>
     <string name="description" translatable="false">normal description</string>
+
     <string-array name="movie_title">
         <item>Venom</item>
         <item>Robin Hood</item>

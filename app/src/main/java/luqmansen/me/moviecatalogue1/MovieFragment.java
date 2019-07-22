@@ -107,7 +107,6 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (inflater == null) {
             inflater.inflate(R.menu.search, menu);
             final MenuItem searchItem = menu.findItem(R.id.search);
             MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
@@ -116,7 +115,6 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
             searchView.setOnQueryTextFocusChangeListener(this);
             searchView.setQueryHint(getString(R.string.searchview_hint));
             super.onCreateOptionsMenu(menu, inflater);
-        }
     }
 
     @Override

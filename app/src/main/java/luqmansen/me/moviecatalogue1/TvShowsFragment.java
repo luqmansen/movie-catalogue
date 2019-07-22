@@ -62,13 +62,6 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
         return view;
     }
 
-    //    private void showRecyclerList()
-//    {
-//        rv_movie.setLayoutManager(new LinearLayoutManager(getContext()));
-//        ListMovieAdapter listMovieAdapter = new ListMovieAdapter(list);
-//        rv_movie.setAdapter(listMovieAdapter);
-//    }
-
     private void showRecyclerGrid() {
         rv_movie.setLayoutManager(new GridLayoutManager(getContext(), 3));
         rv_movie.setAdapter(gridAdapter);

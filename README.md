@@ -6,10 +6,13 @@ This is a native android app for submission requirement in "Menjadi Android Deve
 There are 5 stage of this application representing 5 submission for the program 
 
 1.  **Submission 1: Simple Movie Catalogue**
-</br>**update**: Check `Submission_1` Branch for the Code
-    </br> Requirement:
-    - Listview
-    - Parcelable
+</br>**Code**: https://github.com/luqmansen/movie-catalogue/releases/tag/1.0
+    </br> 
+    Requirement:
+    1. Listview:
+        - implement List view for main movie list
+    2. Parcelable:
+        - use parcelable concept for send data between activity
     
   
 2. **Submission 2: Movie Catalogue (UI/UX)**
@@ -24,7 +27,7 @@ There are 5 stage of this application representing 5 submission for the program
         - Use Parcelable for interface between activity or fragment
         - Use ConstraintLayout for layouting
     3. Localization:
-        - App should support Bahasa Indonesia and English
+        - App should (at least) support Bahasa Indonesia and English
     
 3. **Coming Soon**
 4. **Coming Soon**

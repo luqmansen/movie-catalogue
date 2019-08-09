@@ -1,4 +1,4 @@
-package luqmansen.me.moviecatalogue1;
+package luqmansen.me.moviecatalogue1.App;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
@@ -12,6 +12,9 @@ import android.text.Layout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import luqmansen.me.moviecatalogue1.Movie;
+import luqmansen.me.moviecatalogue1.R;
 
 public class DetailActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String EXTRA_MOVIE = "extra_movie";
@@ -29,7 +32,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_detail);
+        setContentView(R.layout.activity_detail);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();

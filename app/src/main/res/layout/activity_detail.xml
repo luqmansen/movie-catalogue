@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
-    tools:context=".DetailActivity">
+    tools:context=".App.DetailActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -84,7 +84,7 @@
                 app:layout_constraintStart_toStartOf="@+id/blackTransparent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/poster_aquaman" />
+                app:srcCompat="@drawable/text_background" />
 
             <ImageView
                 android:id="@+id/blackTransparent"
@@ -111,7 +111,7 @@
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="@+id/blackTransparent"
                 app:layout_constraintTop_toTopOf="@+id/blackTransparent"
-                app:srcCompat="@drawable/poster_aquaman" />
+                app:srcCompat="@drawable/text_background" />
 
             <TextView
                 android:id="@+id/watchTrailer"

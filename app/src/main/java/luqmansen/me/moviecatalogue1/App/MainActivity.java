@@ -1,6 +1,7 @@
-package luqmansen.me.moviecatalogue1;
+package luqmansen.me.moviecatalogue1.App;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -18,9 +19,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import luqmansen.me.moviecatalogue1.Fragment.MovieFragment;
+import luqmansen.me.moviecatalogue1.Fragment.TvShowsFragment;
+import luqmansen.me.moviecatalogue1.R;
+
 public class MainActivity extends AppCompatActivity {
-    final Fragment fragmentMovie = new MovieFragment();
-    final Fragment fragmentTVshows = new TvShowsFragment();
+    final Fragment fragmentMovie = new MovieFragment(this);
+    final Fragment fragmentTVshows = new TvShowsFragment(this);
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragmentMovie;
 

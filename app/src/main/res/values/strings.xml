@@ -73,18 +73,6 @@
     <string name="desc_movie9"> In a series of escalating encounters, former security guard David Dunn uses his supernatural abilities to track Kevin Wendell Crumb, a disturbed man who has twenty-four personalities. Meanwhile, the shadowy presence of Elijah Price emerges as an orchestrator who holds secrets critical to both men.</string>
     <string name="desc_movie10"> Captain Glass of the USS Arkansas discovers that a coup d\'état is taking place in Russia, so he and his crew join an elite group working on the ground to prevent a war.</string>
 
-    <array name="movie_bg">
-        <item>@drawable/poster_venom</item>
-        <item>@drawable/poster_robinhood</item>
-        <item>@drawable/poster_themule</item>
-        <item>@drawable/poster_birdbox</item>
-        <item>@drawable/poster_bohemian</item>
-        <item>@drawable/poster_bumblebee</item>
-        <item>@drawable/poster_creed</item>
-        <item>@drawable/poster_mortalengine</item>
-        <item>@drawable/poster_glass</item>
-        <item>@drawable/poster_hunterkiller</item>
-    </array>
 
 
     <string-array name="tvshow_title">
@@ -112,19 +100,6 @@
         <item>ex95FSZOT04</item>
         <item>BhtDgn31XZo</item>
     </string-array>
-
-    <array name="tvshow_bg">
-        <item>@drawable/poster_arrow</item>
-        <item>@drawable/poster_doom_patrol</item>
-        <item>@drawable/poster_dragon_ball</item>
-        <item>@drawable/poster_fairytail</item>
-        <item>@drawable/poster_family_guy</item>
-        <item>@drawable/poster_naruto_shipudden</item>
-        <item>@drawable/poster_the_simpson</item>
-        <item>@drawable/poster_the_umbrella</item>
-        <item>@drawable/poster_shameless</item>
-        <item>@drawable/poster_ncis</item>
-    </array>
 
 
     <string-array name="tvshow_release">

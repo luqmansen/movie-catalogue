@@ -18,6 +18,8 @@ public class Data implements Parcelable {
     private String overview;
     @SerializedName("release_date")
     private String releaseDate;
+    @SerializedName("first_air_date")
+    private String firstAirDate;
     @SerializedName("genre_ids")
     private List<Integer> genreIds;
     @SerializedName("id")
@@ -28,6 +30,8 @@ public class Data implements Parcelable {
     private String originalLanguage;
     @SerializedName("title")
     private String title;
+    @SerializedName("name")
+    private String name;
     @SerializedName("backdrop_path")
     private String backdropPath;
     @SerializedName("popularity")
@@ -39,16 +43,18 @@ public class Data implements Parcelable {
     @SerializedName("vote_average")
     private Double voteAverage;
 
-    public Data(String posterPath, boolean adult, String overview, String releaseDate, List<Integer> genreIds, Integer id, String originalTitle, String originalLanguage, String title, String backdropPath, Double popularity, Integer voteCount, Boolean video, Double voteAverage) {
+    public Data(String posterPath, boolean adult, String overview, String releaseDate, String firstAirDate, List<Integer> genreIds, Integer id, String originalTitle, String originalLanguage, String title, String name, String backdropPath, Double popularity, Integer voteCount, Boolean video, Double voteAverage) {
         this.posterPath = posterPath;
         this.adult = adult;
         this.overview = overview;
         this.releaseDate = releaseDate;
+        this.firstAirDate = firstAirDate;
         this.genreIds = genreIds;
         this.id = id;
         this.originalTitle = originalTitle;
         this.originalLanguage = originalLanguage;
         this.title = title;
+        this.name = name;
         this.backdropPath = backdropPath;
         this.popularity = popularity;
         this.voteCount = voteCount;
@@ -168,6 +174,22 @@ public class Data implements Parcelable {
         this.voteAverage = voteAverage;
     }
 
+    public String getFirstAirDate() {
+        return firstAirDate;
+    }
+
+    public void setFirstAirDate(String firstAirDate) {
+        this.firstAirDate = firstAirDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -180,6 +202,8 @@ public class Data implements Parcelable {
         parcel.writeString(this.overview);
         parcel.writeString(this.posterPath);
         parcel.writeString(this.backdropPath);
+        parcel.writeString(this.name);
+        parcel.writeString(this.firstAirDate);
     }
 
 
@@ -189,6 +213,8 @@ public class Data implements Parcelable {
         this.overview = in.readString();
         this.posterPath = in.readString();
         this.backdropPath = in.readString();
+        this.name = in.readString();
+        this.firstAirDate = in.readString();
 
     }
 

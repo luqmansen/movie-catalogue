@@ -16,8 +16,11 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.Date;
+
 import luqmansen.me.moviecatalogue1.Model.Data;
 import luqmansen.me.moviecatalogue1.R;
+import luqmansen.me.moviecatalogue1.Util.DateParser;
 
 public class DetailActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String EXTRA_MOVIE = "extra_movie";
@@ -57,8 +60,21 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         Data data = intent.getParcelableExtra(EXTRA_MOVIE);
 
         //Collect all movie value
-        String title = data.getTitle();
-        String release = data.getReleaseDate();
+        String title;
+        String release;
+
+        if (data.getTitle() == null){
+            title = data.getName();
+            release = data.getFirstAirDate();
+        } else {
+            title = data.getTitle();
+            release = data.getReleaseDate();
+        }
+
+        DateParser dateParser = new DateParser();
+        release = dateParser.parseDateToddMMyyyy(release);
+
+
         String desc = data.getOverview();
         String poster = data.getPosterPath();
         String backdrop = data.getBackdropPath();

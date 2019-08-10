@@ -123,6 +123,7 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
         data.setOverview(data.getOverview());
         data.setPosterPath(data.getPosterPath());
         data.setBackdropPath(data.getBackdropPath());
+        data.setName(data.getName());
 
         Intent movieDetail = new Intent(getContext(), DetailActivity.class);
         movieDetail.putExtra(DetailActivity.EXTRA_MOVIE, data);

@@ -32,30 +32,32 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="2019-8-1"
+            android:text="28 June 2019"
             android:textColor="#C9C1C1"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.436"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/posterImageDetail"
             app:layout_constraintTop_toBottomOf="@id/titleDetail" />
 
         <TextView
             android:id="@+id/titleDetail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="156dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
             android:gravity="center|center_horizontal|left"
-            android:text="@string/title_movie"
+            android:maxLines="100"
+            android:scrollbarAlwaysDrawHorizontalTrack="false"
+            android:scrollHorizontally="false"
+            android:text="Marvel's Agents of S.H.I.E.L.D"
             android:textColor="#FFFFFF"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/releaseDetail"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.992" />
+            app:layout_constraintEnd_toEndOf="@+id/blackTransparent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/descDetail"

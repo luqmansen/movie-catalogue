@@ -49,7 +49,7 @@ import retrofit2.Response;
 public class MovieFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, View.OnFocusChangeListener {
 
 //    private final String TAG = this.getActivity().getClass().getSimpleName();
-    private final String TAG = "MovieFragment";
+    public final String TAG = "MovieFragmentTAG";
     private final static String API_KEY = BuildConfig.API_KEY;
     private GridAdapter gridAdapter;
 

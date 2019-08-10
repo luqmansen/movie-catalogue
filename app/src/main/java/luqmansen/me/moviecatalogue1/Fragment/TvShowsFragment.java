@@ -45,7 +45,7 @@ import retrofit2.Response;
 public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, View.OnFocusChangeListener {
 
 //    private final String TAG = this.getActivity().getClass().getSimpleName();
-    private final String TAG = "TvShowsFragment";
+    private final String TAG = "TvShowsFragmentTAG";
     private final static String API_KEY = BuildConfig.API_KEY;
     private GridAdapter gridAdapter;
 

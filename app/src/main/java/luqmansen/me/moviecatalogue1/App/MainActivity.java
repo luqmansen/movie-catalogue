@@ -29,8 +29,8 @@ import luqmansen.me.moviecatalogue1.R;
 
 
 public class MainActivity extends AppCompatActivity {
-    final Fragment fragmentMovie = new MovieFragment(this);
-    final Fragment fragmentTVshows = new TvShowsFragment(this);
+    final Fragment fragmentMovie = new MovieFragment();
+    final Fragment fragmentTVshows = new TvShowsFragment();
     final FragmentManager fm = getSupportFragmentManager();
     public String title;
 

@@ -47,15 +47,12 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
 //    private final String TAG = this.getActivity().getClass().getSimpleName();
     private final String TAG = "TvShowsFragment";
     private final static String API_KEY = BuildConfig.API_KEY;
-    private Context context;
     private GridAdapter gridAdapter;
 
     String language =Locale.getDefault().getLanguage();
     ProgressBar progressBar;
 
-    public TvShowsFragment(Context context) {
-        this.context = context;
-    }
+    public TvShowsFragment() {} // Public Constructor
 
 
     @Override
@@ -84,7 +81,7 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
             public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {
                 List<Data> datas = response.body().getResults();
                 Log.d(TAG, "Number of movies received: " + datas.size());
-//                Toast.makeText(context, "Number of movies received: " + datas.size(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getContext(), "Number of movies received: " + datas.size(), Toast.LENGTH_LONG).show();
                 gridAdapter = new GridAdapter(datas, R.layout.item_grid);
                 progressBar.setVisibility(View.GONE);
                 recyclerView.setAdapter(gridAdapter);
@@ -93,7 +90,7 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
 
             @Override
             public void onFailure(Call<DataResponse> call, Throwable t) {
-                Toast.makeText(context, "Connection Failed: " , Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "API Request Failed: " , Toast.LENGTH_LONG).show();
                 Log.e(TAG, t.toString());
             }
         });

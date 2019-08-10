@@ -51,15 +51,12 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
 //    private final String TAG = this.getActivity().getClass().getSimpleName();
     private final String TAG = "MovieFragment";
     private final static String API_KEY = BuildConfig.API_KEY;
-    private Context context;
     private GridAdapter gridAdapter;
 
     String language =Locale.getDefault().getLanguage();
     ProgressBar progressBar;
 
-    public MovieFragment(Context context) {
-        this.context = context;
-    }
+    public MovieFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -100,7 +97,7 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
 
             @Override
             public void onFailure(Call<DataResponse> call, Throwable t) {
-                Toast.makeText(context, "Connection Failed: " , Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "API Request Failed: " , Toast.LENGTH_LONG).show();
                 Log.e(TAG, t.toString());
             }
         });

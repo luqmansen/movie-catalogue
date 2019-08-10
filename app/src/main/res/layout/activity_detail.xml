@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
     tools:context=".App.DetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/Overview"
@@ -61,11 +61,11 @@
 
         <TextView
             android:id="@+id/descDetail"
-            android:layout_width="371dp"
+            android:layout_width="0dp"
             android:layout_height="252dp"
             android:layout_marginStart="21dp"
             android:layout_marginTop="464dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="20dp"
             android:background="#00FFFFFF"
             android:baselineAligned="true"
             android:gravity="top"
@@ -95,14 +95,14 @@
 
         <ImageView
             android:id="@+id/blackTransparent"
-            android:layout_width="411dp"
-            android:layout_height="269dp"
-            android:layout_marginBottom="8dp"
-            android:alpha="0.7"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha="0.4"
             android:contentDescription="@string/description"
             android:scaleType="fitXY"
-            app:layout_constraintBottom_toTopOf="@+id/titleDetail"
+            app:layout_constraintBottom_toBottomOf="@+id/backdropImageDetail"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.54"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/text_background" />

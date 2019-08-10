@@ -3,6 +3,7 @@ package luqmansen.me.moviecatalogue1.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -42,6 +43,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,9 +52,10 @@ import retrofit2.Response;
 public class MovieFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, View.OnFocusChangeListener {
 
 //    private final String TAG = this.getActivity().getClass().getSimpleName();
-    public final String TAG = "MovieFragmentTAG";
+    private final String TAG = "MovieFragmentTAG";
     private final static String API_KEY = BuildConfig.API_KEY;
     private GridAdapter gridAdapter;
+    RecyclerView recyclerView;
 
     String language =Locale.getDefault().getLanguage();
     ProgressBar progressBar;
@@ -69,14 +73,11 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
             Toast.makeText(this.getContext(), "Please obtain your API KEY first from themoviedb.org", Toast.LENGTH_LONG).show();
         }
 
-
         NetworkUtil check = new NetworkUtil(getContext());
         check.isNetworkAvailable();
-//        LocaleCheck locale = new LocaleCheck(getContext(), String );
 
-
-        final RecyclerView recyclerView = view.findViewById(R.id.recyler_layout);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
+        recyclerView = view.findViewById(R.id.recyler_layout);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         recyclerView.setHasFixedSize(true);
         setHasOptionsMenu(true);
 
@@ -106,13 +107,10 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
 
 
     private void showRecyclerGrid() {
-
-
         gridAdapter.setOnItemClickCallback(new GridAdapter.OnItemClickCallback() {
             @Override
             public void onItemClicked(Data data) {
                 selectItem(data);
-//                Toast.makeText(context, data.getVideo().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -128,6 +126,16 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
         Intent movieDetail = new Intent(getContext(), DetailActivity.class);
         movieDetail.putExtra(DetailActivity.EXTRA_MOVIE, data);
         getContext().startActivity(movieDetail);
+    }
+
+    //    Uncomment This Function for column change in onConfigurationChange, but reset the recyleview
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+//        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ? 3 : 2));
+        recyclerView.setPadding(10 , 0,10, 0);
+        super.onConfigurationChanged(newConfig);
+
     }
 
     @Override

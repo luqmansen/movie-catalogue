@@ -4,6 +4,7 @@ package luqmansen.me.moviecatalogue1.App;
 import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -154,5 +155,6 @@ public class MainActivity extends AppCompatActivity {
         actionbar.setTitle(title);
 
     }
+
 }
 

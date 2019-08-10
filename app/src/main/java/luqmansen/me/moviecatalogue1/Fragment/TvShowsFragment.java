@@ -3,6 +3,7 @@ package luqmansen.me.moviecatalogue1.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.core.view.MenuItemCompat;
@@ -48,6 +49,7 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
     private final String TAG = "TvShowsFragmentTAG";
     private final static String API_KEY = BuildConfig.API_KEY;
     private GridAdapter gridAdapter;
+    RecyclerView recyclerView;
 
     String language =Locale.getDefault().getLanguage();
     ProgressBar progressBar;
@@ -68,8 +70,8 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
         NetworkUtil check = new NetworkUtil(getContext());
         check.isNetworkAvailable();
 
-        final RecyclerView recyclerView = view.findViewById(R.id.recyler_layout);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
+        recyclerView = view.findViewById(R.id.recyler_layout);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         recyclerView.setHasFixedSize(true);
         setHasOptionsMenu(true);
 
@@ -99,8 +101,6 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
 
 
     private void showRecyclerGrid() {
-
-
         gridAdapter.setOnItemClickCallback(new GridAdapter.OnItemClickCallback() {
             @Override
             public void onItemClicked(Data data) {
@@ -109,10 +109,7 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
         });
     }
 
-
-
     public void selectItem(Data data) {
-//        Toast.makeText(context, data.getTitle(), Toast.LENGTH_LONG).show();
         data.setTitle(data.getTitle());
         data.setReleaseDate(data.getReleaseDate());
         data.setOverview(data.getOverview());
@@ -124,6 +121,15 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
         movieDetail.putExtra(DetailActivity.EXTRA_MOVIE, data);
         getContext().startActivity(movieDetail);
     }
+
+//    Uncomment This Function for column change in onConfigurationChange, but reset the recyleview
+//
+//    @Override
+//    public void onConfigurationChanged(Configuration newConfig) {
+//        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ? 3 : 2));
+//        super.onConfigurationChanged(newConfig);
+//
+//    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

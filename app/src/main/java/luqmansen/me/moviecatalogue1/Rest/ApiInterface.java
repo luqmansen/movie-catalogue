@@ -11,10 +11,10 @@ public interface ApiInterface {
 //    TODO add different language query
 
     @GET("movie/popular")
-    Call<DataResponse> getPopularMovies(@Query("api_key") String apiKey);
+    Call<DataResponse> getPopularMovies(@Query("api_key") String apiKey, @Query("language") String language);
 
     @GET("tv/popular")
-    Call<DataResponse> getPopularTV(@Query("api_key") String apiKey);
+    Call<DataResponse> getPopularTV(@Query("api_key") String apiKey, @Query("language") String language);
 
     @GET("movie/{id}")
     Call<DataResponse> getMovieDetails(@Path ("id") int id, @Query("api_key") String apiKey);

@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,13 +21,15 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.Locale;
 
 import luqmansen.me.moviecatalogue1.Adapter.GridAdapter;
 import luqmansen.me.moviecatalogue1.App.DetailActivity;
 import luqmansen.me.moviecatalogue1.BuildConfig;
 import luqmansen.me.moviecatalogue1.Model.Data;
 import luqmansen.me.moviecatalogue1.Model.DataResponse;
-import luqmansen.me.moviecatalogue1.NetworkUtil.NetworkUtil;
+import luqmansen.me.moviecatalogue1.Util.LocaleCheck;
+import luqmansen.me.moviecatalogue1.Util.NetworkUtil;
 import luqmansen.me.moviecatalogue1.R;
 import luqmansen.me.moviecatalogue1.Rest.ApiClient;
 import luqmansen.me.moviecatalogue1.Rest.ApiInterface;
@@ -47,6 +48,7 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
     private final static String API_KEY = BuildConfig.API_KEY;
     private Context context;
     private GridAdapter gridAdapter;
+    String language =Locale.getDefault().getLanguage();
 
     public TvShowsFragment(Context context) {
         this.context = context;
@@ -64,6 +66,7 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
 
         NetworkUtil check = new NetworkUtil(getContext());
         check.isNetworkAvailable();
+//        LocaleCheck locale = new LocaleCheck(getContext());
 
         final RecyclerView recyclerView = view.findViewById(R.id.recyler_layout);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
@@ -71,8 +74,7 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
         setHasOptionsMenu(true);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-
-        Call<DataResponse> call = apiService.getPopularTV(API_KEY);
+        Call<DataResponse> call = apiService.getPopularTV(API_KEY, language );
         call.enqueue(new Callback<DataResponse>() {
             @Override
             public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {

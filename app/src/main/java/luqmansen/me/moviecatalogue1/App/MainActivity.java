@@ -1,8 +1,8 @@
 package luqmansen.me.moviecatalogue1.App;
 
 
-import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -10,6 +10,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
+import androidx.core.os.ConfigurationCompat;
+import androidx.core.os.LocaleListCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -19,16 +21,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.Locale;
+
 import luqmansen.me.moviecatalogue1.Fragment.MovieFragment;
 import luqmansen.me.moviecatalogue1.Fragment.TvShowsFragment;
 import luqmansen.me.moviecatalogue1.R;
+
+
 
 public class MainActivity extends AppCompatActivity {
     final Fragment fragmentMovie = new MovieFragment(this);
     final Fragment fragmentTVshows = new TvShowsFragment(this);
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragmentMovie;
-
     public String title;
 
 

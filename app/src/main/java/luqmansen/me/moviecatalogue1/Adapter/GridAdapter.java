@@ -1,6 +1,5 @@
-package luqmansen.me.moviecatalogue1.App;
+package luqmansen.me.moviecatalogue1.Adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import luqmansen.me.moviecatalogue1.Model.Data;
-import luqmansen.me.moviecatalogue1.Model.DataResponse;
 import luqmansen.me.moviecatalogue1.Movie;
 import luqmansen.me.moviecatalogue1.R;
-import retrofit2.Callback;
+
 
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder> {
     private List<Data> items;
@@ -54,8 +52,8 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder
         Picasso.get()
                 .load("https://image.tmdb.org/t/p/w300_and_h450_bestv2" + items.get(position)
                         .getPosterPath())
-                .resize(200,300)
                 .into(holder.posterThumbnail);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

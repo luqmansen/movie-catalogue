@@ -13,7 +13,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import luqmansen.me.moviecatalogue1.Movie;
+import com.squareup.picasso.Picasso;
+
+import luqmansen.me.moviecatalogue1.Model.Data;
 import luqmansen.me.moviecatalogue1.R;
 
 public class DetailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -21,11 +23,12 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     TextView titleObject;
     TextView descObject;
     TextView releaseObject;
-    ImageView movieBgObject;
     ImageView playButton;
     TextView watchTrailer;
-    ImageView trailerBg;
+    ImageView posterImg;
+    ImageView backdropImg;
     String movieTrailerId;
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -40,28 +43,37 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         titleObject = findViewById(R.id.titleDetail);
         descObject = findViewById(R.id.descDetail);
         releaseObject = findViewById(R.id.releaseDetail);
-        movieBgObject = findViewById(R.id.movieImageDetail);
-        trailerBg = findViewById(R.id.trailerView);
+        posterImg = findViewById(R.id.posterImageDetail);
+        backdropImg = findViewById(R.id.backdropImageDetail);
         playButton = findViewById(R.id.playButton);
-        watchTrailer = findViewById(R.id.watchTrailer);
+        watchTrailer = findViewById(R.id.watchTrailer); // ini text view
 
         //Collect the intent
         Intent intent = getIntent();
-        Movie movie = intent.getParcelableExtra(EXTRA_MOVIE);
+        Data data = intent.getParcelableExtra(EXTRA_MOVIE);
 
         //Collect all movie value
-        String title = movie.getTitle();
-        String release = movie.getRelease();
-        String desc = movie.getDesc();
-        Integer image = movie.getMovieBg();
-        movieTrailerId = movie.getMovieTrailerId();
+        String title = data.getTitle();
+        String release = data.getReleaseDate();
+        String desc = data.getOverview();
+        String poster = data.getPosterPath();
+        String backdrop = data.getBackdropPath();
+        movieTrailerId = "SUXWAEX2jlg";
 
         titleObject.setText(title);
         releaseObject.setText(release);
         descObject.setText(desc);
         descObject.setJustificationMode(Layout.JUSTIFICATION_MODE_INTER_WORD);
-        movieBgObject.setImageResource(image);
-        trailerBg.setImageResource(image);
+
+        Picasso.get()
+                .load("https://image.tmdb.org/t/p/w300_and_h450_bestv2" + poster)
+                .into(posterImg);
+
+        Picasso.get()
+                .load("https://image.tmdb.org/t/p/w300_and_h450_bestv2" + backdrop)
+                .into(backdropImg);
+
+
 
         //For play trailer icon or text click listener
         playButton.setOnClickListener(this);

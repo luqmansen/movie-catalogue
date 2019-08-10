@@ -1,11 +1,14 @@
 package luqmansen.me.moviecatalogue1.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Data {
+public class Data implements Parcelable {
 
     @SerializedName("poster_path")
     private String posterPath;
@@ -16,7 +19,7 @@ public class Data {
     @SerializedName("release_date")
     private String releaseDate;
     @SerializedName("genre_ids")
-    private List<Integer> genreIds = new ArrayList<Integer>();
+    private List<Integer> genreIds;
     @SerializedName("id")
     private Integer id;
     @SerializedName("original_title")
@@ -164,4 +167,40 @@ public class Data {
     public void setVoteAverage(Double voteAverage) {
         this.voteAverage = voteAverage;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(this.title);
+        parcel.writeString(this.releaseDate);
+        parcel.writeString(this.overview);
+        parcel.writeString(this.posterPath);
+        parcel.writeString(this.backdropPath);
+    }
+
+
+    protected Data(Parcel in){
+        this.title = in.readString();
+        this.releaseDate = in.readString();
+        this.overview = in.readString();
+        this.posterPath = in.readString();
+        this.backdropPath = in.readString();
+
+    }
+
+    public static final Parcelable.Creator<Data> CREATOR = new Creator<Data>() {
+        @Override
+        public Data createFromParcel(Parcel parcel) {
+            return new Data(parcel);
+        }
+
+        @Override
+        public Data[] newArray(int i) {
+            return new Data[i];
+        }
+    };
 }

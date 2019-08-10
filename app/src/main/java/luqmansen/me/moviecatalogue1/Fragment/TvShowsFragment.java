@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,17 +21,14 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import luqmansen.me.moviecatalogue1.Adapter.GridAdapter;
 import luqmansen.me.moviecatalogue1.App.DetailActivity;
-import luqmansen.me.moviecatalogue1.App.GridAdapter;
-import luqmansen.me.moviecatalogue1.App.MainActivity;
 import luqmansen.me.moviecatalogue1.BuildConfig;
 import luqmansen.me.moviecatalogue1.Model.Data;
 import luqmansen.me.moviecatalogue1.Model.DataResponse;
-import luqmansen.me.moviecatalogue1.Movie;
-import luqmansen.me.moviecatalogue1.NetworkUtil;
+import luqmansen.me.moviecatalogue1.NetworkUtil.NetworkUtil;
 import luqmansen.me.moviecatalogue1.R;
 import luqmansen.me.moviecatalogue1.Rest.ApiClient;
 import luqmansen.me.moviecatalogue1.Rest.ApiInterface;
@@ -74,15 +72,16 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<DataResponse> call = apiService.getPopularMovies(API_KEY);
+        Call<DataResponse> call = apiService.getPopularTV(API_KEY);
         call.enqueue(new Callback<DataResponse>() {
             @Override
             public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {
                 List<Data> datas = response.body().getResults();
                 Log.d(TAG, "Number of movies received: " + datas.size());
-                Toast.makeText(context, "Number of movies received: " + datas.size(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(context, "Number of movies received: " + datas.size(), Toast.LENGTH_LONG).show();
                 gridAdapter = new GridAdapter(datas, R.layout.item_grid);
                 recyclerView.setAdapter(gridAdapter);
+                showRecyclerGrid();
             }
 
             @Override
@@ -103,24 +102,23 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
             public void onItemClicked(Data data) {
                 selectItem(data);
             }
-
-
         });
     }
 
 
 
     public void selectItem(Data data) {
-        Toast.makeText(context, (CharSequence) data, Toast.LENGTH_LONG).show();
-//        data.setTitle(movie.getTitle());
-//        data.set(movie.getRelease());
-//        movie.setDesc(movie.getDesc());
-//        movie.setMovieBg(movie.getMovieBg());
-//        movie.setMovieTrailerId(movie.getMovieTrailerId());
-//
-//        Intent movieDetail = new Intent(getContext(), DetailActivity.class);
-//        movieDetail.putExtra(DetailActivity.EXTRA_MOVIE, movie);
-//        getContext().startActivity(movieDetail);
+//        Toast.makeText(context, data.getTitle(), Toast.LENGTH_LONG).show();
+        data.setTitle(data.getTitle());
+        data.setReleaseDate(data.getReleaseDate());
+        data.setOverview(data.getOverview());
+        data.setPosterPath(data.getPosterPath());
+        data.setBackdropPath(data.getBackdropPath());
+//        data.setVideo(data.getVideo());
+
+        Intent movieDetail = new Intent(getContext(), DetailActivity.class);
+        movieDetail.putExtra(DetailActivity.EXTRA_MOVIE, data);
+        getContext().startActivity(movieDetail);
     }
 
     @Override

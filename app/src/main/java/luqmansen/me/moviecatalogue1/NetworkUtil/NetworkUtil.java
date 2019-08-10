@@ -1,4 +1,4 @@
-package luqmansen.me.moviecatalogue1;
+package luqmansen.me.moviecatalogue1.NetworkUtil;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -20,7 +20,7 @@ public class NetworkUtil {
 
         boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
         if (isConnected){
-            Toast.makeText(context, "CONNECTED", Toast.LENGTH_LONG).show();
-        } else Toast.makeText(context, "NOT CONNECTED", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "CONNECTED", Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(context, "NOT CONNECTED", Toast.LENGTH_SHORT).show();
     }
 }

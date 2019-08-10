@@ -15,12 +15,11 @@ public class NetworkUtil {
 
     public void isNetworkAvailable() {
         ConnectivityManager cm =  (ConnectivityManager)  context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
         @SuppressWarnings("deprecation") NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
         boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-        if (isConnected){
-            Toast.makeText(context, "CONNECTED", Toast.LENGTH_SHORT).show();
-        } else Toast.makeText(context, "NOT CONNECTED", Toast.LENGTH_SHORT).show();
+        if (isConnected == false){
+            Toast.makeText(context, "Connection Error", Toast.LENGTH_SHORT).show();
+        }
     }
 }

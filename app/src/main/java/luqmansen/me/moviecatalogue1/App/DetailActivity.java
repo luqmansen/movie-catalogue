@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.Layout;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -29,13 +30,16 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     ImageView backdropImg;
     String movieTrailerId;
 
-
+    ProgressBar progressBar;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        progressBar = findViewById(R.id.progressBarDetail);
+        progressBar.setVisibility(View.VISIBLE);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -73,6 +77,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 .load("https://image.tmdb.org/t/p/w300_and_h450_bestv2" + backdrop)
                 .into(backdropImg);
 
+        progressBar.setVisibility(View.GONE);
 
 
         //For play trailer icon or text click listener

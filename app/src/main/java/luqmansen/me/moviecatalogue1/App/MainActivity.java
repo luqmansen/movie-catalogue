@@ -1,8 +1,11 @@
 package luqmansen.me.moviecatalogue1.App;
 
 
+import android.app.LoaderManager;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -10,18 +13,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
-import androidx.core.os.ConfigurationCompat;
-import androidx.core.os.LocaleListCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
 import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-
-import java.util.Locale;
+import android.widget.ProgressBar;
 
 import luqmansen.me.moviecatalogue1.Fragment.MovieFragment;
 import luqmansen.me.moviecatalogue1.Fragment.TvShowsFragment;
@@ -33,32 +32,15 @@ public class MainActivity extends AppCompatActivity {
     final Fragment fragmentMovie = new MovieFragment(this);
     final Fragment fragmentTVshows = new TvShowsFragment(this);
     final FragmentManager fm = getSupportFragmentManager();
-    Fragment active = fragmentMovie;
     public String title;
 
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.option_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu1:
-                Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
-                fm.beginTransaction().remove(active).commit();
-                startActivity(mIntent);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+    Fragment active = fragmentMovie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -99,6 +81,24 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     };
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.option_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu1:
+                Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+                fm.beginTransaction().remove(active).commit();
+                startActivity(mIntent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

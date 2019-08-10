@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -48,7 +49,9 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
     private final static String API_KEY = BuildConfig.API_KEY;
     private Context context;
     private GridAdapter gridAdapter;
+
     String language =Locale.getDefault().getLanguage();
+    ProgressBar progressBar;
 
     public TvShowsFragment(Context context) {
         this.context = context;
@@ -59,6 +62,7 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_layout, container, false);
+        progressBar = view.findViewById(R.id.progressBarFragment);
 
         if (API_KEY.isEmpty()) {
             Toast.makeText(this.getContext(), "Please obtain your API KEY first from themoviedb.org", Toast.LENGTH_LONG).show();
@@ -66,7 +70,6 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
 
         NetworkUtil check = new NetworkUtil(getContext());
         check.isNetworkAvailable();
-//        LocaleCheck locale = new LocaleCheck(getContext());
 
         final RecyclerView recyclerView = view.findViewById(R.id.recyler_layout);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
@@ -74,6 +77,7 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
         setHasOptionsMenu(true);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        progressBar.setVisibility(View.VISIBLE);
         Call<DataResponse> call = apiService.getPopularTV(API_KEY, language );
         call.enqueue(new Callback<DataResponse>() {
             @Override
@@ -82,6 +86,7 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
                 Log.d(TAG, "Number of movies received: " + datas.size());
 //                Toast.makeText(context, "Number of movies received: " + datas.size(), Toast.LENGTH_LONG).show();
                 gridAdapter = new GridAdapter(datas, R.layout.item_grid);
+                progressBar.setVisibility(View.GONE);
                 recyclerView.setAdapter(gridAdapter);
                 showRecyclerGrid();
             }

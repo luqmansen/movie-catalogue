@@ -21,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -52,17 +53,20 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
     private final static String API_KEY = BuildConfig.API_KEY;
     private Context context;
     private GridAdapter gridAdapter;
+
     String language =Locale.getDefault().getLanguage();
+    ProgressBar progressBar;
 
     public MovieFragment(Context context) {
         this.context = context;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_layout, container, false);
+        progressBar = view.findViewById(R.id.progressBarFragment);
+        progressBar.setVisibility(View.GONE);
 
         if (API_KEY.isEmpty()) {
             Toast.makeText(this.getContext(), "Please obtain your API KEY first from themoviedb.org", Toast.LENGTH_LONG).show();
@@ -82,13 +86,14 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
         Call<DataResponse> call = apiService.getPopularMovies(API_KEY,language);
+        progressBar.setVisibility(View.VISIBLE);
         call.enqueue(new Callback<DataResponse>() {
             @Override
             public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {
                 List<Data> datas = response.body().getResults();
                 Log.d(TAG, "Number of movies received: " + datas.size());
-//                Toast.makeText(context, "Number of movies received: " + datas.size(), Toast.LENGTH_LONG).show();
                 gridAdapter = new GridAdapter(datas, R.layout.item_grid);
+                progressBar.setVisibility(View.GONE);
                 recyclerView.setAdapter(gridAdapter);
                 showRecyclerGrid();
             }
@@ -112,25 +117,20 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
                 selectItem(data);
 //                Toast.makeText(context, data.getVideo().toString(), Toast.LENGTH_SHORT).show();
             }
-
-
         });
     }
 
     public void selectItem(Data data) {
-//        Toast.makeText(context, data.getTitle(), Toast.LENGTH_LONG).show();
         data.setTitle(data.getTitle());
         data.setReleaseDate(data.getReleaseDate());
         data.setOverview(data.getOverview());
         data.setPosterPath(data.getPosterPath());
         data.setBackdropPath(data.getBackdropPath());
-//        data.setVideo(data.getVideo());
 
         Intent movieDetail = new Intent(getContext(), DetailActivity.class);
-        movieDetail.putExtra(DetailActivity.EXTRA_MOVIE, (Parcelable) data);
+        movieDetail.putExtra(DetailActivity.EXTRA_MOVIE, data);
         getContext().startActivity(movieDetail);
     }
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

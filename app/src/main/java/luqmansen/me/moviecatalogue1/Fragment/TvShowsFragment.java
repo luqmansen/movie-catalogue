@@ -1,9 +1,7 @@
 package luqmansen.me.moviecatalogue1.Fragment;
 
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.core.view.MenuItemCompat;
@@ -28,9 +26,8 @@ import java.util.Locale;
 import luqmansen.me.moviecatalogue1.Adapter.GridAdapter;
 import luqmansen.me.moviecatalogue1.App.DetailActivity;
 import luqmansen.me.moviecatalogue1.BuildConfig;
-import luqmansen.me.moviecatalogue1.Model.Data;
-import luqmansen.me.moviecatalogue1.Model.DataResponse;
-import luqmansen.me.moviecatalogue1.Util.LocaleCheck;
+import luqmansen.me.moviecatalogue1.Model.Popular.Data;
+import luqmansen.me.moviecatalogue1.Model.Popular.DataResponse;
 import luqmansen.me.moviecatalogue1.Util.NetworkUtil;
 import luqmansen.me.moviecatalogue1.R;
 import luqmansen.me.moviecatalogue1.Rest.ApiClient;

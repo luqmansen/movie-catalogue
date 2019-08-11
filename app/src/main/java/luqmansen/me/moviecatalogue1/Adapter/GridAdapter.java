@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import luqmansen.me.moviecatalogue1.Model.Data;
+import luqmansen.me.moviecatalogue1.Model.Popular.Data;
 import luqmansen.me.moviecatalogue1.Movie;
 import luqmansen.me.moviecatalogue1.R;
 

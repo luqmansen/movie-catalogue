@@ -1,4 +1,4 @@
-package luqmansen.me.moviecatalogue1.Model;
+package luqmansen.me.moviecatalogue1.Model.Popular;
 
 import com.google.gson.annotations.SerializedName;
 

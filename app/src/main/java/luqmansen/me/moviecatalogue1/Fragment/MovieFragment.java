@@ -1,20 +1,15 @@
 package luqmansen.me.moviecatalogue1.Fragment;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
 
-import androidx.core.os.ConfigurationCompat;
-import androidx.core.os.LocaleListCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -32,9 +27,8 @@ import java.util.Locale;
 import luqmansen.me.moviecatalogue1.App.DetailActivity;
 import luqmansen.me.moviecatalogue1.Adapter.GridAdapter;
 import luqmansen.me.moviecatalogue1.BuildConfig;
-import luqmansen.me.moviecatalogue1.Model.Data;
-import luqmansen.me.moviecatalogue1.Model.DataResponse;
-import luqmansen.me.moviecatalogue1.Util.LocaleCheck;
+import luqmansen.me.moviecatalogue1.Model.Popular.Data;
+import luqmansen.me.moviecatalogue1.Model.Popular.DataResponse;
 import luqmansen.me.moviecatalogue1.Util.NetworkUtil;
 import luqmansen.me.moviecatalogue1.R;
 import luqmansen.me.moviecatalogue1.Rest.ApiClient;
@@ -42,8 +36,6 @@ import luqmansen.me.moviecatalogue1.Rest.ApiInterface;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 
 
 /**
@@ -93,12 +85,12 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
                 gridAdapter = new GridAdapter(datas, R.layout.item_grid);
                 progressBar.setVisibility(View.GONE);
                 recyclerView.setAdapter(gridAdapter);
-                showRecyclerGrid();
+                setOnClickEvent();
             }
 
             @Override
             public void onFailure(Call<DataResponse> call, Throwable t) {
-                Toast.makeText(getContext(), "API Request Failed: " , Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "API Request Failed" , Toast.LENGTH_LONG).show();
                 Log.e(TAG, t.toString());
             }
         });
@@ -106,7 +98,7 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
     }
 
 
-    private void showRecyclerGrid() {
+    private void setOnClickEvent() {
         gridAdapter.setOnItemClickCallback(new GridAdapter.OnItemClickCallback() {
             @Override
             public void onItemClicked(Data data) {
@@ -116,6 +108,7 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
     }
 
     public void selectItem(Data data) {
+        data.setId(data.getId());
         data.setTitle(data.getTitle());
         data.setReleaseDate(data.getReleaseDate());
         data.setOverview(data.getOverview());
@@ -128,12 +121,11 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
         getContext().startActivity(movieDetail);
     }
 
-    //    Uncomment This Function for column change in onConfigurationChange, but reset the recyleview
-
+    //    Uncomment This Function for column change in onConfigurationChange to make 3 column,  but reset the recyleview
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
 //        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ? 3 : 2));
-        recyclerView.setPadding(10 , 0,10, 0);
+        recyclerView.setPadding(0 , 0,0, 0);
         super.onConfigurationChanged(newConfig);
 
     }

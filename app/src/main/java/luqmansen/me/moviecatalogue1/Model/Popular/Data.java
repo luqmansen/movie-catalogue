@@ -1,11 +1,10 @@
-package luqmansen.me.moviecatalogue1.Model;
+package luqmansen.me.moviecatalogue1.Model.Popular;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Data implements Parcelable {
@@ -197,6 +196,7 @@ public class Data implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(this.id);
         parcel.writeString(this.title);
         parcel.writeString(this.releaseDate);
         parcel.writeString(this.overview);
@@ -208,6 +208,7 @@ public class Data implements Parcelable {
 
 
     protected Data(Parcel in){
+        this.id = in.readInt();
         this.title = in.readString();
         this.releaseDate = in.readString();
         this.overview = in.readString();

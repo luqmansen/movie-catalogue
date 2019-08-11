@@ -1,5 +1,6 @@
 package luqmansen.me.moviecatalogue1.App;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +26,8 @@ import luqmansen.me.moviecatalogue1.BuildConfig;
 import luqmansen.me.moviecatalogue1.Model.Popular.Data;
 import luqmansen.me.moviecatalogue1.Model.TrailerVideo.DataVideoResponse;
 import luqmansen.me.moviecatalogue1.Model.TrailerVideo.DataVideos;
+import luqmansen.me.moviecatalogue1.Model.TrailerVideo.TrailerIdFetcher;
+import luqmansen.me.moviecatalogue1.Model.TrailerVideo.YoutubeTrailerFetcherCallback;
 import luqmansen.me.moviecatalogue1.R;
 import luqmansen.me.moviecatalogue1.Rest.ApiClient;
 import luqmansen.me.moviecatalogue1.Rest.ApiInterface;
@@ -33,7 +36,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class DetailActivity extends AppCompatActivity implements View.OnClickListener, YoutubeTrailerFetcherCallback {
     public static final String EXTRA_MOVIE = "extra_movie";
     private final String TAG = "DetailActivity";
     TextView titleObject;
@@ -88,10 +91,13 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
             release = data.getReleaseDate();
             type = "MOVIE";
         }
-        getVideoId(DataID, type);
+
 
         DateParser dateParser = new DateParser();
         release = dateParser.parseDateToddMMyyyy(release);
+
+        TrailerIdFetcher trailerIdFetcher = new TrailerIdFetcher();
+        trailerIdFetcher.getVideoId(DataID, type, this);
 
         String desc = data.getOverview();
         String poster = data.getPosterPath();
@@ -122,41 +128,13 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         startActivity(intent);
     }
 
-    public void getVideoId(final Integer id, String type) {
+    @Override
+    public void onSuccess(@NonNull String value) {
+        youtubeVideoId = value;
+    }
 
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        if (type == "TV") {
-            Call<DataVideoResponse> call = apiService.getTvVideos(id, BuildConfig.API_KEY);
-            call.enqueue(new Callback<DataVideoResponse>() {
-                @Override
-                public void onResponse(Call<DataVideoResponse> call, Response<DataVideoResponse> response) {
-                    List<DataVideos> dataVideos = response.body().getResults();
-                    Log.d("BISMILLAH", String.valueOf(dataVideos));
-                    youtubeVideoId = dataVideos.get(0).getYoutubeID();
-                }
-
-                @Override
-                public void onFailure(Call<DataVideoResponse> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(), "API Request Failed", Toast.LENGTH_LONG).show();
-                    Log.e(TAG, t.toString());
-                }
-            });
-        } else {
-            Call<DataVideoResponse> call = apiService.getMovieVideos(id, BuildConfig.API_KEY);
-            call.enqueue(new Callback<DataVideoResponse>() {
-                @Override
-                public void onResponse(Call<DataVideoResponse> call, Response<DataVideoResponse> response) {
-                    List<DataVideos> dataVideos = response.body().getResults();
-                    Log.d("BISMILLAH", String.valueOf(dataVideos));
-                    youtubeVideoId = dataVideos.get(0).getYoutubeID();
-                }
-
-                @Override
-                public void onFailure(Call<DataVideoResponse> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(), "API Request Failed", Toast.LENGTH_LONG).show();
-                    Log.e(TAG, t.toString());
-                }
-            });
-        }
+    @Override
+    public void onError(@NonNull Throwable throwable) {
+        Toast.makeText(getApplicationContext(), "Connection Error :" + throwable, Toast.LENGTH_SHORT).show();
     }
 }

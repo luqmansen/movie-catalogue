@@ -1,12 +1,7 @@
 package luqmansen.me.moviecatalogue1.App;
 
 
-import android.app.LoaderManager;
 import android.content.Intent;
-import android.content.Loader;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.database.Cursor;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -23,10 +18,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import luqmansen.me.moviecatalogue1.Fragment.MovieFragment;
+import luqmansen.me.moviecatalogue1.Fragment.Movie.MovieFragment;
 import luqmansen.me.moviecatalogue1.Fragment.TvShowsFragment;
 import luqmansen.me.moviecatalogue1.R;
 

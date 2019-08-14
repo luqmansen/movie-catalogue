@@ -1,10 +1,9 @@
-package luqmansen.me.moviecatalogue1.Fragment;
+package luqmansen.me.moviecatalogue1.Fragment.TV;
 
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -131,14 +130,14 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.search, menu);
-        final MenuItem searchItem = menu.findItem(R.id.search);
-        MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.setOnQueryTextListener(this);
-        searchView.setOnQueryTextFocusChangeListener(this);
-        searchView.setQueryHint(getString(R.string.searchview_hint));
-        super.onCreateOptionsMenu(menu, inflater);
+//        inflater.inflate(R.menu.search, menu);
+//        final MenuItem searchItem = menu.findItem(R.id.search);
+//        MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+//        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+//        searchView.setOnQueryTextListener(this);
+//        searchView.setOnQueryTextFocusChangeListener(this);
+//        searchView.setQueryHint(getString(R.string.searchview_hint));
+//        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -180,8 +179,4 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
 //        gridAdapter.setFilter(list);
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
 }

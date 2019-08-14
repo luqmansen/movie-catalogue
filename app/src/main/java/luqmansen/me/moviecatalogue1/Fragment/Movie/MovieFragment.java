@@ -1,10 +1,11 @@
-package luqmansen.me.moviecatalogue1.Fragment;
+package luqmansen.me.moviecatalogue1.Fragment.Movie;
 
 
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -181,4 +182,8 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
 //        gridAdapter.setFilter(list);
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 }

@@ -20,7 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import luqmansen.me.moviecatalogue1.Fragment.Movie.MovieFragment;
-import luqmansen.me.moviecatalogue1.Fragment.TvShowsFragment;
+import luqmansen.me.moviecatalogue1.Fragment.TV.TvShowsFragment;
 import luqmansen.me.moviecatalogue1.R;
 
 import static luqmansen.me.moviecatalogue1.R.id.container_layout;

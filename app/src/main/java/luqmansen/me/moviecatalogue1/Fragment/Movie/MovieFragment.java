@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,6 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -46,9 +48,11 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
 
 //    private final String TAG = this.getActivity().getClass().getSimpleName();
     private final String TAG = "MovieFragmentTAG";
+    private final String STATE_KEY = "STATE_LIST";
     private final static String API_KEY = BuildConfig.API_KEY;
     private GridAdapter gridAdapter;
     RecyclerView recyclerView;
+    List<Data> datas;
 
     String language =Locale.getDefault().getLanguage();
     ProgressBar progressBar;
@@ -66,38 +70,45 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
             Toast.makeText(this.getContext(), "Please obtain your API KEY first from themoviedb.org", Toast.LENGTH_LONG).show();
         }
 
-        NetworkUtil check = new NetworkUtil(getContext());
-        check.isNetworkAvailable();
-
         recyclerView = view.findViewById(R.id.recyler_layout);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         recyclerView.setHasFixedSize(true);
         setHasOptionsMenu(true);
 
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        if (savedInstanceState != null){
+            datas = savedInstanceState.getParcelableArrayList(STATE_KEY);
+            gridAdapter = new GridAdapter(datas, R.layout.item_grid);
+            progressBar.setVisibility(View.GONE);
+            recyclerView.setAdapter(gridAdapter);
+            setOnClickEvent();
 
-        Call<DataResponse> call = apiService.getPopularMovies(API_KEY,language);
-        progressBar.setVisibility(View.VISIBLE);
-        call.enqueue(new Callback<DataResponse>() {
-            @Override
-            public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {
-                List<Data> datas = response.body().getResults();
-                Log.d(TAG, "Number of movies received: " + datas.size());
-                gridAdapter = new GridAdapter(datas, R.layout.item_grid);
-                progressBar.setVisibility(View.GONE);
-                recyclerView.setAdapter(gridAdapter);
-                setOnClickEvent();
-            }
+        } else {
+            NetworkUtil check = new NetworkUtil(getContext());
+            if (check.isNetworkAvailable()) {
+                ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+                Call<DataResponse> call = apiService.getPopularMovies(API_KEY, language);
+                progressBar.setVisibility(View.VISIBLE);
+                call.enqueue(new Callback<DataResponse>() {
+                    @Override
+                    public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {
+                        datas = response.body().getResults();
+                        gridAdapter = new GridAdapter(datas, R.layout.item_grid);
+                        progressBar.setVisibility(View.GONE);
+                        recyclerView.setAdapter(gridAdapter);
+                        setOnClickEvent();
+                    }
 
-            @Override
-            public void onFailure(Call<DataResponse> call, Throwable t) {
-                Toast.makeText(getContext(), "API Request Failed" , Toast.LENGTH_LONG).show();
-                Log.e(TAG, t.toString());
+                    @Override
+                    public void onFailure(Call<DataResponse> call, Throwable t) {
+                        Toast.makeText(getContext(), "API request failed, please check your connection", Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.GONE);
+                        Log.e(TAG, t.toString());
+                    }
+                });
             }
-        });
+        }
         return view;
     }
-
 
     private void setOnClickEvent() {
         gridAdapter.setOnItemClickCallback(new GridAdapter.OnItemClickCallback() {
@@ -185,5 +196,28 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
+        if (gridAdapter.getList() != null) {
+            outState.putParcelableArrayList(STATE_KEY, new ArrayList<Parcelable>(gridAdapter.getList()));
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

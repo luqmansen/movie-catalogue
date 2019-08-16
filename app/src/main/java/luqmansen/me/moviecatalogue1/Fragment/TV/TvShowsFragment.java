@@ -2,6 +2,7 @@ package luqmansen.me.moviecatalogue1.Fragment.TV;
 
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,11 +23,12 @@ import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import luqmansen.me.moviecatalogue1.Adapter.GridAdapter;
 import luqmansen.me.moviecatalogue1.App.DetailActivity;
+import luqmansen.me.moviecatalogue1.Adapter.GridAdapter;
 import luqmansen.me.moviecatalogue1.BuildConfig;
 import luqmansen.me.moviecatalogue1.Model.Popular.Data;
 import luqmansen.me.moviecatalogue1.Model.Popular.DataResponse;
@@ -43,62 +46,71 @@ import retrofit2.Response;
  */
 public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, View.OnFocusChangeListener {
 
-//    private final String TAG = this.getActivity().getClass().getSimpleName();
-    private final String TAG = "TvShowsFragmentTAG";
+    //    private final String TAG = this.getActivity().getClass().getSimpleName();
+    private final String TAG = "MovieFragmentTAG";
+    private final String STATE_KEY = "STATE_LIST";
     private final static String API_KEY = BuildConfig.API_KEY;
     private GridAdapter gridAdapter;
     RecyclerView recyclerView;
+    List<Data> datas;
 
     String language =Locale.getDefault().getLanguage();
     ProgressBar progressBar;
 
-    public TvShowsFragment() {} // Public Constructor
-
+    public TvShowsFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_layout, container, false);
         progressBar = view.findViewById(R.id.progressBarFragment);
+        progressBar.setVisibility(View.GONE);
 
         if (API_KEY.isEmpty()) {
             Toast.makeText(this.getContext(), "Please obtain your API KEY first from themoviedb.org", Toast.LENGTH_LONG).show();
         }
-
-        NetworkUtil check = new NetworkUtil(getContext());
-        check.isNetworkAvailable();
 
         recyclerView = view.findViewById(R.id.recyler_layout);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         recyclerView.setHasFixedSize(true);
         setHasOptionsMenu(true);
 
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        progressBar.setVisibility(View.VISIBLE);
-        Call<DataResponse> call = apiService.getPopularTV(API_KEY, language );
-        call.enqueue(new Callback<DataResponse>() {
-            @Override
-            public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {
-                List<Data> datas = response.body().getResults();
-                Log.d(TAG, "Number of movies received: " + datas.size());
-//                Toast.makeText(getContext(), "Number of movies received: " + datas.size(), Toast.LENGTH_LONG).show();
-                gridAdapter = new GridAdapter(datas, R.layout.item_grid);
-                progressBar.setVisibility(View.GONE);
-                recyclerView.setAdapter(gridAdapter);
-                showRecyclerGrid();
-            }
+        if (savedInstanceState != null){
+            datas = savedInstanceState.getParcelableArrayList(STATE_KEY);
+            gridAdapter = new GridAdapter(datas, R.layout.item_grid);
+            progressBar.setVisibility(View.GONE);
+            recyclerView.setAdapter(gridAdapter);
+            setOnClickEvent();
 
-            @Override
-            public void onFailure(Call<DataResponse> call, Throwable t) {
-                Toast.makeText(getContext(), "API Request Failed: " , Toast.LENGTH_LONG).show();
-                Log.e(TAG, t.toString());
+        } else {
+            NetworkUtil check = new NetworkUtil(getContext());
+            if (check.isNetworkAvailable()) {
+                ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+                Call<DataResponse> call = apiService.getPopularTV(API_KEY, language);
+                progressBar.setVisibility(View.VISIBLE);
+                call.enqueue(new Callback<DataResponse>() {
+                    @Override
+                    public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {
+                        datas = response.body().getResults();
+                        gridAdapter = new GridAdapter(datas, R.layout.item_grid);
+                        progressBar.setVisibility(View.GONE);
+                        recyclerView.setAdapter(gridAdapter);
+                        setOnClickEvent();
+                    }
+
+                    @Override
+                    public void onFailure(Call<DataResponse> call, Throwable t) {
+                        Toast.makeText(getContext(), "API request failed, please check your connection", Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.GONE);
+                        Log.e(TAG, t.toString());
+                    }
+                });
             }
-        });
+        }
         return view;
     }
 
-
-    private void showRecyclerGrid() {
+    private void setOnClickEvent() {
         gridAdapter.setOnItemClickCallback(new GridAdapter.OnItemClickCallback() {
             @Override
             public void onItemClicked(Data data) {
@@ -108,26 +120,27 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
     }
 
     public void selectItem(Data data) {
+        data.setId(data.getId());
         data.setTitle(data.getTitle());
         data.setReleaseDate(data.getReleaseDate());
         data.setOverview(data.getOverview());
         data.setPosterPath(data.getPosterPath());
         data.setBackdropPath(data.getBackdropPath());
-//        data.setVideo(data.getVideo());
+        data.setName(data.getName());
 
         Intent movieDetail = new Intent(getContext(), DetailActivity.class);
         movieDetail.putExtra(DetailActivity.EXTRA_MOVIE, data);
         getContext().startActivity(movieDetail);
     }
 
-//    Uncomment This Function for column change in onConfigurationChange, but reset the recyleview
-//
-//    @Override
-//    public void onConfigurationChanged(Configuration newConfig) {
+    //    Uncomment This Function for column change in onConfigurationChange to make 3 column,  but reset the recyleview
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
 //        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ? 3 : 2));
-//        super.onConfigurationChanged(newConfig);
-//
-//    }
+        recyclerView.setPadding(0 , 0,0, 0);
+        super.onConfigurationChanged(newConfig);
+
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -183,5 +196,28 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
+        if (gridAdapter.getList() != null) {
+            outState.putParcelableArrayList(STATE_KEY, new ArrayList<Parcelable>(gridAdapter.getList()));
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

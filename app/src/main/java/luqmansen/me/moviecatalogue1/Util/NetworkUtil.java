@@ -13,13 +13,14 @@ public class NetworkUtil {
         this.context = context;
     }
 
-    public void isNetworkAvailable() {
+    public boolean isNetworkAvailable() {
         ConnectivityManager cm =  (ConnectivityManager)  context.getSystemService(Context.CONNECTIVITY_SERVICE);
         @SuppressWarnings("deprecation") NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
         boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
         if (isConnected == false){
-            Toast.makeText(context, "Connection Error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Please check your connection", Toast.LENGTH_SHORT).show();
         }
+        return isConnected;
     }
 }

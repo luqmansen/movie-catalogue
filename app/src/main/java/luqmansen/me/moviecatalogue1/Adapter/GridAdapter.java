@@ -35,6 +35,10 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder
         }
     }
 
+    public  List<Data> getList(){
+        return this.items;
+    }
+
     public GridAdapter(List<Data> list, int rowLayout) {
         this.items = list;
         this.rowLayout = rowLayout;

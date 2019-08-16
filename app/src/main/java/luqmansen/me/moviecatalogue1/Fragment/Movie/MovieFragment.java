@@ -10,6 +10,7 @@ import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.os.Parcelable;
 import android.util.Log;
@@ -52,6 +53,8 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
     private final static String API_KEY = BuildConfig.API_KEY;
     private GridAdapter gridAdapter;
     RecyclerView recyclerView;
+    GridLayoutManager gridLayoutManager;
+    StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     List<Data> datas;
 
     String language =Locale.getDefault().getLanguage();
@@ -71,7 +74,9 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
         }
 
         recyclerView = view.findViewById(R.id.recyler_layout);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, GridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(mStaggeredGridLayoutManager);
+
         recyclerView.setHasFixedSize(true);
         setHasOptionsMenu(true);
 
@@ -136,21 +141,25 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
     //    Uncomment This Function for column change in onConfigurationChange to make 3 column,  but reset the recyleview
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-//        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ? 3 : 2));
-        recyclerView.setPadding(0 , 0,0, 0);
         super.onConfigurationChanged(newConfig);
+        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            mStaggeredGridLayoutManager.setSpanCount(2);
 
+        } else {
+            //show in two columns
+            mStaggeredGridLayoutManager.setSpanCount(3);
+        }
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-            inflater.inflate(R.menu.search, menu);
-            final MenuItem searchItem = menu.findItem(R.id.search);
-            MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-            final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-            searchView.setOnQueryTextListener(this);
-            searchView.setOnQueryTextFocusChangeListener(this);
-            searchView.setQueryHint(getString(R.string.searchview_hint));
+//            inflater.inflate(R.menu.search, menu);
+//            final MenuItem searchItem = menu.findItem(R.id.search);
+//            MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+//            final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+//            searchView.setOnQueryTextListener(this);
+//            searchView.setOnQueryTextFocusChangeListener(this);
+//            searchView.setQueryHint(getString(R.string.searchview_hint));
             super.onCreateOptionsMenu(menu, inflater);
     }
 

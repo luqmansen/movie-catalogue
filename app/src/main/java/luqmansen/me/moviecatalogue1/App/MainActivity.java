@@ -2,6 +2,7 @@ package luqmansen.me.moviecatalogue1.App;
 
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -41,9 +42,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+//        hideSystemUI();
 
         if (savedInstanceState != null){
             fragmentMovie =  fm.findFragmentByTag(TAG_MOVIE_FRAGEMENT);
@@ -116,13 +118,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-//            hideSystemUI();
-        }
-    }
 
     private void hideSystemUI() {
         View decorView = getWindow().getDecorView();

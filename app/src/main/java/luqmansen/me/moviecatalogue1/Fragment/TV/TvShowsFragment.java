@@ -136,7 +136,7 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
     //    Uncomment This Function for column change in onConfigurationChange to make 3 column,  but reset the recyleview
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-//        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ? 3 : 2));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ? 3 : 2));
         recyclerView.setPadding(0 , 0,0, 0);
         super.onConfigurationChanged(newConfig);
 
@@ -144,13 +144,13 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.search, menu);
-        final MenuItem searchItem = menu.findItem(R.id.search);
-        MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.setOnQueryTextListener(this);
-        searchView.setOnQueryTextFocusChangeListener(this);
-        searchView.setQueryHint(getString(R.string.searchview_hint));
+//        inflater.inflate(R.menu.search, menu);
+//        final MenuItem searchItem = menu.findItem(R.id.search);
+//        MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+//        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+//        searchView.setOnQueryTextListener(this);
+//        searchView.setOnQueryTextFocusChangeListener(this);
+//        searchView.setQueryHint(getString(R.string.searchview_hint));
         super.onCreateOptionsMenu(menu, inflater);
     }
 

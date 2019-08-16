@@ -32,6 +32,7 @@ import luqmansen.me.moviecatalogue1.R;
 import luqmansen.me.moviecatalogue1.Rest.ApiClient;
 import luqmansen.me.moviecatalogue1.Rest.ApiInterface;
 import luqmansen.me.moviecatalogue1.Util.DateParser;
+import luqmansen.me.moviecatalogue1.Util.NetworkUtil;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -99,6 +100,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         TrailerIdFetcher trailerIdFetcher = new TrailerIdFetcher();
         trailerIdFetcher.getVideoId(DataID, type, this);
 
+
         String desc = data.getOverview();
         String poster = data.getPosterPath();
         String backdrop = data.getBackdropPath();
@@ -127,8 +129,13 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://" + youtubeVideoId));
-        startActivity(intent);
+        NetworkUtil inteCheck = new NetworkUtil(this);
+        if (inteCheck.isNetworkAvailable()) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://" + youtubeVideoId));
+            startActivity(intent);
+        } else {
+            Toast.makeText(getApplicationContext(), "Please Connect to Internet to Watch Trailer", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -138,6 +145,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onError(@NonNull Throwable throwable) {
-        Toast.makeText(getApplicationContext(), "Connection Error :" + throwable, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(), "Connection Error :" + throwable, Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "onError: " + throwable);
     }
 }

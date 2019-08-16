@@ -7,25 +7,5 @@
 	<string name="watch_trailer">"Ver el trailer"</string>
 	<string name="Language">Idioma</string>
 	<string name="overview_detail">"Visión general"</string>
-	<string name="searchview_hint">Encontrar algo....</string>
-	<string name="desc_movie1">"El periodista de investigación Eddie Brock intenta regresar después de un escándalo, pero accidentalmente se convierte en el anfitrión de Venom, un simbionte alienígena violento y súper poderoso. Pronto, debe confiar en sus nuevos poderes para proteger el mundo de una organización en la sombra que busca un simbionte de </string>
-	<string name="desc_movie2">Un cruzado endurecido por la guerra y su comandante moro organizan una revuelta audaz contra la corrupta corona inglesa.</string>
-	<string name="desc_movie3">Earl Stone, un hombre de unos 80 años, está en quiebra, solo, y se enfrenta a la ejecución hipotecaria de su negocio cuando se le ofrece un trabajo que simplemente le exige conducir. </string>
-	<string name="desc_movie4">Cinco años después de que una presencia siniestra siniestra lleve a la mayoría de la sociedad al suicidio, una sobreviviente y sus dos hijos hacen un intento desesperado por alcanzar la seguridad.</string>
-	<string name="desc_movie5">El cantante Freddie Mercury, el guitarrista Brian May, el baterista Roger Taylor y el bajista John Deacon toman el mundo de la música por asalto cuando forman la banda de rock \'n \' roll Queen en 1970. Las canciones de éxito se convierten en clásicos instantáneos. </string>
-	<string name="desc_movie6">A la carrera en el año 1987, Bumblebee encuentra refugio en un depósito de chatarra en una pequeña ciudad de playa californiana. </string>
-	<string name="desc_movie7">Entre las obligaciones personales y el entrenamiento para su próxima gran pelea contra un oponente con vínculos con el pasado de su familia, Adonis Creed se enfrenta al desafío de su vida.</string>
-	<string name="desc_movie8">Muchos miles de años en el futuro, las ciudades de la Tierra recorren el mundo en grandes ruedas, devorándose mutuamente en una lucha por la disminución de los recursos. </string>
-	<string name="desc_movie9">En una serie de encuentros en escalada, el ex guardia de seguridad David Dunn usa sus habilidades sobrenaturales para rastrear a Kevin Wendell Crumb, un hombre perturbado que tiene veinticuatro personalidades. </string>
-	<string name="desc_movie10">El Capitán Glass del USS Arkansas descubre que se está dando un golpe de estado en Rusia, por lo que él y su tripulación se unen a un grupo de élite que trabaja en el terreno para evitar una guerra.</string>
-	<string name="desc_tv1">El mimado multimillonario playboy Oliver Queen está desaparecido y se presume que murió cuando su yate se perdió en el mar. </string>
-	<string name="desc_tv2">Los miembros de Doom Patrol sufrieron horribles accidentes que les dieron habilidades sobrehumanas, pero también los dejaron marcados y desfigurados. </string>
-	<string name="desc_tv3">Hace mucho tiempo, en las montañas, un maestro de combate conocido como Gohan descubrió a un niño extraño al que llamó Goku. </string>
-	<string name="desc_tv4">Lucy es una chica de 17 años que quiere ser una maga de pleno derecho. </string>
-	<string name="desc_tv5">Enfermo, torcido, políticamente incorrecto y la serie animada dulce de Freakin que presenta las aventuras de la disfuncional familia Griffin. </string>
-	<string name="desc_tv6">Naruto Shippuuden es la continuación de la serie de televisión animada original Naruto. La historia gira en torno a un antiguo y un poco más maduro Uzumaki Naruto y su búsqueda para salvar a su amigo Uchiha Sasuke de los puños de Shinobi, Orochimaru. </string>
-	<string name="desc_tv7">Ubicado en Springfield, la ciudad estadounidense promedio, el espectáculo se centra en las travesuras y aventuras cotidianas de la familia Simpson; </string>
-	<string name="desc_tv8">Una familia disfuncional de superhéroes se reúne para resolver el misterio de la muerte de su padre, la amenaza del apocalipsis y más.</string>
-	<string name="desc_tv9">Frank Gallagher, de Chicago, es el orgulloso padre soltero de seis niños inteligentes, trabajadores e independientes, que sin él estarían ... quizás mejor. </string>
-	<string name="desc_tv10">Desde el asesinato y el espionaje hasta el terrorismo y los submarinos robados, un equipo de agentes especiales investiga cualquier crimen que tenga un fragmento de evidencia relacionada con el personal de la Marina y el Cuerpo de Marines, independientemente de su rango o posición.</string>
+    <string name="desc_movie1">"El periodista de investigación Eddie Brock intenta regresar después de un escándalo, pero accidentalmente se convierte en el anfitrión de Venom, un simbionte alienígena violento y súper poderoso. Pronto, debe confiar en sus nuevos poderes para proteger el mundo de una organización en la sombra que busca un simbionte de </string>
 </resources>

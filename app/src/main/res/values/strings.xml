@@ -1,13 +1,15 @@
 <resources>
     <string name="app_name">Movie Catalogue</string>
     <string name="title_activity_main">""</string>
-    <string name="title_movie" >Movie</string>
-    <string name="title_tv_shows" >TV Shows</string>
+    <string name="title_movie">Movie</string>
+    <string name="title_tv_shows">TV Shows</string>
+    <string name="title_favorites_tv">Favorites TV</string>
+    <string name="title_favorites_movie">Favorites Movie</string>
     <string name="watch_trailer">"Watch Trailer"</string>
     <string name="Language">Language</string>
     <string name="overview_detail">"Overview"</string>
     <string name="description" translatable="false">normal description</string>
-
+    <string name="remove_fav">"Remove From Favorites"</string>
     <string name="desc_movie1">"Investigative journalist Eddie Brock attempts a comeback following a scandal, but accidentally becomes the host of Venom, a violent, super powerful alien symbiote. Soon, he must rely on his newfound powers to protect the world from a shadowy organization looking for a symbiote of their own.</string>
 
 

@@ -1,4 +1,4 @@
-package luqmansen.me.moviecatalogue1.Fragment.Movie;
+package luqmansen.me.moviecatalogue1.Fragment;
 
 
 import android.content.Intent;
@@ -6,7 +6,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.core.view.MenuItemCompat;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import luqmansen.me.moviecatalogue1.App.DetailActivity;
+import luqmansen.me.moviecatalogue1.Activity.DetailActivity;
 import luqmansen.me.moviecatalogue1.Adapter.GridAdapter;
 import luqmansen.me.moviecatalogue1.BuildConfig;
 import luqmansen.me.moviecatalogue1.Model.Popular.Data;
@@ -45,9 +45,9 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MovieFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, View.OnFocusChangeListener {
+public class MovieFavoriteFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, View.OnFocusChangeListener {
 
-//    private final String TAG = this.getActivity().getClass().getSimpleName();
+    //    private final String TAG = this.getActivity().getClass().getSimpleName();
     private final String TAG = "MovieFragmentTAG";
     private final String STATE_KEY = "STATE_LIST";
     private final static String API_KEY = BuildConfig.API_KEY;
@@ -60,7 +60,7 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
     String language =Locale.getDefault().getLanguage();
     ProgressBar progressBar;
 
-    public MovieFragment() {}
+    public MovieFavoriteFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -160,7 +160,7 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
 //            searchView.setOnQueryTextListener(this);
 //            searchView.setOnQueryTextFocusChangeListener(this);
 //            searchView.setQueryHint(getString(R.string.searchview_hint));
-            super.onCreateOptionsMenu(menu, inflater);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override

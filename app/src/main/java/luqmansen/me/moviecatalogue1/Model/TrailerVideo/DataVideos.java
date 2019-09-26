@@ -7,8 +7,11 @@ public class DataVideos {
     @SerializedName("key")
     private String youtubeID;
 
-    public DataVideos(String youtubeID) {
-        this.youtubeID = youtubeID;
+//    public DataVideos(String youtubeID) {
+//        this.youtubeID = youtubeID;
+//    }
+        public DataVideos() {
+
     }
 
     public String getYoutubeID() {

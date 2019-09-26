@@ -1,4 +1,4 @@
-package luqmansen.me.moviecatalogue1.Fragment.TV;
+package luqmansen.me.moviecatalogue1.Fragment;
 
 
 import android.content.Intent;
@@ -6,10 +6,11 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.core.view.MenuItemCompat;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.os.Parcelable;
 import android.util.Log;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import luqmansen.me.moviecatalogue1.App.DetailActivity;
+import luqmansen.me.moviecatalogue1.Activity.DetailActivity;
 import luqmansen.me.moviecatalogue1.Adapter.GridAdapter;
 import luqmansen.me.moviecatalogue1.BuildConfig;
 import luqmansen.me.moviecatalogue1.Model.Popular.Data;
@@ -44,7 +45,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, View.OnFocusChangeListener {
+public class TVFavoriteFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, View.OnFocusChangeListener {
 
     //    private final String TAG = this.getActivity().getClass().getSimpleName();
     private final String TAG = "MovieFragmentTAG";
@@ -52,12 +53,14 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
     private final static String API_KEY = BuildConfig.API_KEY;
     private GridAdapter gridAdapter;
     RecyclerView recyclerView;
+    GridLayoutManager gridLayoutManager;
+    StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     List<Data> datas;
 
     String language =Locale.getDefault().getLanguage();
     ProgressBar progressBar;
 
-    public TvShowsFragment() {}
+    public TVFavoriteFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -71,7 +74,9 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
         }
 
         recyclerView = view.findViewById(R.id.recyler_layout);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, GridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(mStaggeredGridLayoutManager);
+
         recyclerView.setHasFixedSize(true);
         setHasOptionsMenu(true);
 
@@ -86,7 +91,7 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
             NetworkUtil check = new NetworkUtil(getContext());
             if (check.isNetworkAvailable()) {
                 ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                Call<DataResponse> call = apiService.getPopularTV(API_KEY, language);
+                Call<DataResponse> call = apiService.getPopularMovies(API_KEY, language);
                 progressBar.setVisibility(View.VISIBLE);
                 call.enqueue(new Callback<DataResponse>() {
                     @Override
@@ -136,21 +141,25 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
     //    Uncomment This Function for column change in onConfigurationChange to make 3 column,  but reset the recyleview
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ? 3 : 2));
-        recyclerView.setPadding(0 , 0,0, 0);
         super.onConfigurationChanged(newConfig);
+        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            mStaggeredGridLayoutManager.setSpanCount(2);
 
+        } else {
+            //show in two columns
+            mStaggeredGridLayoutManager.setSpanCount(3);
+        }
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        inflater.inflate(R.menu.search, menu);
-//        final MenuItem searchItem = menu.findItem(R.id.search);
-//        MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-//        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-//        searchView.setOnQueryTextListener(this);
-//        searchView.setOnQueryTextFocusChangeListener(this);
-//        searchView.setQueryHint(getString(R.string.searchview_hint));
+//            inflater.inflate(R.menu.search, menu);
+//            final MenuItem searchItem = menu.findItem(R.id.search);
+//            MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+//            final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+//            searchView.setOnQueryTextListener(this);
+//            searchView.setOnQueryTextFocusChangeListener(this);
+//            searchView.setQueryHint(getString(R.string.searchview_hint));
         super.onCreateOptionsMenu(menu, inflater);
     }
 

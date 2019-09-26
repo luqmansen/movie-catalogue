@@ -12,5 +12,16 @@
         android:id="@+id/navigation_tvshows"
         android:icon="@drawable/baseline_live_tv_black_36"
         android:title="@string/title_tv_shows" />
+    <item
+        android:id="@+id/navigation_favorites_movie"
+        android:icon="@drawable/baseline_favorite_white_36"
+        android:title="@string/title_favorites_movie" />
+
+    <item
+        android:id="@+id/navigation_favorites_tv"
+        android:icon="@drawable/baseline_favorite_white_36"
+        android:title="@string/title_favorites_tv" />
+
+
 
 </menu>

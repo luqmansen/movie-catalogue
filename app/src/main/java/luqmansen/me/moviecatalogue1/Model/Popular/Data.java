@@ -42,23 +42,8 @@ public class Data implements Parcelable {
     @SerializedName("vote_average")
     private Double voteAverage;
 
-    public Data(String posterPath, boolean adult, String overview, String releaseDate, String firstAirDate, List<Integer> genreIds, Integer id, String originalTitle, String originalLanguage, String title, String name, String backdropPath, Double popularity, Integer voteCount, Boolean video, Double voteAverage) {
-        this.posterPath = posterPath;
-        this.adult = adult;
-        this.overview = overview;
-        this.releaseDate = releaseDate;
-        this.firstAirDate = firstAirDate;
-        this.genreIds = genreIds;
-        this.id = id;
-        this.originalTitle = originalTitle;
-        this.originalLanguage = originalLanguage;
-        this.title = title;
-        this.name = name;
-        this.backdropPath = backdropPath;
-        this.popularity = popularity;
-        this.voteCount = voteCount;
-        this.video = video;
-        this.voteAverage = voteAverage;
+    public Data() {
+
     }
 
     public String getPosterPath() {
@@ -207,7 +192,7 @@ public class Data implements Parcelable {
     }
 
 
-    protected Data(Parcel in){
+    public Data(Parcel in){
         this.id = in.readInt();
         this.title = in.readString();
         this.releaseDate = in.readString();

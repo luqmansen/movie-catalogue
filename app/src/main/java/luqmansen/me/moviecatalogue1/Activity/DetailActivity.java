@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 import com.squareup.picasso.Picasso;
 
+import luqmansen.me.moviecatalogue1.DB.CheckRecord;
 import luqmansen.me.moviecatalogue1.DB.DBHandler;
 import luqmansen.me.moviecatalogue1.Model.Popular.Data;
 import luqmansen.me.moviecatalogue1.Model.TrailerVideo.TrailerIdFetcher;
@@ -44,7 +45,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     ImageView backdropImg;
     ProgressBar progressBar;
     String youtubeVideoId;
-    ImageButton addToFavorites;
+    Button addToFavorites;
     Button deleteFavorite;
 
 
@@ -72,10 +73,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
         playButton.setOnClickListener(this);
         watchTrailer.setOnClickListener(this);
-
-
-//        deleteFavorite = findViewById(R.id.remove_favorite);
-//        deleteFavorite.setOnClickListener(deleteFavorite());
 
 
         //Collect the intent
@@ -133,28 +130,45 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         progressBar.setVisibility(View.GONE);
 
         addToFavorites = findViewById(R.id.favorite_button);
-        addToFavorites.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DBHandler db = new DBHandler(DetailActivity.this);
-                db.insertFavorites(DataID.toString(),type1,title, date, desc, backdrop, poster, youtubeVideoId);
-                Toast.makeText(getApplicationContext(), "Details Inserted Successfully",Toast.LENGTH_SHORT).show();
-            }
-        });
+        addToFavorites.setVisibility(View.INVISIBLE);
+        deleteFavorite = findViewById(R.id.remove_favorite);
+        deleteFavorite.setVisibility(View.INVISIBLE);
+
+        CheckRecord checker = new CheckRecord(DetailActivity.this);
+        if (!checker.CheckRecordInDB("favoritetable","id",DataID.toString())){
+
+
+            addToFavorites.setVisibility(View.VISIBLE);
+            addToFavorites.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DBHandler db = new DBHandler(DetailActivity.this);
+                    db.insertFavorites(DataID.toString(),type1,title, date, desc, backdrop, poster, youtubeVideoId);
+                    Toast.makeText(getApplicationContext(), "Added to Favorite",Toast.LENGTH_SHORT).show();
+                    addToFavorites.setVisibility(View.INVISIBLE);
+                    deleteFavorite.setVisibility(View.VISIBLE);
+                }
+            });
+        } else{
+
+            deleteFavorite.setVisibility(View.VISIBLE);
+            deleteFavorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DBHandler db = new DBHandler(DetailActivity.this);
+                    db.deleteFavorite(DataID);
+                    Toast.makeText(getApplicationContext(), "Removed from Favorite",Toast.LENGTH_SHORT).show();
+                    addToFavorites.setVisibility(View.VISIBLE);
+                    deleteFavorite.setVisibility(View.INVISIBLE);
+                }
+            });
+        }
+
+
 
 
     }
 
-
-
-    public  void DeleteButton(){
-        deleteFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-    }
 
     @Override
     public void onClick(View view) {

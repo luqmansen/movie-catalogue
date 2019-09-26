@@ -3,8 +3,10 @@ package luqmansen.me.moviecatalogue1.DB;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteCursorDriver;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.CancellationSignal;
 
 import androidx.annotation.Nullable;
 
@@ -49,6 +51,15 @@ public class DBHandler  extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITE);
         onCreate(db);
     }
+
+    public Cursor doQuery(String query){
+        SQLiteDatabase db = getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+        return cursor;
+    }
+
+
 
     public void insertFavorites(String id, String type, String title, String date, String overview, String backdrop, String poster, String trailer){
 

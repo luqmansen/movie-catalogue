@@ -22,9 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import luqmansen.me.moviecatalogue1.Activity.DetailActivity;
@@ -32,7 +30,7 @@ import luqmansen.me.moviecatalogue1.Adapter.GridAdapter;
 import luqmansen.me.moviecatalogue1.BuildConfig;
 import luqmansen.me.moviecatalogue1.Model.Popular.Data;
 import luqmansen.me.moviecatalogue1.Model.Popular.DataResponse;
-import luqmansen.me.moviecatalogue1.Util.NetworkUtil;
+import luqmansen.me.moviecatalogue1.Util.Network.NetworkUtil;
 import luqmansen.me.moviecatalogue1.R;
 import luqmansen.me.moviecatalogue1.Rest.ApiClient;
 import luqmansen.me.moviecatalogue1.Rest.ApiInterface;

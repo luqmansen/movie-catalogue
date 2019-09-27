@@ -108,6 +108,17 @@ public class TVFavoriteFragment extends Fragment implements SearchView.OnQueryTe
         getContext().startActivity(movieDetail);
     }
 
+    @Override
+    public void onResume() {
+        DBHandler db = new DBHandler(getContext());
+        super.onResume();
+        datas = db.getAll("TV");
+        gridAdapter = new GridAdapter(datas, R.layout.item_grid);
+        recyclerView.setAdapter(gridAdapter);
+        gridAdapter.notifyDataSetChanged();
+        setOnClickEvent();
+    }
+
     //    Uncomment This Function for column change in onConfigurationChange to make 3 column,  but reset the recyleview
     @Override
     public void onConfigurationChanged(Configuration newConfig) {

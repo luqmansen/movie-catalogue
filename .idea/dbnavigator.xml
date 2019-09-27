@@ -35,10 +35,7 @@
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="f2442749-e5fd-4982-90bd-2b1d80a6e0fb" object-ref="schemas/main/tables/android_metadata" />
-      <object connection-id="f2442749-e5fd-4982-90bd-2b1d80a6e0fb" object-ref="schemas/main/tables/favoritetable" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="f2442749-e5fd-4982-90bd-2b1d80a6e0fb" />

@@ -20,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import luqmansen.me.moviecatalogue1.DB.DBHandler;
 import luqmansen.me.moviecatalogue1.Fragment.MovieFavoriteFragment;
 import luqmansen.me.moviecatalogue1.Fragment.MovieFragment;
 import luqmansen.me.moviecatalogue1.Fragment.TVFavoriteFragment;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG_FAVORITES_FRAGMENT_TV = "TAG_FAVORITES_FRAGMENT_TV";
     private final String TAG_FAVORITES_FRAGMENT_MOVIE = "TAG_FAVORITES_FRAGMENT_MOVIE";
     public String title;
+    long oldCount, newCount =0;
 
     Fragment fragmentMovie;
     Fragment fragmentTVshows;
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragmentFavoritesMovie;
     Fragment active = fragmentMovie;
     final FragmentManager fm = getSupportFragmentManager();
+    DBHandler db = new DBHandler(MainActivity.this);
+
 
 
     @Override
@@ -77,14 +81,29 @@ public class MainActivity extends AppCompatActivity {
             title = getString(R.string.title_movie);
         }
         setActionBarTitle(title);
+
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            if (db.getProfilesCount(MainActivity.this) > oldCount){
+                fragmentFavoritesTV = null;
+                fragmentFavoritesMovie = null;
+                fragmentFavoritesTV = new TVFavoriteFragment();
+                fragmentFavoritesMovie = new MovieFavoriteFragment();
+                fm.beginTransaction().remove(fragmentFavoritesMovie).commit();
+                fm.beginTransaction().remove(fragmentFavoritesTV).commit();
+                fm.beginTransaction().add(container_layout, fragmentFavoritesTV, TAG_FAVORITES_FRAGMENT_TV).hide(fragmentFavoritesTV).commit();
+                fm.beginTransaction().add(container_layout, fragmentFavoritesMovie, TAG_FAVORITES_FRAGMENT_MOVIE).hide(fragmentFavoritesMovie).commit();
+
+            }
             switch (item.getItemId()) {
                 case R.id.navigation_movie:
+
                     fm.beginTransaction()
                             .hide(active)
                             .show(fragmentMovie)
@@ -92,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                     title = getString(R.string.title_movie);
                     setActionBarTitle(title);
                     active = fragmentMovie;
+
                     return true;
                 case R.id.navigation_tvshows:
                     fm.beginTransaction()
@@ -126,6 +146,13 @@ public class MainActivity extends AppCompatActivity {
     };
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        oldCount = db.getProfilesCount(this);
+
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
     }
@@ -135,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.option_menu, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

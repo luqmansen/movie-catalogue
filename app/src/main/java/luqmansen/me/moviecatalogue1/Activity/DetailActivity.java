@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,13 +14,11 @@ import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 import com.squareup.picasso.Picasso;
 
 import luqmansen.me.moviecatalogue1.DB.CheckRecord;
@@ -30,8 +27,8 @@ import luqmansen.me.moviecatalogue1.Model.Popular.Data;
 import luqmansen.me.moviecatalogue1.Model.TrailerVideo.TrailerIdFetcher;
 import luqmansen.me.moviecatalogue1.Model.TrailerVideo.YoutubeTrailerFetcherCallback;
 import luqmansen.me.moviecatalogue1.R;
-import luqmansen.me.moviecatalogue1.Util.DateParser;
-import luqmansen.me.moviecatalogue1.Util.NetworkUtil;
+import luqmansen.me.moviecatalogue1.Util.Date.DateParser;
+import luqmansen.me.moviecatalogue1.Util.Network.NetworkUtil;
 
 public class DetailActivity extends AppCompatActivity implements View.OnClickListener, YoutubeTrailerFetcherCallback {
     public static final String EXTRA_MOVIE = "extra_movie";
@@ -47,6 +44,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     String youtubeVideoId;
     Button addToFavorites;
     Button deleteFavorite;
+
 //    DBHandler db = new DBHandler(DetailActivity.this);
 
 

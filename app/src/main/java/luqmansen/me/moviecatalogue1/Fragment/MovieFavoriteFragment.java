@@ -5,15 +5,11 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,26 +18,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 
 import luqmansen.me.moviecatalogue1.Activity.DetailActivity;
 import luqmansen.me.moviecatalogue1.Adapter.GridAdapter;
-import luqmansen.me.moviecatalogue1.BuildConfig;
 import luqmansen.me.moviecatalogue1.DB.DBHandler;
 import luqmansen.me.moviecatalogue1.Model.Popular.Data;
-import luqmansen.me.moviecatalogue1.Model.Popular.DataResponse;
-import luqmansen.me.moviecatalogue1.Util.NetworkUtil;
 import luqmansen.me.moviecatalogue1.R;
-import luqmansen.me.moviecatalogue1.Rest.ApiClient;
-import luqmansen.me.moviecatalogue1.Rest.ApiInterface;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 /**
@@ -99,6 +84,17 @@ public class MovieFavoriteFragment extends Fragment implements SearchView.OnQuer
         return view;
     }
 
+    @Override
+    public void onResume() {
+        DBHandler db = new DBHandler(getContext());
+        super.onResume();
+        datas = db.getAll("MOVIE");
+        gridAdapter = new GridAdapter(datas, R.layout.item_grid);
+        recyclerView.setAdapter(gridAdapter);
+        gridAdapter.notifyDataSetChanged();
+        setOnClickEvent();
+    }
+
     private void setOnClickEvent() {
         gridAdapter.setOnItemClickCallback(new GridAdapter.OnItemClickCallback() {
             @Override
@@ -134,6 +130,7 @@ public class MovieFavoriteFragment extends Fragment implements SearchView.OnQuer
             mStaggeredGridLayoutManager.setSpanCount(3);
         }
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

@@ -4,6 +4,7 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteCursorDriver;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -34,7 +35,7 @@ public class DBHandler  extends SQLiteOpenHelper {
     private static final String KEY_BACKDROP = "backdrop";
     private static final String KEY_POSTER = "poster";
     private static final String KEY_TRAILER = "trailer";
-    Context context;
+
 
 
     public DBHandler(Context context) {
@@ -47,7 +48,7 @@ public class DBHandler  extends SQLiteOpenHelper {
             + KEY_ID + " INTEGER PRIMARY KEY , "
             + KEY_TYPE + " TEXT, "
             + KEY_TITLE + " TEXT, "
-            + KEY_DATE + " TEXT, "
+            + KEY_DATE + " DATE, "
             + KEY_OVERVIEW + " TEXT, "
             + KEY_BACKDROP + " TEXT, "
             + KEY_POSTER + " TEXT, "
@@ -88,6 +89,13 @@ public class DBHandler  extends SQLiteOpenHelper {
         db.close();
     }
 
+    public long getProfilesCount(MainActivity mainActivity) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        long count = DatabaseUtils.queryNumEntries(db, TABLE_FAVORITE);
+        db.close();
+        return count;
+    }
+
     public ArrayList<Data> getAll(String type){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -109,8 +117,6 @@ public class DBHandler  extends SQLiteOpenHelper {
 
         return favoritelist;
     }
-
-
 
     public void deleteFavorite(int movieId){
             SQLiteDatabase db = this.getWritableDatabase();

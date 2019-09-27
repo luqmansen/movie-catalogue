@@ -1,4 +1,4 @@
-package luqmansen.me.moviecatalogue1.Util;
+package luqmansen.me.moviecatalogue1.Util.Network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

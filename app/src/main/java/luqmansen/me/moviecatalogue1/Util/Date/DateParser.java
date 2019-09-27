@@ -1,4 +1,4 @@
-package luqmansen.me.moviecatalogue1.Util;
+package luqmansen.me.moviecatalogue1.Util.Date;
 
 import android.annotation.SuppressLint;
 
@@ -22,6 +22,7 @@ public class DateParser {
             str = outputFormat.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
+            return time;
         }
         return str;
     }

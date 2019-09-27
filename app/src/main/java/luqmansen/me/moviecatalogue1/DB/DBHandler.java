@@ -1,5 +1,6 @@
 package luqmansen.me.moviecatalogue1.DB;
 
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -7,17 +8,23 @@ import android.database.sqlite.SQLiteCursorDriver;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.CancellationSignal;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import luqmansen.me.moviecatalogue1.Activity.MainActivity;
+import luqmansen.me.moviecatalogue1.Model.Popular.Data;
 
 public class DBHandler  extends SQLiteOpenHelper {
 
     private static final int DB_VERSION = 1;
-    private static final String DB_NAME = "favoritedb";
+    private static final String DB_NAME = "favoritedb.db";
     private static final String TABLE_FAVORITE = "favoritetable";
     private static final String KEY_ID = "id";
     private static final String KEY_TYPE= "type";
@@ -27,23 +34,26 @@ public class DBHandler  extends SQLiteOpenHelper {
     private static final String KEY_BACKDROP = "backdrop";
     private static final String KEY_POSTER = "poster";
     private static final String KEY_TRAILER = "trailer";
+    Context context;
 
-    public DBHandler( Context context) {
+
+    public DBHandler(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE = "CREATE TABLE " + TABLE_FAVORITE + "("
-            + KEY_ID + " INTEGER PRIMARY KEY ,"
-            + KEY_TYPE + " TEXT,"
-            + KEY_TITLE + " TEXT,"
-            + KEY_DATE + " TEXT,"
-            + KEY_OVERVIEW + " TEXT,"
-            + KEY_BACKDROP + " TEXT,"
-            + KEY_POSTER + " TEXT,"
-            + KEY_TRAILER + " TEXT"+ ")";
+            + KEY_ID + " INTEGER PRIMARY KEY , "
+            + KEY_TYPE + " TEXT, "
+            + KEY_TITLE + " TEXT, "
+            + KEY_DATE + " TEXT, "
+            + KEY_OVERVIEW + " TEXT, "
+            + KEY_BACKDROP + " TEXT, "
+            + KEY_POSTER + " TEXT, "
+            + KEY_TRAILER + " TEXT"+ " ); ";
         db.execSQL(CREATE_TABLE);
+        Log.i("CREATE_TABLE", CREATE_TABLE);
     }
 
     @Override
@@ -58,8 +68,6 @@ public class DBHandler  extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         return cursor;
     }
-
-
 
     public void insertFavorites(String id, String type, String title, String date, String overview, String backdrop, String poster, String trailer){
 
@@ -76,29 +84,33 @@ public class DBHandler  extends SQLiteOpenHelper {
         contentValues.put(KEY_TRAILER, trailer);
 
         long newRowID = db.insert(TABLE_FAVORITE, null, contentValues);
+        Log.d("INSERT", Long.toString(newRowID));
         db.close();
     }
 
-    public ArrayList<HashMap<String, String>> getAll(){
+    public ArrayList<Data> getAll(String type){
 
         SQLiteDatabase db = this.getWritableDatabase();
-        ArrayList<HashMap<String, String>> favoritelist = new ArrayList<>();
-        String query = "SELECT id, type, title, date, overview, backdrop, poster, trailer FROM " + TABLE_FAVORITE;
+        ArrayList<Data> favoritelist = new ArrayList<>();
+        String query = "SELECT id, title, date, overview, backdrop, poster, trailer FROM " + TABLE_FAVORITE + " WHERE type = " + "'" + type +"'";
         Cursor cursor = db.rawQuery(query, null);
-        while (cursor.moveToNext()){
-            HashMap<String, String> favorite = new HashMap<>();
-            favorite.put("id", cursor.getString(cursor.getColumnIndex(KEY_ID)));
-            favorite.put("type", cursor.getString(cursor.getColumnIndex(KEY_TYPE)));
-            favorite.put("title", cursor.getString(cursor.getColumnIndex(KEY_TITLE)));
-            favorite.put("date", cursor.getString(cursor.getColumnIndex(KEY_DATE)));
-            favorite.put("overview", cursor.getString(cursor.getColumnIndex(KEY_OVERVIEW)));
-            favorite.put("backdrop", cursor.getString(cursor.getColumnIndex(KEY_BACKDROP)));
-            favorite.put("poster", cursor.getString(cursor.getColumnIndex(KEY_POSTER)));
-            favorite.put("trailer", cursor.getString(cursor.getColumnIndex(KEY_TRAILER)));
 
+        while (cursor.moveToNext()){
+            Data favorite = new Data();
+            favorite.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))));
+            favorite.setTitle(cursor.getString(cursor.getColumnIndex(KEY_TITLE)));
+            favorite.setReleaseDate(cursor.getString(cursor.getColumnIndex(KEY_DATE)));
+            favorite.setOverview(cursor.getString(cursor.getColumnIndex(KEY_OVERVIEW)));
+            favorite.setBackdropPath(cursor.getString(cursor.getColumnIndex(KEY_BACKDROP)));
+            favorite.setPosterPath(cursor.getString(cursor.getColumnIndex(KEY_POSTER)));
+            favorite.setTrailer(cursor.getString(cursor.getColumnIndex(KEY_TRAILER)));
+            favoritelist.add(favorite);
         }
+
         return favoritelist;
     }
+
+
 
     public void deleteFavorite(int movieId){
             SQLiteDatabase db = this.getWritableDatabase();

@@ -24,6 +24,7 @@ import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -55,7 +56,7 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
     RecyclerView recyclerView;
     GridLayoutManager gridLayoutManager;
     StaggeredGridLayoutManager mStaggeredGridLayoutManager;
-    List<Data> datas;
+    ArrayList<Data> datas;
 
     String language =Locale.getDefault().getLanguage();
     ProgressBar progressBar;

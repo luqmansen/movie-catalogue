@@ -19,7 +19,7 @@ import luqmansen.me.moviecatalogue1.R;
 
 
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder> {
-    private List<Data> items;
+    private ArrayList<Data> items;
     private List<Movie> filteredList;
     private int rowLayout;
     private OnItemClickCallback onItemClickCallback;
@@ -35,11 +35,11 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder
         }
     }
 
-    public  List<Data> getList(){
+    public  ArrayList<Data> getList(){
         return this.items;
     }
 
-    public GridAdapter(List<Data> list, int rowLayout) {
+    public GridAdapter(ArrayList<Data> list, int rowLayout) {
         this.items = list;
         this.rowLayout = rowLayout;
     }

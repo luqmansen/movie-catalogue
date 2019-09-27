@@ -4,16 +4,6 @@ package luqmansen.me.moviecatalogue1.Fragment;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,24 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
-import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import luqmansen.me.moviecatalogue1.Activity.DetailActivity;
 import luqmansen.me.moviecatalogue1.Adapter.GridAdapter;
-import luqmansen.me.moviecatalogue1.BuildConfig;
+import luqmansen.me.moviecatalogue1.DB.DBHandler;
 import luqmansen.me.moviecatalogue1.Model.Popular.Data;
-import luqmansen.me.moviecatalogue1.Model.Popular.DataResponse;
-import luqmansen.me.moviecatalogue1.Util.NetworkUtil;
 import luqmansen.me.moviecatalogue1.R;
-import luqmansen.me.moviecatalogue1.Rest.ApiClient;
-import luqmansen.me.moviecatalogue1.Rest.ApiInterface;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 /**
@@ -47,31 +33,28 @@ import retrofit2.Response;
  */
 public class TVFavoriteFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, View.OnFocusChangeListener {
 
-    //    private final String TAG = this.getActivity().getClass().getSimpleName();
-    private final String TAG = "MovieFragmentTAG";
-    private final String STATE_KEY = "STATE_LIST";
-    private final static String API_KEY = BuildConfig.API_KEY;
+    //    private final String TAG = "MovieFragmentTAG";
+    private final String STATE_KEY = "STATE_LIST_FAVORITE_MOVIE";
     private GridAdapter gridAdapter;
+    ProgressBar progressBar;
     RecyclerView recyclerView;
     GridLayoutManager gridLayoutManager;
     StaggeredGridLayoutManager mStaggeredGridLayoutManager;
-    List<Data> datas;
+    ArrayList<Data> datas;
+    DBHandler db = new DBHandler(getContext());
 
-    String language =Locale.getDefault().getLanguage();
-    ProgressBar progressBar;
+    String language = Locale.getDefault().getLanguage();
 
-    public TVFavoriteFragment() {}
+
+    public TVFavoriteFragment() {
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_layout, container, false);
         progressBar = view.findViewById(R.id.progressBarFragment);
         progressBar.setVisibility(View.GONE);
-
-        if (API_KEY.isEmpty()) {
-            Toast.makeText(this.getContext(), "Please obtain your API KEY first from themoviedb.org", Toast.LENGTH_LONG).show();
-        }
 
         recyclerView = view.findViewById(R.id.recyler_layout);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, GridLayoutManager.VERTICAL);
@@ -80,7 +63,7 @@ public class TVFavoriteFragment extends Fragment implements SearchView.OnQueryTe
         recyclerView.setHasFixedSize(true);
         setHasOptionsMenu(true);
 
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             datas = savedInstanceState.getParcelableArrayList(STATE_KEY);
             gridAdapter = new GridAdapter(datas, R.layout.item_grid);
             progressBar.setVisibility(View.GONE);
@@ -88,29 +71,16 @@ public class TVFavoriteFragment extends Fragment implements SearchView.OnQueryTe
             setOnClickEvent();
 
         } else {
-            NetworkUtil check = new NetworkUtil(getContext());
-            if (check.isNetworkAvailable()) {
-                ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-                Call<DataResponse> call = apiService.getPopularMovies(API_KEY, language);
-                progressBar.setVisibility(View.VISIBLE);
-                call.enqueue(new Callback<DataResponse>() {
-                    @Override
-                    public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {
-                        datas = response.body().getResults();
-                        gridAdapter = new GridAdapter(datas, R.layout.item_grid);
-                        progressBar.setVisibility(View.GONE);
-                        recyclerView.setAdapter(gridAdapter);
-                        setOnClickEvent();
-                    }
 
-                    @Override
-                    public void onFailure(Call<DataResponse> call, Throwable t) {
-                        Toast.makeText(getContext(), "API request failed, please check your connection", Toast.LENGTH_LONG).show();
-                        progressBar.setVisibility(View.GONE);
-                        Log.e(TAG, t.toString());
-                    }
-                });
-            }
+            progressBar.setVisibility(View.VISIBLE);
+            DBHandler db = new DBHandler(getContext());
+            datas = db.getAll("TV");
+
+            gridAdapter = new GridAdapter(datas, R.layout.item_grid);
+            recyclerView.setAdapter(gridAdapter);
+            setOnClickEvent();
+            progressBar.setVisibility(View.GONE);
+
         }
         return view;
     }
@@ -202,13 +172,13 @@ public class TVFavoriteFragment extends Fragment implements SearchView.OnQueryTe
 //        gridAdapter.setFilter(list);
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (gridAdapter.getList() != null) {
-            outState.putParcelableArrayList(STATE_KEY, new ArrayList<Parcelable>(gridAdapter.getList()));
-        }
-    }
+//    @Override
+//    public void onSaveInstanceState(@NonNull Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        if (gridAdapter.getList() != null) {
+//            outState.putParcelableArrayList(STATE_KEY, new ArrayList<Parcelable>(gridAdapter.getList()));
+//        }
+//    }
 }
 
 

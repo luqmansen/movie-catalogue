@@ -47,6 +47,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     String youtubeVideoId;
     Button addToFavorites;
     Button deleteFavorite;
+//    DBHandler db = new DBHandler(DetailActivity.this);
 
 
     @SuppressLint("WrongViewCast")

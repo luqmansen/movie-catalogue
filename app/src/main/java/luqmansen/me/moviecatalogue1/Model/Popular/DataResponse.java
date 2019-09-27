@@ -2,6 +2,8 @@ package luqmansen.me.moviecatalogue1.Model.Popular;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataResponse {
@@ -9,7 +11,7 @@ public class DataResponse {
     @SerializedName("page")
     private int page;
     @SerializedName("results")
-    private List<Data> results;
+    private ArrayList<Data> results;
     @SerializedName("total_results")
     private int totalResults;
     @SerializedName("total_pages")
@@ -23,11 +25,11 @@ public class DataResponse {
         this.page = page;
     }
 
-    public List<Data> getResults() {
+    public ArrayList<Data> getResults() {
         return results;
     }
 
-    public void setResults(List<Data> results) {
+    public void setResults(ArrayList<Data> results) {
         this.results = results;
     }
 

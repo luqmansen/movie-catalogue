@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
         else {
             fragmentMovie = new MovieFragment();
             fragmentTVshows = new TvShowsFragment();
-            fragmentFavoritesTV = new MovieFavoriteFragment();
-            fragmentFavoritesMovie = new TVFavoriteFragment();
+            fragmentFavoritesTV = new TVFavoriteFragment();
+            fragmentFavoritesMovie = new MovieFavoriteFragment();
             active = fragmentMovie;
             fm.beginTransaction().add(container_layout, fragmentFavoritesTV, TAG_FAVORITES_FRAGMENT_TV).hide(fragmentFavoritesTV).commit();
             fm.beginTransaction().add(container_layout, fragmentFavoritesMovie, TAG_FAVORITES_FRAGMENT_MOVIE).hide(fragmentFavoritesMovie).commit();

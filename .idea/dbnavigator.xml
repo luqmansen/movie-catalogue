@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DataExportManager">
@@ -20,38 +20,32 @@
     </export-instructions>
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
-    <autoscroll-to-editor value="false" />
+    <autoscroll-to-editor value="true" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
     <loaded-nodes>
-      <connection connection-id="cd7068e5-bea9-450a-9f94-9315c5e544d1">
-        <schema name="main" object-types="dataset trigger, index, constraint, column, view, table" />
+      <connection connection-id="f2442749-e5fd-4982-90bd-2b1d80a6e0fb">
+        <schema name="main" object-types="dataset trigger, table, constraint, index, view, column" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="cd7068e5-bea9-450a-9f94-9315c5e544d1">
-      <console name="Connection 1" type="STANDARD" schema="main" session="Main"><![CDATA[select
-    *
-from
-    favoritetable;]]></console>
+    <connection id="f2442749-e5fd-4982-90bd-2b1d80a6e0fb">
+      <console name="Connection" type="STANDARD" schema="main" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
-      <object connection-id="cd7068e5-bea9-450a-9f94-9315c5e544d1" object-ref="schemas/main/tables/favoritetable" />
+      <object connection-id="f2442749-e5fd-4982-90bd-2b1d80a6e0fb" object-ref="schemas/main/tables/android_metadata" />
+      <object connection-id="f2442749-e5fd-4982-90bd-2b1d80a6e0fb" object-ref="schemas/main/tables/favoritetable" />
     </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="cd7068e5-bea9-450a-9f94-9315c5e544d1" />
+    <connection id="f2442749-e5fd-4982-90bd-2b1d80a6e0fb" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="cd7068e5-bea9-450a-9f94-9315c5e544d1" dataset="main.favoritetable" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="cd7068e5-bea9-450a-9f94-9315c5e544d1" dataset="main.android_metadata" active-filter-id="">
-      <filter id="ee1f704e-14bb-4390-a8c8-d30ac3829eeb" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
-        <condition column="locale" operator="=" value="" active="true" />
-      </filter>
-    </filter-actions>
+    <filter-actions connection-id="f2442749-e5fd-4982-90bd-2b1d80a6e0fb" dataset="main.favoritetable" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="f2442749-e5fd-4982-90bd-2b1d80a6e0fb" dataset="main.android_metadata" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -78,9 +72,9 @@ from
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="cd7068e5-bea9-450a-9f94-9315c5e544d1" active="true">
+      <connection id="f2442749-e5fd-4982-90bd-2b1d80a6e0fb" active="true">
         <database>
-          <name value="Connection 1" />
+          <name value="Connection" />
           <description value="" />
           <database-type value="SQLITE" />
           <config-type value="BASIC" />
@@ -93,7 +87,7 @@ from
           <port value="1234" />
           <database value="database" />
           <files>
-            <file path="$USER_HOME$/AndroidStudio/DeviceExplorer/Pixel_2_API_28 [emulator-5554]/data/data/luqmansen.me.moviecatalogue1/databases/favoritedb" schema="main" />
+            <file path="$USER_HOME$/AndroidStudio/DeviceExplorer/emulator-5554/data/data/luqmansen.me.moviecatalogue1/databases/favoritedb.db" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />

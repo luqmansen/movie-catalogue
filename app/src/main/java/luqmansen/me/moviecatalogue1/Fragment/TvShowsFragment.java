@@ -22,6 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -51,7 +52,7 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
     private final static String API_KEY = BuildConfig.API_KEY;
     private GridAdapter gridAdapter;
     RecyclerView recyclerView;
-    List<Data> datas;
+    ArrayList<Data> datas;
 
     String language =Locale.getDefault().getLanguage();
     ProgressBar progressBar;

@@ -39,11 +39,23 @@ public class Data implements Parcelable {
     private Integer voteCount;
     @SerializedName("video")
     private Boolean video;
+    @SerializedName("trailer")
+    private String trailer;
     @SerializedName("vote_average")
     private Double voteAverage;
 
+
+
     public Data() {
 
+    }
+
+    public String getTrailer() {
+        return trailer;
+    }
+
+    public void setTrailer(String trailer) {
+        this.trailer = trailer;
     }
 
     public String getPosterPath() {

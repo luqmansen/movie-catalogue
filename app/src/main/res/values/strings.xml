@@ -6,6 +6,7 @@
     <string name="title_favorites_tv">Favorites TV</string>
     <string name="title_favorites_movie">Favorites Movie</string>
     <string name="watch_trailer">"Watch Trailer"</string>
+    <string name="search_hint">"Search View"</string>
     <string name="Language">Language</string>
     <string name="overview_detail">"Overview"</string>
     <string name="description" translatable="false">normal description</string>

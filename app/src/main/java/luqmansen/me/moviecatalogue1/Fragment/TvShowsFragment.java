@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -142,13 +143,13 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        inflater.inflate(R.menu.search, menu);
-//        final MenuItem searchItem = menu.findItem(R.id.search);
-//        MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-//        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-//        searchView.setOnQueryTextListener(this);
-//        searchView.setOnQueryTextFocusChangeListener(this);
-//        searchView.setQueryHint(getString(R.string.searchview_hint));
+        inflater.inflate(R.menu.search, menu);
+        final MenuItem searchItem = menu.findItem(R.id.search);
+        MenuItemCompat.setShowAsAction(searchItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(this);
+        searchView.setOnQueryTextFocusChangeListener(this);
+        searchView.setQueryHint(getString(R.string.search_hint));
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -159,19 +160,19 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
 
     @Override
     public boolean onQueryTextChange(String s) {
-//        if (s == null || s.trim().isEmpty()) {
-//            gridAdapter.setFilter(list);
-//            return false;
-//        }
-//        s = s.toLowerCase();
-//        final ArrayList<Movie> filteredTitle = new ArrayList<>();
-//        for (Movie model : list) {
-//            final String title = model.getTitle().toLowerCase();
-//            if (title.contains(s)) {
-//                filteredTitle.add(model);
-//            }
-//        }
-//        gridAdapter.setFilter(filteredTitle);
+        if (s == null || s.trim().isEmpty()) {
+            gridAdapter.setFilter(datas);
+            return false;
+        }
+        s = s.toLowerCase();
+        final ArrayList<Data> filteredTitle = new ArrayList<>();
+        for (Data model : datas) {
+            final String title = model.getName().toLowerCase();
+            if (title.contains(s)) {
+                filteredTitle.add(model);
+            }
+        }
+        gridAdapter.setFilter(filteredTitle);
         return true;
     }
 

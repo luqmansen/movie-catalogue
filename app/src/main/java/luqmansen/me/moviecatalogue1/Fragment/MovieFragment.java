@@ -168,6 +168,25 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
         return true;
     }
 
+//    @Override
+//    public boolean onQueryTextChange(String s) {
+//        if (s == null || s.trim().isEmpty()) {
+//            gridAdapter.setFilter(datas);
+//            return false;
+//        }
+//        s = s.toLowerCase();
+//        final ArrayList<Data> filteredTitle = new ArrayList<>();
+//        for (Data model : datas) {
+//            final String title = model.getTitle().toLowerCase();
+//            if (title.contains(s)) {
+//                filteredTitle.add(model);
+//            }
+//        }
+//        gridAdapter.setFilter(filteredTitle);
+//        return true;
+//    }
+
+
     @Override
     public boolean onQueryTextChange(String s) {
         if (s == null || s.trim().isEmpty()) {
@@ -176,14 +195,31 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
         }
         s = s.toLowerCase();
         final ArrayList<Data> filteredTitle = new ArrayList<>();
-        for (Data model : datas) {
-            final String title = model.getTitle().toLowerCase();
-            if (title.contains(s)) {
-                filteredTitle.add(model);
-            }
+
+        NetworkUtil check = new NetworkUtil(getContext());
+        if (check.isNetworkAvailable()) {
+            ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+            Call<DataResponse> call = apiService.searchMovie(API_KEY, s);
+            progressBar.setVisibility(View.VISIBLE);
+            call.enqueue(new Callback<DataResponse>() {
+                @Override
+                public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {
+                    datas = response.body().getResults();
+                    gridAdapter = new GridAdapter(datas, R.layout.item_grid);
+                    progressBar.setVisibility(View.GONE);
+                    recyclerView.setAdapter(gridAdapter);
+                    setOnClickEvent();
+                }
+
+                @Override
+                public void onFailure(Call<DataResponse> call, Throwable t) {
+                    Toast.makeText(getContext(), "API request failed, please check your connection", Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.GONE);
+                    Log.e(TAG, t.toString());
+                }
+            });
         }
-        gridAdapter.setFilter(filteredTitle);
-        return true;
+        return  true;
     }
 
     @Override

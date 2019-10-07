@@ -29,7 +29,10 @@ public class TrailerIdFetcher {
                 public void onResponse(Call<DataVideoResponse> call, Response<DataVideoResponse> response) {
                     List<DataVideos> dataVideos = response.body().getResults();
                     Log.d(TAG, String.valueOf(dataVideos));
-                    String youtubeID = dataVideos.get(0).getYoutubeID();
+                    String youtubeID = "";
+                    if (!dataVideos.isEmpty()){
+                        youtubeID = dataVideos.get(0).getYoutubeID();
+                    }
 
                     if (callback != null){
                         callback.onSuccess(youtubeID);
@@ -49,8 +52,10 @@ public class TrailerIdFetcher {
                 public void onResponse(Call<DataVideoResponse> call, Response<DataVideoResponse> response) {
                     List<DataVideos> dataVideos = response.body().getResults();
                     Log.d(TAG, String.valueOf(dataVideos));
-                    String youtubeID = dataVideos.get(0).getYoutubeID();
-
+                    String youtubeID = "";
+                    if (!dataVideos.isEmpty()){
+                        youtubeID = dataVideos.get(0).getYoutubeID();
+                    }
                     if (callback != null){
                         callback.onSuccess(youtubeID);
                     }

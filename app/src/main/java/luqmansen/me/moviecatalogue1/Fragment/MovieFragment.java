@@ -56,6 +56,7 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
     GridLayoutManager gridLayoutManager;
     StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     ArrayList<Data> datas;
+    ArrayList<Data> filteredTitle;
 
     String language =Locale.getDefault().getLanguage();
     ProgressBar progressBar;
@@ -168,33 +169,13 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
         return true;
     }
 
-//    @Override
-//    public boolean onQueryTextChange(String s) {
-//        if (s == null || s.trim().isEmpty()) {
-//            gridAdapter.setFilter(datas);
-//            return false;
-//        }
-//        s = s.toLowerCase();
-//        final ArrayList<Data> filteredTitle = new ArrayList<>();
-//        for (Data model : datas) {
-//            final String title = model.getTitle().toLowerCase();
-//            if (title.contains(s)) {
-//                filteredTitle.add(model);
-//            }
-//        }
-//        gridAdapter.setFilter(filteredTitle);
-//        return true;
-//    }
-
-
     @Override
     public boolean onQueryTextChange(String s) {
         if (s == null || s.trim().isEmpty()) {
-            gridAdapter.setFilter(datas);
+//            gridAdapter.setFilter(datas);
             return false;
         }
         s = s.toLowerCase();
-        final ArrayList<Data> filteredTitle = new ArrayList<>();
 
         NetworkUtil check = new NetworkUtil(getContext());
         if (check.isNetworkAvailable()) {
@@ -204,8 +185,8 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
             call.enqueue(new Callback<DataResponse>() {
                 @Override
                 public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {
-                    datas = response.body().getResults();
-                    gridAdapter = new GridAdapter(datas, R.layout.item_grid);
+                    filteredTitle = response.body().getResults();
+                    gridAdapter = new GridAdapter(filteredTitle, R.layout.item_grid);
                     progressBar.setVisibility(View.GONE);
                     recyclerView.setAdapter(gridAdapter);
                     setOnClickEvent();
@@ -229,13 +210,13 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
 
     @Override
     public boolean onMenuItemActionCollapse(MenuItem menuItem) {
-//        gridAdapter.setFilter(list);
+        gridAdapter.setFilter(datas);
         return true;
     }
 
     @Override
     public void onFocusChange(View view, boolean b) {
-//        gridAdapter.setFilter(list);
+        gridAdapter.setFilter(datas);
     }
 
     @Override

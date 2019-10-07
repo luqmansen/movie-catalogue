@@ -52,6 +52,7 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
     private GridAdapter gridAdapter;
     RecyclerView recyclerView;
     ArrayList<Data> datas;
+    ArrayList<Data> filteredTitle;
 
     String language =Locale.getDefault().getLanguage();
     ProgressBar progressBar;
@@ -158,31 +159,13 @@ public class TvShowsFragment extends Fragment implements SearchView.OnQueryTextL
         return true;
     }
 
-//    @Override
-//    public boolean onQueryTextChange(String s) {
-//        if (s == null || s.trim().isEmpty()) {
-//            gridAdapter.setFilter(datas);
-//            return false;
-//        }
-//        s = s.toLowerCase();
-//        final ArrayList<Data> filteredTitle = new ArrayList<>();
-//        for (Data model : datas) {
-//            final String title = model.getName().toLowerCase();
-//            if (title.contains(s)) {
-//                filteredTitle.add(model);
-//            }
-//        }
-//        gridAdapter.setFilter(filteredTitle);
-//        return true;
-//    }
 @Override
 public boolean onQueryTextChange(String s) {
     if (s == null || s.trim().isEmpty()) {
-        gridAdapter.setFilter(datas);
+//        gridAdapter.setFilter(datas);
         return false;
     }
     s = s.toLowerCase();
-    final ArrayList<Data> filteredTitle = new ArrayList<>();
 
     NetworkUtil check = new NetworkUtil(getContext());
     if (check.isNetworkAvailable()) {
@@ -192,8 +175,8 @@ public boolean onQueryTextChange(String s) {
         call.enqueue(new Callback<DataResponse>() {
             @Override
             public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {
-                datas = response.body().getResults();
-                gridAdapter = new GridAdapter(datas, R.layout.item_grid);
+                filteredTitle = response.body().getResults();
+                gridAdapter = new GridAdapter(filteredTitle, R.layout.item_grid);
                 progressBar.setVisibility(View.GONE);
                 recyclerView.setAdapter(gridAdapter);
                 setOnClickEvent();
@@ -217,13 +200,13 @@ public boolean onQueryTextChange(String s) {
 
     @Override
     public boolean onMenuItemActionCollapse(MenuItem menuItem) {
-//        gridAdapter.setFilter(list);
+        gridAdapter.setFilter(datas);
         return true;
     }
 
     @Override
     public void onFocusChange(View view, boolean b) {
-//        gridAdapter.setFilter(list);
+        gridAdapter.setFilter(datas);
     }
 
     @Override

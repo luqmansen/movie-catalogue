@@ -48,5 +48,13 @@ There are 5 stage of this application representing 5 submission for the program
     - Apply design pattern (eg: MVVM, MVP, etc)
     - App show an error when data can't be displayed
         
-4. **Coming Soon**
-5. **Coming Soon**
+4. **Submission 4: Movie Catalogue (Local Database)**
+    <br>
+    Idem with above, but able to store selected favorite movie on sqlite database and display it to another fragment
+    
+5. **Submission 5: Final Project**
+    <br>
+    1. Seach movie feature with API endpoints query **done**
+    2. Stack Widget
+    3. Alarm Manager
+    4. Content Provider

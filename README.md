@@ -1,6 +1,8 @@
 # movie-catalogue
 ## Movie catalogue application for Google Developer Kejar 2019 
 
+[![](http://img.youtube.com/vi/hkB9BcuPOTI/0.jpg)](http://www.youtube.com/watch?v=hkB9BcuPOTI "")
+
 This is a native android app for submission requirement in "Menjadi Android Developer Expert" from Google Developer Kejar 2019 in collaboaration with dicoding.com
 
 There are 5 stage of this application representing 5 submission for the program 
